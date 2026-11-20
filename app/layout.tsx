@@ -13,6 +13,7 @@ import ServiceWorkerRegister from '@/features/offline/ServiceWorkerRegister'
 import OfflineBanner from '@/features/offline/OfflineBanner'
 import ScrollToTopOnReload from '@/features/navigation/ScrollToTopOnReload'
 import { installPromptScript } from '@/features/install/installPromptScript'
+import HistoryTracker from '@/features/navigation/HistoryTracker'
 import RouteProgress from '@/features/navigation/RouteProgress'
 import NativeBootstrap from '@/features/install/NativeBootstrap'
 
@@ -106,6 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={siteJsonLd} />
         <ScrollToTopOnReload />
         <RouteProgress />
+        <HistoryTracker />
         <MusicBackground />
         <Navbar />
         <OfflineBanner />
