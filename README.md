@@ -1,6 +1,6 @@
 # Guitar Cheat Sheet
 
-A free, open source guitar reference. Look up any scale, mode, chord, progression, technique or tuning in all 12 keys. Works offline, installs as an app on Android, iOS and desktop.
+A free, open source guitar reference. Live at **https://guitarcheatsheet.sohidul.site**. Look up any scale, mode, chord, progression, technique or tuning in all 12 keys. Works offline, installs as an app on Android, iOS and desktop.
 
 ## Features
 - A guided learning path (`/learn`): scale, key, modes, triads, chord types, strumming, then practise and solo

@@ -60,6 +60,7 @@
     "node": ">=20.9"
   },
   "description": "Free, offline-first guitar reference: scales, modes, chords, progressions, techniques, theory and tunings in all 12 keys.",
+  "homepage": "https://guitarcheatsheet.sohidul.site",
   "license": "MIT",
   "private": true,
   "repository": {

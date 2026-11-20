@@ -5,7 +5,7 @@
 export const SITE = {
   name: 'Guitar Cheat Sheet',
   shortName: 'Guitar CS',
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://guitarcheatsheet.com').replace(/\/$/, ''),
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://guitarcheatsheet.sohidul.site').replace(/\/$/, ''),
   tagline: 'Every scale, chord and technique in all 12 keys',
   description:
     'Free guitar reference for every player. Look up scales, modes, chords, progressions, techniques, music theory and tunings in all 12 keys.',
