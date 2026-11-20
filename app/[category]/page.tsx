@@ -32,8 +32,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const ALL_KEYS = ['C', 'G', 'D', 'A', 'E', 'B', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb']
-
 export default async function CategoryPage({ params }: Props) {
   const { category } = await params
   if (!isCategorySlug(category)) notFound()
@@ -75,10 +73,6 @@ export default async function CategoryPage({ params }: Props) {
           gap: 8px !important;
         }
 
-        .cat-key-btn:hover {
-          border-color: ${cat.a}88 !important;
-          color: ${cat.a} !important;
-        }
         .cat-nav-link:hover {
           background: rgba(169,138,125,.06) !important;
           color: #e5e2e1 !important;
@@ -101,28 +95,10 @@ export default async function CategoryPage({ params }: Props) {
             position: 'sticky',
             top: 64,
           }}>
-            <div style={{ padding: '24px 0' }}>
-
-              {/* Brand mark */}
-              <div style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '.9rem', fontWeight: 700,
-                color: cat.a,
-                letterSpacing: '0.22em', textTransform: 'uppercase',
-                padding: '0 24px',
-                marginBottom: 28,
-              }}>MASTERY</div>
+            <div style={{ padding: 0 }}>
 
               {/* Category navigation */}
               <div style={{ marginBottom: 28 }}>
-                <p style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '.58rem', fontWeight: 700,
-                  color: 'rgba(169,138,125,.45)',
-                  textTransform: 'uppercase', letterSpacing: '.14em',
-                  padding: '0 24px', marginBottom: 8,
-                }}>Categories</p>
-
                 <nav>
                   {cats.map(c => {
                     const p = CATEGORY_CONFIG[c as CategorySlug]
@@ -151,36 +127,6 @@ export default async function CategoryPage({ params }: Props) {
                     )
                   })}
                 </nav>
-              </div>
-
-              {/* Filter by Key */}
-              <div style={{ padding: '0 24px', marginBottom: 28 }}>
-                <p style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '.58rem', fontWeight: 700,
-                  color: 'rgba(169,138,125,.45)',
-                  textTransform: 'uppercase', letterSpacing: '.14em',
-                  marginBottom: 10,
-                }}>Filter by Key</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
-                  {ALL_KEYS.map(k => (
-                    <div
-                      key={k}
-                      className="cat-key-btn"
-                      style={{
-                        border: '1px solid rgba(169,138,125,.18)',
-                        borderRadius: 2,
-                        padding: '6px 4px',
-                        textAlign: 'center',
-                        fontFamily: 'var(--font-sans)',
-                        fontSize: '.62rem', fontWeight: 700,
-                        color: 'rgba(169,138,125,.45)',
-                        cursor: 'default',
-                        transition: 'border-color .15s, color .15s',
-                      }}
-                    >{k}</div>
-                  ))}
-                </div>
               </div>
 
             </div>
