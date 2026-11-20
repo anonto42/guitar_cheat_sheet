@@ -19,30 +19,36 @@ interface NoteMapProps {
   tonic?: string
   /** Highest fret shown. */
   frets?: number
-  /** Short description for screen readers and the caption. */
+  /** Fret window to highlight (for a scale position). Notes outside it are dimmed. */
+  range?: [number, number]
+  /** Notes to outline, for example the tones of the chord playing right now. */
+  emphasis?: string[]
+  /** Short description for screen readers. */
   label: string
   className?: string
 }
 
 /**
- * Every position of the given notes on the fretboard, generated from the tuning, so a new scale
- * or key needs no hand-drawn diagram. Strings run high e at the top to low E at the bottom.
+ * Every position of the given notes on the fretboard, generated from the tuning, so any scale,
+ * chord or key needs no hand-drawn diagram. Strings run high e at the top to low E at the bottom.
  */
-export default function NoteMap({ notes, tonic, frets = 12, label, className }: NoteMapProps) {
+export default function NoteMap({ notes, tonic, frets = 15, range, emphasis, label, className }: NoteMapProps) {
   const nameByPitch = new Map(notes.map(n => [pitchClass(n), n]))
   const tonicPitch = tonic ? pitchClass(tonic) : -1
+  const emphasised = new Set((emphasis ?? []).map(pitchClass))
   const fretNumbers = Array.from({ length: frets + 1 }, (_, i) => i)
   const strings = [...OPEN_STRINGS].reverse()
+  const inRange = (f: number) => !range || (f >= range[0] && f <= range[1])
 
   return (
-    <figure className={cn('overflow-x-auto', className)}>
-      <table className="w-full min-w-[44rem] border-collapse text-xs">
+    <figure className={cn('overflow-x-auto border border-line2 bg-bg3/60 p-3', className)}>
+      <table className="w-full min-w-[46rem] border-collapse text-xs">
         <caption className="sr-only">{label}</caption>
         <thead>
           <tr>
-            <th scope="col" className="w-8" />
+            <th scope="col" className="w-7" />
             {fretNumbers.map(f => (
-              <th key={f} scope="col" className="pb-2 text-center font-semibold text-outline">
+              <th key={f} scope="col" className={cn('pb-1.5 text-center font-semibold', inRange(f) && range ? 'text-ember-l' : 'text-outline')}>
                 {f === 0 ? 'Open' : f}
                 <span className={cn('mx-auto mt-1 block h-1.5 w-1.5', MARKER_FRETS.has(f) ? 'bg-outline/50' : 'bg-transparent')} />
               </th>
@@ -56,19 +62,23 @@ export default function NoteMap({ notes, tonic, frets = 12, label, className }: 
               {fretNumbers.map(f => {
                 const pc = (string.pc + f) % 12
                 const name = nameByPitch.get(pc)
+                const lit = inRange(f)
                 return (
                   <td
                     key={f}
                     className={cn(
-                      'h-9 border-b border-line2 p-0 text-center align-middle',
-                      f === 0 ? 'border-r-2 border-r-outline/60' : 'border-l border-l-line2',
+                      'h-8 border-b border-line2 p-0 text-center align-middle',
+                      f === 0 ? 'border-r-[3px] border-r-outline/70' : 'border-l border-l-line2',
+                      range && lit && 'bg-ember/[0.06]',
                     )}
                   >
                     {name && (
                       <span
                         className={cn(
-                          'inline-flex h-6 min-w-6 items-center justify-center px-1 text-[0.68rem] font-bold',
+                          'inline-flex h-6 min-w-6 items-center justify-center px-1 text-[0.68rem] font-bold transition-opacity',
                           pc === tonicPitch ? 'bg-ember text-bg2' : 'bg-white/10 text-cream',
+                          emphasised.has(pc) && 'outline outline-2 outline-offset-1 outline-amber',
+                          !lit && 'opacity-25',
                         )}
                       >
                         {name}
