@@ -5,6 +5,7 @@ import { content } from '@/services/content'
 import { CATEGORY_CONFIG } from '@/data/categories'
 import { FRETBOARDS } from '@/data/fretboards'
 import FretboardDiagram from '@/features/fretboard/FretboardDiagram'
+import BackLink from '@/components/ui/BackLink'
 import { SITE } from '@/config/site'
 import type { CategorySlug, GuitarEntry } from '@/types'
 
@@ -151,23 +152,7 @@ export default async function EntryPage({ params }: Props) {
         }
       `}</style>
 
-      <main style={{ minHeight: '100vh', background: '#131313', paddingBottom: 100 }}>
-
-        {/* Breadcrumb */}
-        <nav style={{
-          background: '#0e0e0e',
-          borderBottom: '1px solid #353534',
-          padding: '14px 24px',
-          display: 'flex', gap: 8, alignItems: 'center',
-          fontFamily: 'var(--font-sans)',
-          fontSize: '.68rem',
-        }}>
-          <Link href="/" style={{ color: '#ff6b00', textDecoration: 'none', fontWeight: 600 }}>Guitar Cheat Sheet</Link>
-          <span style={{ color: 'rgba(169,138,125,.3)' }}>›</span>
-          <Link href={`/${entry.category}`} style={{ color: cat.a, textDecoration: 'none', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '.6rem' }}>{cat.label}</Link>
-          <span style={{ color: 'rgba(169,138,125,.3)' }}>›</span>
-          <span style={{ color: '#a98a7d' }}>{entry.title}</span>
-        </nav>
+      <main style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 100 }}>
 
         <div
           className="entry-layout"
@@ -182,7 +167,7 @@ export default async function EntryPage({ params }: Props) {
           <div style={{ flex: 1, padding: '36px 32px', minWidth: 0 }}>
 
             {/* Category badge */}
-            <div style={{ marginBottom: 16 }}>
+            <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
               <span style={{
                 display: 'inline-block',
                 fontFamily: 'var(--font-sans)',
@@ -193,6 +178,7 @@ export default async function EntryPage({ params }: Props) {
                 borderLeft: `2px solid ${cat.a}`,
                 padding: '4px 10px',
               }}>{cat.label}</span>
+              <BackLink href={`/${entry.category}`}>Back to {cat.label}</BackLink>
             </div>
 
             {/* Title */}
@@ -398,7 +384,7 @@ export default async function EntryPage({ params }: Props) {
                   marginBottom: 14, fontStyle: 'italic',
                 }}>Every key, root note, all tones, diatonic chords.</p>
                 <div style={{
-                  background: '#0e0e0e',
+                  background: 'rgba(14,14,14,.72)',
                   border: '1px solid #353534',
                   overflow: 'hidden',
                 }}>

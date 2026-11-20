@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { content } from '@/services/content'
 import { CATEGORY_CONFIG, CATEGORIES, isCategorySlug } from '@/data/categories'
+import BackLink from '@/components/ui/BackLink'
+import AccentSweep from '@/components/ui/AccentSweep'
 import { SITE } from '@/config/site'
 import type { CategorySlug } from '@/types'
 
@@ -63,11 +65,8 @@ export default async function CategoryPage({ params }: Props) {
         .cat-sidebar { display: none; }
         @media (min-width: 768px) { .cat-sidebar { display: flex; } }
 
-        .cat-entry-card { transition: border-color .2s, transform .15s; }
-        .cat-entry-card:hover {
-          border-color: ${cat.a}88 !important;
-          transform: translateY(-2px);
-        }
+        .cat-entry-card { transition: transform .15s, background .2s; }
+        .cat-entry-card:hover { transform: translateY(-2px); background: #201f1f !important; }
         .cat-entry-card:hover .cat-card-footer {
           border-top-color: ${cat.a}33 !important;
         }
@@ -86,26 +85,7 @@ export default async function CategoryPage({ params }: Props) {
         }
       `}</style>
 
-      <main style={{ minHeight: '100vh', background: '#131313', paddingBottom: 80 }}>
-
-        {/* Breadcrumb */}
-        <nav style={{
-          background: '#0e0e0e',
-          borderBottom: '1px solid #353534',
-          padding: '14px 24px',
-          display: 'flex', gap: 8, alignItems: 'center',
-          fontFamily: 'var(--font-sans)',
-          fontSize: '.68rem',
-        }}>
-          <Link href="/" style={{ color: '#ff6b00', textDecoration: 'none', letterSpacing: '0.06em', fontWeight: 600 }}>
-            Guitar Cheat Sheet
-          </Link>
-          <span style={{ color: 'rgba(169,138,125,.3)' }}>›</span>
-          <span style={{
-            color: cat.a, fontWeight: 700,
-            letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '.6rem',
-          }}>{cat.label}</span>
-        </nav>
+      <main style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 80 }}>
 
         <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex' }}>
 
@@ -114,7 +94,7 @@ export default async function CategoryPage({ params }: Props) {
             width: 256,
             flexDirection: 'column',
             borderRight: '1px solid #353534',
-            background: '#0e0e0e',
+            background: 'rgba(14,14,14,.72)',
             flexShrink: 0,
             overflowY: 'auto',
             maxHeight: 'calc(100vh - 112px)',
@@ -208,17 +188,20 @@ export default async function CategoryPage({ params }: Props) {
           </aside>
 
           {/* ── Main content ── */}
-          <div style={{ flex: 1, padding: '36px 32px 80px', background: '#131313', minWidth: 0 }}>
+          <div style={{ flex: 1, padding: '36px 32px 80px', background: 'transparent', minWidth: 0 }}>
 
             {/* Page header */}
             <header style={{ marginBottom: 40 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 10 }}>
               <p style={{
                 fontFamily: 'var(--font-sans)',
                 fontSize: '.62rem', fontWeight: 700,
                 color: cat.a,
                 textTransform: 'uppercase', letterSpacing: '0.14em',
-                marginBottom: 10,
+                margin: 0,
               }}>Theoretical Foundations</p>
+              <BackLink href="/">Back to home</BackLink>
+              </div>
               <h1 style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
@@ -247,7 +230,7 @@ export default async function CategoryPage({ params }: Props) {
                 <Link
                   key={entry.id}
                   href={`/${entry.category}/${entry.id}`}
-                  className="cat-entry-card"
+                  className="cat-entry-card sweep-card"
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -256,10 +239,11 @@ export default async function CategoryPage({ params }: Props) {
                     border: '1px solid #353534',
                     overflow: 'hidden',
                     borderRadius: 0,
-                  }}
+                    position: 'relative',
+                    '--accent': cat.a,
+                  } as React.CSSProperties}
                 >
-                  {/* Top accent strip */}
-                  <div style={{ height: 2, background: `linear-gradient(90deg, ${cat.a}, ${cat.a}44, transparent)` }} />
+                  <AccentSweep />
 
                   <div style={{ padding: '20px 24px', flex: 1 }}>
                     {/* Type badge */}
@@ -305,7 +289,7 @@ export default async function CategoryPage({ params }: Props) {
                     className="cat-card-footer"
                     style={{
                       borderTop: '1px solid #353534',
-                      background: '#0e0e0e',
+                      background: 'rgba(14,14,14,.72)',
                       padding: '11px 24px',
                       display: 'flex',
                       justifyContent: 'space-between',
