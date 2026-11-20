@@ -8,8 +8,11 @@ import { generateKeywords } from '@/lib/seoGenerators'
 import JsonLd from '@/components/seo/JsonLd'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import MusicBackground from '@/components/brand/MusicBackground'
 import ServiceWorkerRegister from '@/features/offline/ServiceWorkerRegister'
 import OfflineBanner from '@/features/offline/OfflineBanner'
+import ScrollToTopOnReload from '@/features/navigation/ScrollToTopOnReload'
+import RouteProgress from '@/features/navigation/RouteProgress'
 import NativeBootstrap from '@/features/install/NativeBootstrap'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
@@ -59,6 +62,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     appleWebApp: { capable: true, title: SITE.shortName, statusBarStyle: 'black-translucent' },
     formatDetection: { telephone: false },
+    // The site is already dark; stops the Dark Reader extension from rewriting the DOM (and breaking hydration).
+    other: { 'darkreader-lock': '' },
   }
 }
 
@@ -95,6 +100,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${notoSerif.variable}`} data-scroll-behavior="smooth">
       <body suppressHydrationWarning>
         <JsonLd data={siteJsonLd} />
+        <ScrollToTopOnReload />
+        <RouteProgress />
+        <MusicBackground />
         <Navbar />
         <OfflineBanner />
         {children}
