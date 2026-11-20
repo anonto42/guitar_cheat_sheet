@@ -8,9 +8,9 @@ Create a new component in the Guitar Cheat Sheet project.
 ```
 
 **Examples:**
-- `/new-component display/TagCloud` — creates `app/components/TagCloud.tsx` (no client)
-- `/new-component interactive/KeySelector --client` — creates with `'use client'`
-- `/new-component ui/EntryTable --client --shadcn table badge` — installs shadcn deps first
+- `/new-component display/TagCloud`, creates `app/components/TagCloud.tsx` (no client)
+- `/new-component interactive/KeySelector --client`, creates with `'use client'`
+- `/new-component ui/EntryTable --client --shadcn table badge`, installs shadcn deps first
 
 ## What to Do When This Command Is Invoked
 
@@ -97,7 +97,7 @@ interface <Name>Props {
 }
 
 export default function <Name>({ item, open = false, onToggle, className }: <Name>Props) {
-  const p = PAL[item.category]  // CategoryConfig — always typed
+  const p = PAL[item.category]  // CategoryConfig, always typed
 
   return (
     <div
@@ -218,7 +218,7 @@ Before finishing any component:
 - [ ] Background: `#141210` (card), `#1a1712` (open), `#111009` (body), `#0d0b08` (page)
 - [ ] Text: `#f5edda` headings, `rgba(255,255,255,.4)` body, `.2` hints
 - [ ] Borders: `rgba(255,255,255,.06)` default, `.12` hover
-- [ ] Category colours always from `PAL[item.category]` — never hardcoded
+- [ ] Category colours always from `PAL[item.category]`, never hardcoded
 - [ ] Fonts: Playfair Display titles, Space Mono labels/tags, Lora body/italic
 - [ ] `transition: all .15s` on hover states
 - [ ] `'use client'` only if hooks or events present

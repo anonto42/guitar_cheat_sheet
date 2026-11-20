@@ -2,36 +2,36 @@
 
 You are a component builder for the Guitar Cheat Sheet project. This is a Next.js 14 App Router project with TypeScript strict mode, Tailwind CSS v3, and shadcn/ui.
 
-## Rules — Always Follow
+## Rules: Always Follow
 
-1. **TypeScript strict** — every prop has an interface, no `any`, use `import type` for type-only imports
-2. **`'use client'` only when needed** — hooks, browser events, useState, useEffect require it; pure render components do not
-3. **`cn()` for conditional classes** — import from `app/lib/utils.ts`, use for Tailwind class merging
-4. **Category palette via PAL** — `import { PAL } from '../data/guitarData'`, access as `PAL[item.category]` (typed as `CategorySlug`)
-5. **No data in components** — all guitar content comes from `app/data/`, never hardcoded in components
-6. **Props interface naming** — `interface <ComponentName>Props { ... }`
+1. **TypeScript strict**, every prop has an interface, no `any`, use `import type` for type-only imports
+2. **`'use client'` only when needed**, hooks, browser events, useState, useEffect require it; pure render components do not
+3. **`cn()` for conditional classes**, import from `lib/utils.ts`, use for Tailwind class merging
+4. **Category palette via PAL**, `import { PAL } from '../data/guitarData'`, access as `PAL[item.category]` (typed as `CategorySlug`)
+5. **No data in components**, all guitar content comes from `data/`, never hardcoded in components
+6. **Props interface naming**, `interface <ComponentName>Props { ... }`
 
 ## shadcn/ui Component Rules
 
 Install with: `npx shadcn@latest add <component>`
 
 Available and preferred shadcn components for this project:
-- `button` — use instead of raw `<button>` when not doing hover inline styles
-- `badge` — category labels, tag pills
-- `card` — wrapping containers (but GuitarEntry cards use custom Card.tsx for animation)
-- `dialog` — modals and overlays
-- `input` — search inputs (SearchBar.tsx uses raw input for custom gold focus ring)
-- `separator` — section dividers
-- `tooltip` — hover hints on icon buttons
-- `scroll-area` — scrollable panels (KeysPanel if it grows)
-- `tabs` — switching between Notes / Chords / Details views
-- `collapsible` — expand/collapse sections (alternative to current open state in Card.tsx)
-- `popover` — floating panels
+- `button`, use instead of raw `<button>` when not doing hover inline styles
+- `badge`, category labels, tag pills
+- `card`, wrapping containers (but GuitarEntry cards use custom Card.tsx for animation)
+- `dialog`, modals and overlays
+- `input`, search inputs (SearchBar.tsx uses raw input for custom gold focus ring)
+- `separator`, section dividers
+- `tooltip`, hover hints on icon buttons
+- `scroll-area`, scrollable panels (KeysPanel if it grows)
+- `tabs`, switching between Notes / Chords / Details views
+- `collapsible`, expand/collapse sections (alternative to current open state in Card.tsx)
+- `popover`, floating panels
 
 **Do NOT use shadcn for:**
-- The main GuitarEntry Card — it needs custom expand animation and category-coloured borders
-- Category filter buttons — they need per-category accent colours from PAL
-- Hero section — fully custom layout
+- The main GuitarEntry Card, it needs custom expand animation and category-coloured borders
+- Category filter buttons, they need per-category accent colours from PAL
+- Hero section, fully custom layout
 
 ## Semantic CSS Variable Map
 
@@ -73,7 +73,7 @@ interface MyCardProps {
 }
 
 export default function MyCard({ item, open, onToggle }: MyCardProps) {
-  const p = PAL[item.category]  // CategorySlug — no cast needed
+  const p = PAL[item.category]  // CategorySlug, no cast needed
   // ...
 }
 ```
@@ -84,7 +84,7 @@ export default function MyCard({ item, open, onToggle }: MyCardProps) {
 import { useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/app/lib/utils'
+import { cn } from '@/lib/utils'
 
 interface SearchFormProps {
   onSearch: (query: string) => void
@@ -146,7 +146,7 @@ Before shipping any component, verify:
 - [ ] Borders use `rgba(255,255,255,.06)` default, `.12` on hover
 - [ ] Category accents applied via `PAL[category].a/.b/.br`
 - [ ] Font: Playfair Display for titles, Space Mono for labels/code, Lora for body
-- [ ] No hardcoded category colours — always use `PAL[cat]`
+- [ ] No hardcoded category colours, always use `PAL[cat]`
 - [ ] Hover/active states have smooth `transition: all .15s`
 - [ ] `'use client'` added only if hooks or events are used
 - [ ] Component exports a default export with a named `Props` interface

@@ -8,9 +8,9 @@ Create a new page in the Guitar Cheat Sheet Next.js 14 App Router project.
 ```
 
 **Examples:**
-- `/new-page about` — creates `app/about/page.tsx` (server)
-- `/new-page chord-finder --client` — creates `app/chord-finder/page.tsx` with `'use client'`
-- `/new-page print/entry --standalone` — creates `app/(standalone)/print/entry/page.tsx`
+- `/new-page about`, creates `app/about/page.tsx` (server)
+- `/new-page chord-finder --client`, creates `app/chord-finder/page.tsx` with `'use client'`
+- `/new-page print/entry --standalone`, creates `app/(standalone)/print/entry/page.tsx`
 
 ## What to Do When This Command Is Invoked
 
@@ -19,7 +19,7 @@ Create a new page in the Guitar Cheat Sheet Next.js 14 App Router project.
    - `--client` → `app/<path>/page.tsx` with `'use client'` directive
    - `--standalone` → `app/(standalone)/<path>/page.tsx` (needs its own layout)
 
-2. **Check if a layout is needed** — if `--standalone` and `app/(standalone)/layout.tsx` doesn't exist, create a minimal one.
+2. **Check if a layout is needed**, if `--standalone` and `app/(standalone)/layout.tsx` doesn't exist, create a minimal one.
 
 3. **Create the page file** using the correct template below.
 
@@ -85,8 +85,8 @@ export default function <PageName>Page() {
 ```
 
 Note: Client pages cannot export `metadata`. If SEO is needed, split into:
-- `app/<path>/page.tsx` — server shell with metadata
-- `app/<path>/<PageName>Client.tsx` — `'use client'` interactive part
+- `app/<path>/page.tsx`, server shell with metadata
+- `app/<path>/<PageName>Client.tsx`, `'use client'` interactive part
 
 ---
 
@@ -134,5 +134,5 @@ export default function <PageName>Page() {
 - [ ] `export const metadata` with `title` and `description` (server pages only)
 - [ ] `<main>` wrapper with `minHeight: '100vh'` and dark background
 - [ ] `h1` using Playfair Display font
-- [ ] No hardcoded guitar data — import from `app/data/guitarData`
+- [ ] No hardcoded guitar data, import from `@/services/content` (or `@/data`)
 - [ ] `npm run build` passes with no type errors

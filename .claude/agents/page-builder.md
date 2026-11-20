@@ -18,7 +18,7 @@ Current route structure:
 ```
 app/
   layout.tsx       ← root layout (fonts, metadata, JSON-LD)
-  page.tsx         ← home page (client component — search/filter state)
+  page.tsx         ← home page (client component, search/filter state)
   sitemap.ts       ← auto-generated sitemap
   robots.ts        ← robots.txt
   globals.css      ← global styles + CSS custom properties
@@ -29,7 +29,7 @@ app/
 **Use Server Component (no directive) when:**
 - Page only renders data (no useState, no useEffect, no event handlers)
 - Generating metadata (`export const metadata`)
-- Using `generateSeoSections`, `generateFAQ` — these are pure functions, safe at build time
+- Using `generateSeoSections`, `generateFAQ`, these are pure functions, safe at build time
 - Fetching data (if you add a DB/API later)
 
 **Use `'use client'` when:**
@@ -79,7 +79,7 @@ import type { GuitarEntry, CategorySlug } from '@/app/types'
 const scales = DATA.filter(d => d.category === 'scales')
 
 // Access category config
-const p = PAL['scales']   // CategoryConfig — typed
+const p = PAL['scales']   // CategoryConfig, typed
 ```
 
 ## API Integration Pattern (for future backend)
@@ -87,7 +87,7 @@ const p = PAL['scales']   // CategoryConfig — typed
 When adding API routes or data fetching:
 
 ```tsx
-// app/api/search/route.ts  — API Route
+// app/api/search/route.ts : API Route
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { DATA } from '@/app/data'
@@ -146,19 +146,19 @@ export default function PageName() {
 ## SEO Checklist for New Pages
 
 - [ ] `export const metadata` with `title` and `description`
-- [ ] `title` uses short form — layout template appends ` | Guitar Cheat Sheet`
+- [ ] `title` uses short form, layout template appends ` | Guitar Cheat Sheet`
 - [ ] `description` is 120–160 characters
 - [ ] `openGraph` title + description match metadata
 - [ ] Page has an `<h1>` (visually or via `aria-label`)
 - [ ] Semantic HTML: `<main>`, `<section>`, `<article>`, `<nav>` as appropriate
-- [ ] No inline `display:none` on content that should be indexed — use `aria-hidden` + CSS clip trick for visually-hidden SEO content
+- [ ] No inline `display:none` on content that should be indexed, use `aria-hidden` + CSS clip trick for visually-hidden SEO content
 
 ## Common Page Types in This Project
 
 ### Category Filter Page
 A page that pre-filters to a specific category. Use URL param `?cat=scales`.
 ```tsx
-// Can stay as the main page.tsx — cat param drives state
+// Can stay as the main page.tsx: cat param drives state
 // Or create app/scales/page.tsx that redirects with ?cat=scales
 ```
 
@@ -176,4 +176,4 @@ export async function generateStaticParams() {
 ```
 
 ### Print/Share Page (future)
-A clean printable layout for a single entry — use `(standalone)` route group with its own minimal layout.
+A clean printable layout for a single entry, use `(standalone)` route group with its own minimal layout.
