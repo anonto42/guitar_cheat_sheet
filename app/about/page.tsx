@@ -32,11 +32,11 @@ export default async function AboutPage() {
   const entryCount = (await content.listEntries()).length
 
   return (
-    <main style={{ minHeight: '100vh', background: '#131313', paddingBottom: 100 }}>
+    <main style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 100 }}>
 
       {/* Breadcrumb */}
       <nav style={{
-        background: '#0e0e0e', borderBottom: '1px solid #353534',
+        background: 'rgba(14,14,14,.72)', borderBottom: '1px solid #353534',
         padding: '14px 24px', display: 'flex', gap: 8, alignItems: 'center',
         fontFamily: 'var(--font-sans)', fontSize: '.68rem',
       }}>
