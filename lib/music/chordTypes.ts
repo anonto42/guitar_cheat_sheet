@@ -25,7 +25,9 @@ export const CHORD_TYPES: ChordType[] = [
   { id: 'dominant7', label: 'Dominant 7th', symbol: '7', intervals: [[1, 0], [3, 4], [5, 7], [7, 10]], blurb: 'Major triad plus a flat 7th. Tension that resolves.', entry: { category: 'chords', id: 'dominant-7th' } },
   { id: 'major7', label: 'Major 7th', symbol: 'maj7', intervals: [[1, 0], [3, 4], [5, 7], [7, 11]], blurb: 'Major triad plus the 7th. Lush and smooth.', entry: { category: 'chords', id: 'major-7th' } },
   { id: 'minor7', label: 'Minor 7th', symbol: 'm7', intervals: [[1, 0], [3, 3], [5, 7], [7, 10]], blurb: 'Minor triad plus a flat 7th. Mellow and soulful.', entry: { category: 'chords', id: 'minor-7th' } },
+  { id: 'dominant9', label: 'Dominant 9th', symbol: '9', intervals: [[1, 0], [3, 4], [5, 7], [7, 10], [9, 14]], blurb: 'Dominant 7th plus the 9th. Funky and rich.', entry: { category: 'chords', id: '9th-chord' } },
   { id: 'diminished', label: 'Diminished', symbol: 'dim', intervals: [[1, 0], [3, 3], [5, 6]], blurb: 'Minor triad with a flat 5th. Tense and unstable.', entry: { category: 'chords', id: 'diminished' } },
+  { id: 'half-diminished', label: 'Half diminished', symbol: 'm7♭5', intervals: [[1, 0], [3, 3], [5, 6], [7, 10]], blurb: 'Diminished triad plus a flat 7th. The ii chord of a minor key.', entry: { category: 'chords', id: 'diminished' } },
   { id: 'augmented', label: 'Augmented', symbol: 'aug', intervals: [[1, 0], [3, 4], [5, 8]], blurb: 'Major triad with a raised 5th. Dreamy and restless.', entry: { category: 'chords', id: 'augmented-chord' } },
 ]
 
@@ -54,4 +56,12 @@ export function buildSlashChords(root: string, type: ChordType): BuiltChord[] {
     { name: `${root}${type.symbol}/${third}`, notes: [third, r, fifth], typeId: 'slash' },
     { name: `${root}${type.symbol}/${fifth}`, notes: [fifth, r, third], typeId: 'slash' },
   ]
+}
+
+/** Chord type taught on each chord entry page. */
+export const CHORD_TYPE_FOR_ENTRY: Record<string, string> = {
+  'major-chord': 'major', 'minor-chord': 'minor', 'power-chord': 'power', 'dominant-7th': 'dominant7',
+  'major-7th': 'major7', 'minor-7th': 'minor7', 'sus2-chord': 'sus2', 'sus4-chord': 'sus4',
+  'diminished': 'diminished', 'add9-chord': 'add9', 'augmented-chord': 'augmented', '9th-chord': 'dominant9',
+  'major-arpeggio': 'major', 'minor-arpeggio': 'minor', 'sixth-chord': 'sixth', 'minor-sixth-chord': 'minor-sixth',
 }
