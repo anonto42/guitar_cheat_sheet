@@ -7,6 +7,7 @@ import { Download, Menu, Search, X } from 'lucide-react'
 import { PRIMARY_LINKS } from '@/config/navigation'
 import { cn } from '@/lib/utils'
 import Logo from '@/components/brand/Logo'
+import Button from '@/components/ui/Button'
 import SearchBox from '@/features/search/SearchBox'
 import HideWhenInstalled from './HideWhenInstalled'
 import LibraryMenu from './LibraryMenu'
@@ -23,7 +24,7 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-[100] border-b border-line2 bg-bg2/90 pt-[var(--safe-top)] backdrop-blur-xl">
+    <header className="sticky top-0 z-[100] bg-bg2/90 pt-[var(--safe-top)] backdrop-blur-xl">
       <div className="mx-auto flex h-nav max-w-7xl items-center gap-2 px-3 sm:px-6 lg:gap-6 lg:px-8">
         {/* Mobile: menu button */}
         <button
@@ -65,13 +66,10 @@ export default function Navbar() {
         </div>
 
         <HideWhenInstalled>
-          <Link
-            href="/download"
-            className="hidden h-10 shrink-0 items-center gap-2 rounded-md bg-ember px-4 text-sm font-bold text-bg2 transition-colors hover:bg-ember-l lg:flex"
-          >
+          <Button href="/download" size="sm" className="hidden h-[var(--control-h)] shrink-0 border border-ember lg:inline-flex">
             <Download size={15} aria-hidden="true" />
             Get the app
-          </Link>
+          </Button>
         </HideWhenInstalled>
 
         {/* Mobile: search toggle */}

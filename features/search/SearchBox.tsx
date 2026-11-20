@@ -72,8 +72,8 @@ export default function SearchBox({
     <div ref={rootRef} className={cn('relative', className)}>
       <div
         className={cn(
-          'flex h-10 items-center gap-2 rounded-lg border bg-surface px-3 transition-colors',
-          focused ? 'border-ember/60 bg-bg3' : 'border-line2 hover:border-line3',
+          'flex h-[var(--control-h)] items-center gap-2 border bg-surface px-3 transition-colors',
+          focused ? 'border-ember/70 bg-bg3' : 'border-line3 bg-surface hover:border-outline/50',
         )}
       >
         <Search size={16} className={focused ? 'text-ember' : 'text-outline'} aria-hidden="true" />

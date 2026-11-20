@@ -12,7 +12,7 @@ const buttonVariants = cva(
         ghost: 'text-outline hover:bg-white/5 hover:text-cream',
       },
       size: {
-        sm: 'h-9 px-3 text-xs',
+        sm: 'h-10 px-4 text-sm',
         md: 'h-11 px-5 text-sm',
         lg: 'h-12 px-6 text-sm',
       },

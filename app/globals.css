@@ -45,6 +45,8 @@
 
     /* Layout */
     --nav-h: 64px;
+    /* Height shared by navbar controls (search, buttons, links) so they always line up. */
+    --control-h: 2.5rem;
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
   }

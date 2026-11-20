@@ -14,7 +14,7 @@ export default function BackLink({ href, children, className }: BackLinkProps) {
     <Link
       href={href}
       className={cn(
-        'group inline-flex h-9 shrink-0 items-center gap-2 rounded-full border border-line2 bg-surface/70 px-4 text-xs font-semibold text-outline backdrop-blur transition-colors hover:border-line3 hover:text-cream',
+        'group inline-flex h-10 shrink-0 items-center gap-2 rounded-full border border-line2 bg-surface/70 px-4 text-xs font-semibold text-outline backdrop-blur transition-colors hover:border-line3 hover:text-cream',
         className,
       )}
     >
