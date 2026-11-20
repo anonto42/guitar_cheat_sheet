@@ -1,6 +1,7 @@
 import ArrowLink from '@/components/ui/ArrowLink'
 import CardGrid from '@/components/ui/CardGrid'
 import EntryCard from '@/components/ui/EntryCard'
+import ScrollReveal from '@/components/ui/ScrollReveal'
 import SectionHeading from '@/components/ui/SectionHeading'
 import type { CategorySummary } from '@/services/content'
 import type { GuitarEntry } from '@/types'
@@ -15,15 +16,17 @@ export default function CategorySection({ category, entries }: CategorySectionPr
   const headingId = `cat-${category.slug}`
   return (
     <section aria-labelledby={headingId} className="scroll-mt-24">
-      <SectionHeading
-        id={headingId}
-        title={`Guitar ${category.label}`}
-        description={category.desc}
-        accent={category.a}
-        accentTitle
-        className="[&_h2]:text-xl sm:[&_h2]:text-2xl [&_p]:text-sm"
-        action={<ArrowLink href={`/${category.slug}`}>View all {category.count}</ArrowLink>}
-      />
+      <ScrollReveal variant="left">
+        <SectionHeading
+          id={headingId}
+          title={`Guitar ${category.label}`}
+          description={category.desc}
+          accent={category.a}
+          accentTitle
+          className="[&_h2]:text-xl sm:[&_h2]:text-2xl [&_p]:text-sm"
+          action={<ArrowLink href={`/${category.slug}`}>View all {category.count}</ArrowLink>}
+        />
+      </ScrollReveal>
       <CardGrid className="mt-5">
         {entries.map(entry => <EntryCard key={entry.id} entry={entry} />)}
       </CardGrid>
