@@ -7,13 +7,13 @@ export const metadata: Metadata = {
 }
 
 const HEADING_STYLE = {
-  fontFamily: "'Noto Serif', Georgia, serif",
+  fontFamily: 'var(--font-display)',
   fontSize: '1.1rem', fontWeight: 600,
   color: '#e5e2e1', marginBottom: 10,
 } as const
 
 const BODY_STYLE = {
-  fontFamily: "'Inter', system-ui, sans-serif",
+  fontFamily: 'var(--font-sans)',
   fontSize: '.88rem', color: '#e2bfb0',
   lineHeight: 1.75, whiteSpace: 'pre-line' as const,
   marginBottom: 10,
@@ -31,8 +31,8 @@ When you visit the site, standard web server logs may automatically record techn
     body: `This site may use cookies for functionality and to serve advertising. A cookie is a small text file stored on your device by your browser.
 
 We may use:
-• Session cookies — temporary cookies that expire when you close your browser, used to maintain state during your visit (e.g., your selected category or search).
-• Third-party advertising cookies — if Google AdSense advertisements are displayed, Google may set cookies to serve ads based on your prior visits to this or other websites.
+• Session cookies, temporary cookies that expire when you close your browser, used to maintain state during your visit (e.g., your selected category or search).
+• Third-party advertising cookies, if Google AdSense advertisements are displayed, Google may set cookies to serve ads based on your prior visits to this or other websites.
 
 You can disable cookies in your browser settings. Note that some functionality may be affected.`,
   },
@@ -46,7 +46,7 @@ Google's use of advertising cookies enables it and its partners to serve ads to 
   },
   {
     heading: '4. Analytics',
-    body: `We may use analytics tools (such as Google Analytics) to understand how visitors use the site. This data is aggregated and anonymised — it does not identify individual users. It helps us improve the content and user experience.`,
+    body: `We may use analytics tools (such as Google Analytics) to understand how visitors use the site. This data is aggregated and anonymised, it does not identify individual users. It helps us improve the content and user experience.`,
   },
   {
     heading: '5. Third-Party Links',
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
       <nav style={{
         background: '#0e0e0e', borderBottom: '1px solid #353534',
         padding: '14px 24px', display: 'flex', gap: 8, alignItems: 'center',
-        fontFamily: "'Inter', system-ui, sans-serif", fontSize: '.68rem',
+        fontFamily: 'var(--font-sans)', fontSize: '.68rem',
       }}>
         <Link href="/" style={{ color: '#ff6b00', textDecoration: 'none', fontWeight: 600 }}>Guitar Cheat Sheet</Link>
         <span style={{ color: 'rgba(169,138,125,.3)' }}>›</span>
@@ -86,21 +86,21 @@ export default function PrivacyPage() {
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '48px 24px 80px' }}>
 
         <p style={{
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: 'var(--font-sans)',
           fontSize: '.6rem', fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.14em',
           color: 'rgba(169,138,125,.45)', marginBottom: 12,
         }}>Legal</p>
 
         <h1 style={{
-          fontFamily: "'Noto Serif', Georgia, serif",
+          fontFamily: 'var(--font-display)',
           fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', fontWeight: 700,
           color: '#e5e2e1', marginBottom: 8,
           lineHeight: 1.15, letterSpacing: '-0.02em',
         }}>Privacy Policy</h1>
 
         <p style={{
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: 'var(--font-sans)',
           fontSize: '.7rem', color: 'rgba(169,138,125,.4)',
           marginBottom: 40, letterSpacing: '0.04em',
           textTransform: 'uppercase',
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
 
         <div style={{ marginTop: 48 }}>
           <Link href="/" style={{
-            fontFamily: "'Inter', system-ui, sans-serif",
+            fontFamily: 'var(--font-sans)',
             fontSize: '.72rem', fontWeight: 600,
             color: 'rgba(169,138,125,.5)',
             textDecoration: 'none',

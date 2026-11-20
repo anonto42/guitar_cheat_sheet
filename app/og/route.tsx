@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const title  = searchParams.get('title')  ?? 'Guitar Cheat Sheet'
   const sub    = searchParams.get('sub')    ?? 'Scales · Chords · Modes · Techniques'
-  const accent = searchParams.get('accent') ?? '#c9a84c'
+  const accent = searchParams.get('accent') ?? '#ff6b00'
 
   return new ImageResponse(
     (

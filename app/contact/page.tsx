@@ -14,7 +14,7 @@ const inputStyle = {
   border: '1px solid #353534',
   borderRadius: 2,
   padding: '12px 14px',
-  fontFamily: "'Inter', system-ui, sans-serif",
+  fontFamily: 'var(--font-sans)',
   fontSize: '.9rem', color: '#e5e2e1',
   outline: 'none',
   transition: 'border-color .2s',
@@ -22,7 +22,7 @@ const inputStyle = {
 
 const labelStyle = {
   display: 'block',
-  fontFamily: "'Inter', system-ui, sans-serif",
+  fontFamily: 'var(--font-sans)',
   fontSize: '.6rem', fontWeight: 700,
   color: 'rgba(169,138,125,.5)',
   textTransform: 'uppercase' as const, letterSpacing: '.12em',
@@ -74,7 +74,7 @@ export default function ContactPage() {
       <nav style={{
         background: '#0e0e0e', borderBottom: '1px solid #353534',
         padding: '14px 24px', display: 'flex', gap: 8, alignItems: 'center',
-        fontFamily: "'Inter', system-ui, sans-serif", fontSize: '.68rem',
+        fontFamily: 'var(--font-sans)', fontSize: '.68rem',
       }}>
         <Link href="/" style={{ color: '#ff6b00', textDecoration: 'none', fontWeight: 600 }}>Guitar Cheat Sheet</Link>
         <span style={{ color: 'rgba(169,138,125,.3)' }}>›</span>
@@ -84,26 +84,26 @@ export default function ContactPage() {
       <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 24px 80px' }}>
 
         <p style={{
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: 'var(--font-sans)',
           fontSize: '.6rem', fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.14em',
           color: 'rgba(169,138,125,.45)', marginBottom: 12,
         }}>Reach Out</p>
 
         <h1 style={{
-          fontFamily: "'Noto Serif', Georgia, serif",
+          fontFamily: 'var(--font-display)',
           fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', fontWeight: 700,
           color: '#e5e2e1', marginBottom: 16,
           lineHeight: 1.15, letterSpacing: '-0.02em',
         }}>Get in Touch</h1>
 
         <p style={{
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: 'var(--font-sans)',
           fontSize: '.92rem', color: '#e2bfb0',
           lineHeight: 1.7, marginBottom: 36,
         }}>
           We&apos;d love to hear from you. Whether you&apos;ve spotted an error, have a suggestion for
-          new content, or just want to say hello — use the form below.
+          new content, or just want to say hello, use the form below.
         </p>
 
         {status === 'success' ? (
@@ -114,18 +114,18 @@ export default function ContactPage() {
             padding: '20px 24px',
           }}>
             <p style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
+              fontFamily: 'var(--font-sans)',
               fontSize: '.92rem',
               color: '#4fc96a', margin: 0, marginBottom: 12,
             }}>
-              ✓ Message received — thank you!
+              ✓ Message received, thank you!
             </p>
             <button
               onClick={() => setStatus('idle')}
               style={{
                 background: 'transparent', border: 'none',
                 color: '#ff6b00',
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '.72rem', fontWeight: 700,
                 cursor: 'pointer', padding: 0,
                 textTransform: 'uppercase', letterSpacing: '0.08em',
@@ -186,7 +186,7 @@ export default function ContactPage() {
 
             {status === 'error' && (
               <p style={{
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '.86rem', color: '#ffb4ab', margin: 0,
               }}>
                 {errorMsg}
@@ -201,7 +201,7 @@ export default function ContactPage() {
                 background: status === 'loading' ? 'rgba(255,107,0,.5)' : '#ff6b00',
                 color: '#000',
                 border: 'none', borderRadius: 2,
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '.72rem', fontWeight: 700,
                 textTransform: 'uppercase', letterSpacing: '0.1em',
                 padding: '12px 28px',
@@ -217,7 +217,7 @@ export default function ContactPage() {
 
         <div style={{ marginTop: 56, paddingTop: 24, borderTop: '1px solid #353534' }}>
           <Link href="/" style={{
-            fontFamily: "'Inter', system-ui, sans-serif",
+            fontFamily: 'var(--font-sans)',
             fontSize: '.72rem', fontWeight: 600,
             color: 'rgba(169,138,125,.5)',
             textDecoration: 'none',
