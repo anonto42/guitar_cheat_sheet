@@ -30,6 +30,16 @@ export const CATEGORY_CONFIG: CategoryConfigMap = {
     desc: 'Triads, 7ths, sus, dim, aug and beyond',
     sitemapPriority: 0.9,
   },
+  strumming: {
+    a: '#9be15d', b: 'rgba(155,225,93,.24)', br: 'rgba(155,225,93,.70)',
+    label: 'Strumming',
+    desc: 'Rhythm patterns from basic downstrokes to funk sixteenths',
+    sitemapPriority: 0.8,
+    keyed: false,
+    formulaLabel: 'Pattern',
+    degreesLabel: 'Count',
+    exampleLabel: 'Step by step in',
+  },
   progressions: {
     a: '#b987f5', b: 'rgba(185,135,245,.24)', br: 'rgba(185,135,245,.70)',
     label: 'Progressions',

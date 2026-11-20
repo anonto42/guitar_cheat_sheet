@@ -1,4 +1,4 @@
-import type { CategoryConfig, CategorySlug, GuitarEntry } from '@/types'
+import type { CategoryConfig, CategorySlug, GuitarEntry, LearnStep } from '@/types'
 
 /** Lightweight record used for client-side search. Keep it small: it is downloaded by the browser. */
 export interface SearchIndexItem {
@@ -28,4 +28,5 @@ export interface ContentRepository {
   listCategories(): Promise<CategorySummary[]>
   getCategory(slug: string): Promise<CategorySummary | null>
   getSearchIndex(): Promise<SearchIndexItem[]>
+  getLearningPath(): Promise<LearnStep[]>
 }

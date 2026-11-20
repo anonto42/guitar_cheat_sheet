@@ -22,8 +22,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params
   if (!isCategorySlug(category)) return {}
   const cat = CATEGORY_CONFIG[category]
-  const title = `Guitar ${cat.label}: Every ${cat.label.replace(/s$/, "")} in All 12 Keys`
-  const description = `Complete guitar ${cat.label.toLowerCase()} reference. ${cat.desc}. Every item shown in all 12 keys with formulas, notes, and chord families. Free for all levels.`
+  const title = cat.keyed === false
+    ? `Guitar ${cat.label} Patterns: ${cat.desc}`
+    : `Guitar ${cat.label}: Every ${cat.label.replace(/s$/, "")} in All 12 Keys`
+  const description = cat.keyed === false
+    ? `Guitar ${cat.label.toLowerCase()} reference. ${cat.desc}. Each pattern shows the strokes, the count and how to play it. Free for all levels.`
+    : `Complete guitar ${cat.label.toLowerCase()} reference. ${cat.desc}. Every item shown in all 12 keys with formulas, notes, and chord families. Free for all levels.`
   return {
     title,
     description,
@@ -160,7 +164,9 @@ export default async function CategoryPage({ params }: Props) {
                 fontSize: '1rem', color: '#e2bfb0',
                 maxWidth: 640, lineHeight: 1.6,
               }}>
-                {cat.desc}. Every item shown in all 12 keys, complete notes, formulas, and chord families.
+                {cat.keyed === false
+                  ? `${cat.desc}. Each pattern shows the strokes, the count and how to play it.`
+                  : `${cat.desc}. Every item shown in all 12 keys, complete notes, formulas, and chord families.`}
               </p>
             </header>
 
@@ -225,7 +231,7 @@ export default async function CategoryPage({ params }: Props) {
                         color: 'rgba(169,138,125,.55)',
                         fontStyle: 'italic',
                         letterSpacing: '0.02em',
-                      }}>Intervals: {entry.formula}</p>
+                      }}>{cat.formulaLabel ?? 'Intervals'}: {entry.formula}</p>
                     )}
                   </div>
 

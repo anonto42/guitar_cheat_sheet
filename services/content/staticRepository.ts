@@ -1,6 +1,7 @@
 import { DATA } from '@/data'
 import { CATEGORY_CONFIG, isCategorySlug } from '@/data/categories'
-import type { CategorySlug } from '@/types'
+import { LEARN_STEPS } from '@/data/learn'
+import type { CategorySlug, GuitarEntry, LearnStep } from '@/types'
 import type { CategorySummary, ContentRepository, SearchIndexItem } from './types'
 
 function summarise(slug: CategorySlug): CategorySummary {
@@ -27,5 +28,18 @@ export const staticRepository: ContentRepository = {
 
   async getSearchIndex(): Promise<SearchIndexItem[]> {
     return DATA.map(({ id, category, title, summary, tags }) => ({ id, category, title, summary, tags }))
+  },
+
+  async getLearningPath(): Promise<LearnStep[]> {
+    return LEARN_STEPS.map(({ entries, ...step }, i) => ({
+      ...step,
+      number: i + 1,
+      entries: entries
+        .map(ref => {
+          const [category, id] = ref.split('/')
+          return DATA.find(e => e.category === category && e.id === id)
+        })
+        .filter((e): e is GuitarEntry => e !== undefined),
+    }))
   },
 }

@@ -29,8 +29,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!entry) return {}
 
   const cat = CATEGORY_CONFIG[entry.category as CategorySlug]
-  const title = `${entry.title} (Guitar ${cat.label}, All 12 Keys)`
-  const description = `${entry.summary} Formula: ${entry.formula}. Learn the ${entry.title} in every key: C, D, E, F, G, A, B and all sharps/flats. ${entry.usedBy}.`
+  const keyed = cat.keyed !== false
+  const title = keyed ? `${entry.title} (Guitar ${cat.label}, All 12 Keys)` : `${entry.title}: Guitar Strumming Pattern`
+  const description = keyed
+    ? `${entry.summary} Formula: ${entry.formula}. Learn the ${entry.title} in every key: C, D, E, F, G, A, B and all sharps/flats. ${entry.usedBy}.`
+    : `${entry.summary} Pattern: ${entry.formula}. ${entry.usedBy}.`
 
   return {
     title,
@@ -212,7 +215,7 @@ export default async function EntryPage({ params }: Props) {
                     fontSize: '.58rem', fontWeight: 700,
                     textTransform: 'uppercase', letterSpacing: '.12em',
                     color: 'rgba(169,138,125,.5)', marginBottom: 6,
-                  }}>Formula</div>
+                  }}>{cat.formulaLabel ?? 'Formula'}</div>
                   <div style={{
                     fontFamily: 'var(--font-sans)',
                     fontSize: '.92rem',
@@ -235,7 +238,7 @@ export default async function EntryPage({ params }: Props) {
                     fontSize: '.58rem', fontWeight: 700,
                     textTransform: 'uppercase', letterSpacing: '.12em',
                     color: 'rgba(169,138,125,.5)', marginBottom: 6,
-                  }}>Degrees</div>
+                  }}>{cat.degreesLabel ?? 'Degrees'}</div>
                   <div style={{
                     fontFamily: 'var(--font-sans)',
                     fontSize: '.92rem',
@@ -258,7 +261,7 @@ export default async function EntryPage({ params }: Props) {
                     fontSize: '.58rem', fontWeight: 700,
                     textTransform: 'uppercase', letterSpacing: '.12em',
                     color: 'rgba(169,138,125,.5)', marginBottom: 6,
-                  }}>Example in {entry.example.root}</div>
+                  }}>{cat.exampleLabel ?? 'Example in'} {entry.example.root}</div>
                   <div style={{
                     fontFamily: 'var(--font-sans)',
                     fontSize: '.88rem',
@@ -476,7 +479,7 @@ export default async function EntryPage({ params }: Props) {
                   fontFamily: 'var(--font-sans)',
                   fontSize: '.8rem', color: '#a98a7d',
                   lineHeight: 1.55, marginBottom: 14,
-                }}>Play the {entry.title} across all 12 keys. Start at 60 BPM, increase by 5 each run.</p>
+                }}>{cat.keyed === false ? `Play the ${entry.title} on one chord, then change chords without stopping. Start at 60 BPM, increase by 5 each run.` : `Play the ${entry.title} across all 12 keys. Start at 60 BPM, increase by 5 each run.`}</p>
               </div>
 
               {entry.tip && (

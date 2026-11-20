@@ -2,6 +2,7 @@ import type { GuitarEntry } from '@/types'
 import { scales }       from './entries/scales'
 import { modes }        from './entries/modes'
 import { chords }       from './entries/chords'
+import { strumming }    from './entries/strumming'
 import { progressions } from './entries/progressions'
 import { techniques }   from './entries/techniques'
 import { theory }       from './entries/theory'
@@ -12,6 +13,7 @@ export const DATA: GuitarEntry[] = [
   ...scales,
   ...modes,
   ...chords,
+  ...strumming,
   ...progressions,
   ...techniques,
   ...theory,
