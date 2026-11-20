@@ -3,14 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
   :root {
-    /* ── Backgrounds ── */
+    /* Surfaces */
     --bg:      #131313;
     --bg2:     #0d0b08;
     --bg3:     #0e0e0e;
@@ -18,18 +12,18 @@
     --card:    #201f1f;
     --card2:   #2a2727;
 
-    /* ── Borders ── */
+    /* Borders */
     --border:  rgba(169,138,125,.1);
     --border2: rgba(169,138,125,.18);
     --border3: rgba(169,138,125,.28);
 
-    /* ── Ember palette ── */
-    --ember:     #ff6b00;   /* primary-container */
-    --ember-l:   #ffb693;   /* primary */
-    --amber:     #ffdb9d;   /* secondary */
+    /* Ember palette */
+    --ember:     #ff6b00;
+    --ember-l:   #ffb693;
+    --amber:     #ffdb9d;
     --ember-dim: rgba(255,107,0,.12);
 
-    /* ── Category accents (unchanged — data layer) ── */
+    /* Category accents */
     --scales:       #f0c93a;
     --modes:        #5fd3c8;
     --chords:       #6eb4ff;
@@ -37,66 +31,63 @@
     --techniques:   #ff8c42;
     --theory:       #4dd98a;
     --tunings:      #ff6b8a;
+    --solos:        #ff4d6d;
 
-    /* ── Text ── */
+    /* Text */
     --text:   #e5e2e1;
     --muted:  #e2bfb0;
     --muted2: #a98a7d;
     --muted3: rgba(169,138,125,.4);
+
+    /* Fonts (loaded by next/font in app/layout.tsx) */
+    --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+    --font-display: var(--font-noto-serif), Georgia, serif;
+
+    /* Layout */
+    --nav-h: 64px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
   body {
+    margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
   }
 
+  h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  button { cursor: pointer; font-family: inherit; }
+  input  { font-family: inherit; }
+
   ::placeholder { color: var(--muted3); }
-  :focus        { outline: none; }
-  button        { cursor: pointer; font-family: inherit; }
-  input         { font-family: inherit; }
 
-  ::-webkit-scrollbar       { width: 4px; }
+  /* Keyboard focus only: mouse and touch users see no ring */
+  :focus { outline: none; }
+  :focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; border-radius: 2px; }
+
+  ::-webkit-scrollbar       { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: rgba(169,138,125,.15); border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(169,138,125,.25); }
+  ::-webkit-scrollbar-thumb { background: rgba(169,138,125,.18); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(169,138,125,.3); }
 
-  ::selection { background: rgba(255,107,0,.18); color: var(--text); }
-}
+  ::selection { background: rgba(255,107,0,.22); color: var(--text); }
 
-/* ── Responsive nav visibility ── */
-/* Top header: desktop only */
-@media (max-width: 767px) {
-  .gcs-header { display: none !important; }
-}
-
-/* Bottom nav: mobile only */
-.mobile-bottom-nav { display: none !important; }
-@media (max-width: 767px) {
-  .mobile-bottom-nav { display: flex !important; }
-  body { padding-bottom: 64px; }
-}
-
-/* Mobile brand bar on home page: visible only when header is hidden */
-.mobile-brand-bar { display: none !important; }
-@media (max-width: 767px) {
-  .mobile-brand-bar { display: flex !important; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
 }
 
 @layer components {
-  /* ── Glass effects ── */
-  .glass-card {
-    background: rgba(30, 30, 30, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(169, 138, 125, 0.1);
-  }
-
   .glass-panel {
     background: rgba(28, 27, 27, 0.75);
     backdrop-filter: blur(16px);
@@ -105,54 +96,15 @@
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
-  .milled-edge {
-    box-shadow: inset 0 1px 0 0 rgba(255, 182, 147, 0.08);
-  }
-
-  /* ── Label caps ── */
-  .label-caps {
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-
-  .cat-badge {
-    @apply inline-flex items-center font-bold uppercase tracking-widest rounded px-[7px] py-[2px] border;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.62rem;
-  }
-
-  .section-label {
-    @apply flex items-center gap-2 mb-2;
-  }
-
-  .note-pill {
-    @apply inline-flex items-center justify-center font-bold px-[11px] py-[5px] rounded border min-w-[32px] text-center leading-none;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.02em;
-  }
-
   .key-btn {
     @apply font-bold px-2 py-[5px] rounded border min-w-[36px] cursor-pointer transition-all duration-100;
-    font-family: 'Inter', system-ui, sans-serif;
     font-size: 0.65rem;
   }
 
-  .quick-pill {
-    @apply bg-white/[0.03] border border-white/[0.06] rounded px-[10px] py-1 cursor-pointer transition-all duration-150;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.6rem;
-    color: rgba(226, 191, 176, 0.3);
-    letter-spacing: 0.02em;
-  }
+  .ember-glow { text-shadow: 0 0 20px rgba(255, 107, 0, 0.35); }
 
-  /* ── Ember glow utility ── */
-  .ember-glow {
-    text-shadow: 0 0 20px rgba(255, 107, 0, 0.35);
-  }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
 }
 
 /* GuitarFX Studio */
