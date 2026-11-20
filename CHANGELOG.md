@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+- Android app: Capacitor project in `android/`, launcher icons and splash screens, microphone permission, GitHub Actions workflow that builds the APK and attaches it to releases, Download APK button with install steps
+- Responsive fixes: navbar at 1024 to 1279px, Practice Studio on phones, category cards and tuner at 320px, fretboard maps scroll to the chosen position
 - Practice Studio: any scale or mode as the key (harmonic minor, Dorian, Phrygian dominant…), song parts (intro, verse, pre-chorus, chorus, bridge, solo, outro) with their own chords, a song order, song templates, and loop whole song or one part
 - Shared shadcn-style Select (Radix) replaces every native dropdown
 - Rebuilt entry pages: key picker on every keyed page (`?key=`), readable info cards, "In simple words" box, history-aware Back button, compact technique diagrams

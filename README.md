@@ -17,8 +17,8 @@ A free, open source guitar reference. Look up any scale, mode, chord, progressio
 
 ## Quick start
 ```bash
-git clone https://github.com/ananto/guitar-cheat-sheet.git
-cd guitar-cheat-sheet
+git clone https://github.com/anonto42/guitar_cheat_sheet.git
+cd guitar_cheat_sheet
 npm install
 cp .env.example .env.local
 npm run dev        # http://localhost:3000
