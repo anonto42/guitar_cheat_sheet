@@ -1,31 +1,30 @@
 import type { MetadataRoute } from 'next'
-import { DATA }               from './data'
-import { CATEGORY_CONFIG }    from './data/categories'
-import { generateSitemapEntries } from './lib/seoGenerators'
+import { content } from '@/services/content'
+import { SITE } from '@/config/site'
+import { generateSitemapEntries } from '@/lib/seoGenerators'
+import { CATEGORY_CONFIG } from '@/data/categories'
 
-const SITE_URL = 'https://guitarcheatsheet.com'
+export const dynamic = 'force-static'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date().toISOString()
+  const entries = await content.listEntries()
 
-  // Static pages
   const staticPages: MetadataRoute.Sitemap = [
-    { url: SITE_URL,                           lastModified: now, changeFrequency: 'weekly',  priority: 1 },
-    { url: `${SITE_URL}/about`,                lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${SITE_URL}/contact`,              lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
-    { url: `${SITE_URL}/privacy`,              lastModified: now, changeFrequency: 'yearly',  priority: 0.2 },
+    { url: SITE.url, lastModified: now, changeFrequency: 'weekly', priority: 1 },
+    { url: `${SITE.url}/download`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE.url}/guitarfx`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE.url}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${SITE.url}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${SITE.url}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
   ]
 
-  // Category landing pages (e.g. /scales, /chords)
-  const categoryPages = generateSitemapEntries(CATEGORY_CONFIG, SITE_URL)
-
-  // Individual entry pages (e.g. /scales/minor-pentatonic)
-  const entryPages: MetadataRoute.Sitemap = DATA.map(entry => ({
-    url: `${SITE_URL}/${entry.category}/${entry.id}`,
+  const entryPages: MetadataRoute.Sitemap = entries.map(entry => ({
+    url: `${SITE.url}/${entry.category}/${entry.id}`,
     lastModified: now,
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'monthly',
     priority: 0.75,
   }))
 
-  return [...staticPages, ...categoryPages, ...entryPages]
+  return [...staticPages, ...generateSitemapEntries(CATEGORY_CONFIG, SITE.url), ...entryPages]
 }

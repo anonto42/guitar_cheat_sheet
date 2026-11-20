@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { DATA } from '../data'
-import { CATEGORY_CONFIG, CATEGORIES, isCategorySlug } from '../data/categories'
-import type { CategorySlug } from '../types'
+import { content } from '@/services/content'
+import { CATEGORY_CONFIG, CATEGORIES, isCategorySlug } from '@/data/categories'
+import { SITE } from '@/config/site'
+import type { CategorySlug } from '@/types'
 
-const SITE_URL = 'https://guitarcheatsheet.com'
+const SITE_URL = SITE.url
 
 interface Props {
   params: Promise<{ category: string }>
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params
   if (!isCategorySlug(category)) return {}
   const cat = CATEGORY_CONFIG[category]
-  const title = `Guitar ${cat.label} — All ${cat.label} in Every Key`
+  const title = `Guitar ${cat.label}: Every ${cat.label.replace(/s$/, "")} in All 12 Keys`
   const description = `Complete guitar ${cat.label.toLowerCase()} reference. ${cat.desc}. Every item shown in all 12 keys with formulas, notes, and chord families. Free for all levels.`
   return {
     title,
@@ -37,7 +38,7 @@ export default async function CategoryPage({ params }: Props) {
 
   const slug = category as CategorySlug
   const cat = CATEGORY_CONFIG[slug]
-  const entries = DATA.filter(d => d.category === slug)
+  const entries = await content.listEntries({ category: slug })
   const cats = CATEGORIES.filter(c => c !== 'all')
 
   const jsonLd = {
@@ -93,7 +94,7 @@ export default async function CategoryPage({ params }: Props) {
           borderBottom: '1px solid #353534',
           padding: '14px 24px',
           display: 'flex', gap: 8, alignItems: 'center',
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: 'var(--font-sans)',
           fontSize: '.68rem',
         }}>
           <Link href="/" style={{ color: '#ff6b00', textDecoration: 'none', letterSpacing: '0.06em', fontWeight: 600 }}>
@@ -124,7 +125,7 @@ export default async function CategoryPage({ params }: Props) {
 
               {/* Brand mark */}
               <div style={{
-                fontFamily: "'Noto Serif', Georgia, serif",
+                fontFamily: 'var(--font-display)',
                 fontSize: '.9rem', fontWeight: 700,
                 color: cat.a,
                 letterSpacing: '0.22em', textTransform: 'uppercase',
@@ -135,7 +136,7 @@ export default async function CategoryPage({ params }: Props) {
               {/* Category navigation */}
               <div style={{ marginBottom: 28 }}>
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.58rem', fontWeight: 700,
                   color: 'rgba(169,138,125,.45)',
                   textTransform: 'uppercase', letterSpacing: '.14em',
@@ -156,7 +157,7 @@ export default async function CategoryPage({ params }: Props) {
                           alignItems: 'center',
                           gap: 10,
                           padding: '11px 24px',
-                          fontFamily: "'Inter', system-ui, sans-serif",
+                          fontFamily: 'var(--font-sans)',
                           fontSize: '.76rem',
                           fontWeight: isActive ? 700 : 400,
                           textDecoration: 'none',
@@ -176,7 +177,7 @@ export default async function CategoryPage({ params }: Props) {
               {/* Filter by Key */}
               <div style={{ padding: '0 24px', marginBottom: 28 }}>
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.58rem', fontWeight: 700,
                   color: 'rgba(169,138,125,.45)',
                   textTransform: 'uppercase', letterSpacing: '.14em',
@@ -192,7 +193,7 @@ export default async function CategoryPage({ params }: Props) {
                         borderRadius: 2,
                         padding: '6px 4px',
                         textAlign: 'center',
-                        fontFamily: "'Inter', system-ui, sans-serif",
+                        fontFamily: 'var(--font-sans)',
                         fontSize: '.62rem', fontWeight: 700,
                         color: 'rgba(169,138,125,.45)',
                         cursor: 'default',
@@ -212,14 +213,14 @@ export default async function CategoryPage({ params }: Props) {
             {/* Page header */}
             <header style={{ marginBottom: 40 }}>
               <p style={{
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '.62rem', fontWeight: 700,
                 color: cat.a,
                 textTransform: 'uppercase', letterSpacing: '0.14em',
                 marginBottom: 10,
               }}>Theoretical Foundations</p>
               <h1 style={{
-                fontFamily: "'Noto Serif', Georgia, serif",
+                fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
                 fontWeight: 700, lineHeight: 1.1,
                 letterSpacing: '-0.02em',
@@ -227,11 +228,11 @@ export default async function CategoryPage({ params }: Props) {
                 marginBottom: 14,
               }}>{cat.label} Library</h1>
               <p style={{
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '1rem', color: '#e2bfb0',
                 maxWidth: 640, lineHeight: 1.6,
               }}>
-                {cat.desc}. Every item shown in all 12 keys — complete notes, formulas, and chord families.
+                {cat.desc}. Every item shown in all 12 keys, complete notes, formulas, and chord families.
               </p>
             </header>
 
@@ -264,7 +265,7 @@ export default async function CategoryPage({ params }: Props) {
                     {/* Type badge */}
                     <span style={{
                       display: 'inline-block',
-                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontFamily: 'var(--font-sans)',
                       fontSize: '.58rem', fontWeight: 700,
                       textTransform: 'uppercase', letterSpacing: '0.12em',
                       color: cat.a,
@@ -273,7 +274,7 @@ export default async function CategoryPage({ params }: Props) {
 
                     {/* Title */}
                     <h2 style={{
-                      fontFamily: "'Noto Serif', Georgia, serif",
+                      fontFamily: 'var(--font-display)',
                       fontSize: '1.3rem', fontWeight: 600,
                       lineHeight: 1.25, color: '#e5e2e1',
                       marginBottom: 8,
@@ -281,7 +282,7 @@ export default async function CategoryPage({ params }: Props) {
 
                     {/* Summary */}
                     <p style={{
-                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontFamily: 'var(--font-sans)',
                       fontSize: '.82rem', color: '#a98a7d',
                       lineHeight: 1.55,
                       marginBottom: entry.formula ? 14 : 0,
@@ -290,7 +291,7 @@ export default async function CategoryPage({ params }: Props) {
                     {/* Formula */}
                     {entry.formula && (
                       <p style={{
-                        fontFamily: "'Inter', system-ui, sans-serif",
+                        fontFamily: 'var(--font-sans)',
                         fontSize: '.7rem',
                         color: 'rgba(169,138,125,.55)',
                         fontStyle: 'italic',
@@ -313,7 +314,7 @@ export default async function CategoryPage({ params }: Props) {
                     }}
                   >
                     <span style={{
-                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontFamily: 'var(--font-sans)',
                       fontSize: '.68rem',
                       color: 'rgba(169,138,125,.35)',
                       fontStyle: 'italic',
@@ -324,7 +325,7 @@ export default async function CategoryPage({ params }: Props) {
                       className="cat-explore-btn"
                       style={{
                         display: 'flex', alignItems: 'center', gap: 4,
-                        fontFamily: "'Inter', system-ui, sans-serif",
+                        fontFamily: 'var(--font-sans)',
                         fontSize: '.68rem', fontWeight: 700,
                         color: 'rgba(169,138,125,.6)',
                         textTransform: 'uppercase', letterSpacing: '0.08em',
@@ -347,7 +348,7 @@ export default async function CategoryPage({ params }: Props) {
               borderTop: '1px solid #353534',
             }}>
               <h2 style={{
-                fontFamily: "'Noto Serif', Georgia, serif",
+                fontFamily: 'var(--font-display)',
                 fontSize: '1.4rem', fontWeight: 600,
                 color: '#e5e2e1', marginBottom: 20,
               }}>About Guitar {cat.label}</h2>
@@ -359,12 +360,12 @@ export default async function CategoryPage({ params }: Props) {
                 {entries.slice(0, 6).map(entry => (
                   <article key={entry.id}>
                     <h3 style={{
-                      fontFamily: "'Noto Serif', Georgia, serif",
+                      fontFamily: 'var(--font-display)',
                       fontSize: '.95rem', fontWeight: 600,
                       color: '#e5e2e1', marginBottom: 6,
                     }}>{entry.title}</h3>
                     <p style={{
-                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontFamily: 'var(--font-sans)',
                       fontSize: '.8rem', color: '#a98a7d',
                       lineHeight: 1.7, margin: 0,
                     }}>

@@ -1,20 +1,22 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { DATA } from '../../data'
-import { CATEGORY_CONFIG } from '../../data/categories'
-import { FRETBOARDS } from '../../data/fretboards'
-import FretboardDiagram from '../../components/FretboardDiagram'
-import type { CategorySlug, GuitarEntry } from '../../types'
+import { content } from '@/services/content'
+import { CATEGORY_CONFIG } from '@/data/categories'
+import { FRETBOARDS } from '@/data/fretboards'
+import FretboardDiagram from '@/features/fretboard/FretboardDiagram'
+import { SITE } from '@/config/site'
+import type { CategorySlug, GuitarEntry } from '@/types'
 
-const SITE_URL = 'https://guitarcheatsheet.com'
+const SITE_URL = SITE.url
 
 interface Props {
   params: Promise<{ category: string; slug: string }>
 }
 
 export async function generateStaticParams() {
-  return DATA.map(entry => ({
+  const entries = await content.listEntries()
+  return entries.map(entry => ({
     category: entry.category,
     slug: entry.id,
   }))
@@ -22,11 +24,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category, slug: paramSlug } = await params
-  const entry = DATA.find(d => d.category === category && d.id === paramSlug)
+  const entry = await content.getEntry(category, paramSlug)
   if (!entry) return {}
 
   const cat = CATEGORY_CONFIG[entry.category as CategorySlug]
-  const title = `${entry.title} — Guitar ${cat.label} in All 12 Keys`
+  const title = `${entry.title} (Guitar ${cat.label}, All 12 Keys)`
   const description = `${entry.summary} Formula: ${entry.formula}. Learn the ${entry.title} in every key: C, D, E, F, G, A, B and all sharps/flats. ${entry.usedBy}.`
 
   return {
@@ -69,7 +71,7 @@ function KeyTable({ entry, cat }: { entry: GuitarEntry; cat: { a: string; b: str
     <div style={{ overflowX: 'auto' }}>
       <table style={{
         width: '100%', borderCollapse: 'collapse',
-        fontFamily: "'Inter', system-ui, sans-serif",
+        fontFamily: 'var(--font-sans)',
         fontSize: '.76rem',
       }}>
         <thead>
@@ -104,13 +106,13 @@ function KeyTable({ entry, cat }: { entry: GuitarEntry; cat: { a: string; b: str
 
 export default async function EntryPage({ params }: Props) {
   const { category, slug: paramSlug } = await params
-  const entry = DATA.find(d => d.category === category && d.id === paramSlug)
+  const entry = await content.getEntry(category, paramSlug)
   if (!entry) notFound()
 
   const cat = CATEGORY_CONFIG[entry.category as CategorySlug]
   const diagrams = FRETBOARDS[entry.id] ?? []
-  const related = DATA
-    .filter(d => d.category === entry.category && d.id !== entry.id)
+  const related = (await content.listEntries({ category: entry.category }))
+    .filter(d => d.id !== entry.id)
     .slice(0, 6)
 
   const jsonLd = {
@@ -157,7 +159,7 @@ export default async function EntryPage({ params }: Props) {
           borderBottom: '1px solid #353534',
           padding: '14px 24px',
           display: 'flex', gap: 8, alignItems: 'center',
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: 'var(--font-sans)',
           fontSize: '.68rem',
         }}>
           <Link href="/" style={{ color: '#ff6b00', textDecoration: 'none', fontWeight: 600 }}>Guitar Cheat Sheet</Link>
@@ -183,7 +185,7 @@ export default async function EntryPage({ params }: Props) {
             <div style={{ marginBottom: 16 }}>
               <span style={{
                 display: 'inline-block',
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '.6rem', fontWeight: 700,
                 textTransform: 'uppercase', letterSpacing: '0.12em',
                 color: cat.a,
@@ -195,7 +197,7 @@ export default async function EntryPage({ params }: Props) {
 
             {/* Title */}
             <h1 style={{
-              fontFamily: "'Noto Serif', Georgia, serif",
+              fontFamily: 'var(--font-display)',
               fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)',
               fontWeight: 600, lineHeight: 1.2,
               color: '#e5e2e1',
@@ -205,7 +207,7 @@ export default async function EntryPage({ params }: Props) {
 
             {/* Summary */}
             <p style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
+              fontFamily: 'var(--font-sans)',
               fontSize: '1rem', color: '#e2bfb0',
               lineHeight: 1.65, marginBottom: 28,
               maxWidth: 700,
@@ -222,13 +224,13 @@ export default async function EntryPage({ params }: Props) {
                   minWidth: 0,
                 }}>
                   <div style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.58rem', fontWeight: 700,
                     textTransform: 'uppercase', letterSpacing: '.12em',
                     color: 'rgba(169,138,125,.5)', marginBottom: 6,
                   }}>Formula</div>
                   <div style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.92rem',
                     color: cat.a,
                     letterSpacing: '0.06em',
@@ -245,13 +247,13 @@ export default async function EntryPage({ params }: Props) {
                   minWidth: 0,
                 }}>
                   <div style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.58rem', fontWeight: 700,
                     textTransform: 'uppercase', letterSpacing: '.12em',
                     color: 'rgba(169,138,125,.5)', marginBottom: 6,
                   }}>Degrees</div>
                   <div style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.92rem',
                     color: '#e5e2e1',
                     letterSpacing: '0.08em',
@@ -268,13 +270,13 @@ export default async function EntryPage({ params }: Props) {
                   minWidth: 0,
                 }}>
                   <div style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.58rem', fontWeight: 700,
                     textTransform: 'uppercase', letterSpacing: '.12em',
                     color: 'rgba(169,138,125,.5)', marginBottom: 6,
                   }}>Example in {entry.example.root}</div>
                   <div style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.88rem',
                     color: '#e5e2e1',
                     letterSpacing: '0.06em',
@@ -289,7 +291,7 @@ export default async function EntryPage({ params }: Props) {
               <section aria-labelledby="fretboard-heading" style={{ marginBottom: 40 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
                   <p style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.6rem', fontWeight: 700,
                     color: cat.a, textTransform: 'uppercase', letterSpacing: '0.14em', margin: 0,
                   }} id="fretboard-heading">Interactive Visualizer</p>
@@ -319,7 +321,7 @@ export default async function EntryPage({ params }: Props) {
             <section aria-labelledby="details-heading" style={{ marginBottom: 40 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
                 <h2 id="details-heading" style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.6rem', fontWeight: 700,
                   color: cat.a, textTransform: 'uppercase', letterSpacing: '0.14em', margin: 0,
                 }}>About the {entry.title}</h2>
@@ -327,7 +329,7 @@ export default async function EntryPage({ params }: Props) {
               </div>
               {entry.details.split('\n\n').map((para, i) => (
                 <p key={i} style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.92rem', color: '#e2bfb0',
                   lineHeight: 1.75,
                   marginTop: i > 0 ? 14 : 0, marginBottom: 0,
@@ -340,14 +342,14 @@ export default async function EntryPage({ params }: Props) {
               <section aria-labelledby="genres-heading" style={{ marginBottom: 40 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
                   <h2 id="genres-heading" style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.6rem', fontWeight: 700,
                     color: cat.a, textTransform: 'uppercase', letterSpacing: '0.14em', margin: 0,
                   }}>Genres &amp; Contexts</h2>
                   <div style={{ flex: 1, height: 1, background: 'rgba(169,138,125,.08)' }} />
                 </div>
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.9rem', color: '#e2bfb0', lineHeight: 1.7,
                 }}>{entry.usedBy}</p>
               </section>
@@ -358,7 +360,7 @@ export default async function EntryPage({ params }: Props) {
               <section aria-labelledby="chords-heading" style={{ marginBottom: 40 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
                   <h2 id="chords-heading" style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.6rem', fontWeight: 700,
                     color: cat.a, textTransform: 'uppercase', letterSpacing: '0.14em', margin: 0,
                   }}>Diatonic Chords</h2>
@@ -367,7 +369,7 @@ export default async function EntryPage({ params }: Props) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   {entry.chords.map((ch, i) => (
                     <span key={i} style={{
-                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontFamily: 'var(--font-sans)',
                       fontSize: '.78rem', fontWeight: 600,
                       color: cat.a, background: cat.b,
                       border: `1px solid ${cat.br}55`,
@@ -383,7 +385,7 @@ export default async function EntryPage({ params }: Props) {
               <section aria-labelledby="keys-heading" style={{ marginBottom: 48 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
                   <h2 id="keys-heading" style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.6rem', fontWeight: 700,
                     color: cat.a, textTransform: 'uppercase', letterSpacing: '0.14em', margin: 0,
                     whiteSpace: 'nowrap',
@@ -391,10 +393,10 @@ export default async function EntryPage({ params }: Props) {
                   <div style={{ flex: 1, height: 1, background: 'rgba(169,138,125,.08)' }} />
                 </div>
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.76rem', color: 'rgba(169,138,125,.4)',
                   marginBottom: 14, fontStyle: 'italic',
-                }}>Every key — root note, all tones, diatonic chords.</p>
+                }}>Every key, root note, all tones, diatonic chords.</p>
                 <div style={{
                   background: '#0e0e0e',
                   border: '1px solid #353534',
@@ -425,7 +427,7 @@ export default async function EntryPage({ params }: Props) {
                   pointerEvents: 'none', userSelect: 'none',
                 }}>&ldquo;</div>
                 <div style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.6rem', fontWeight: 700,
                   textTransform: 'uppercase', letterSpacing: '0.14em',
                   color: cat.a, marginBottom: 10,
@@ -434,7 +436,7 @@ export default async function EntryPage({ params }: Props) {
                   <span>◆</span> Pro Tip
                 </div>
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontStyle: 'italic',
                   fontSize: '.9rem', color: '#ffb693',
                   lineHeight: 1.7, margin: 0,
@@ -450,7 +452,7 @@ export default async function EntryPage({ params }: Props) {
                     key={tag}
                     className="entry-tag"
                     style={{
-                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontFamily: 'var(--font-sans)',
                       fontSize: '.62rem', fontWeight: 600,
                       color: 'rgba(169,138,125,.45)',
                       background: 'rgba(169,138,125,.06)',
@@ -481,18 +483,18 @@ export default async function EntryPage({ params }: Props) {
                   background: cat.a,
                 }} />
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.6rem', fontWeight: 700,
                   color: cat.a, textTransform: 'uppercase',
                   letterSpacing: '0.14em', marginBottom: 10,
                 }}>Practice Drill</p>
                 <h4 style={{
-                  fontFamily: "'Noto Serif', Georgia, serif",
+                  fontFamily: 'var(--font-display)',
                   fontSize: '1rem', fontWeight: 600,
                   color: '#e5e2e1', marginBottom: 8,
                 }}>The All-Keys Sequence</h4>
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.8rem', color: '#a98a7d',
                   lineHeight: 1.55, marginBottom: 14,
                 }}>Play the {entry.title} across all 12 keys. Start at 60 BPM, increase by 5 each run.</p>
@@ -505,13 +507,13 @@ export default async function EntryPage({ params }: Props) {
                   padding: '20px 24px',
                 }}>
                   <p style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.6rem', fontWeight: 700,
                     color: cat.a, textTransform: 'uppercase',
                     letterSpacing: '0.14em', marginBottom: 10,
                   }}>Lesson Notes</p>
                   <p style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontStyle: 'italic',
                     fontSize: '.84rem', color: 'rgba(226,191,176,.7)',
                     lineHeight: 1.65, marginBottom: 0,
@@ -525,7 +527,7 @@ export default async function EntryPage({ params }: Props) {
               href={`/${entry.category}`}
               className="entry-back"
               style={{
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '.72rem', fontWeight: 600,
                 color: 'rgba(169,138,125,.5)',
                 textDecoration: 'none',
@@ -564,13 +566,13 @@ export default async function EntryPage({ params }: Props) {
               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
             }}>
               <span style={{
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '.62rem', fontWeight: 700,
                 color: cat.a,
                 textTransform: 'uppercase', letterSpacing: '0.12em',
               }}>More {cat.label}</span>
               <span style={{
-                fontFamily: "'Inter', system-ui, sans-serif",
+                fontFamily: 'var(--font-sans)',
                 fontSize: '.6rem', fontWeight: 600,
                 color: 'rgba(169,138,125,.45)',
               }}>{related.length} lessons</span>
@@ -586,7 +588,7 @@ export default async function EntryPage({ params }: Props) {
             }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.68rem', fontWeight: 700,
                   color: cat.a,
                   textTransform: 'uppercase', letterSpacing: '0.06em',
@@ -594,7 +596,7 @@ export default async function EntryPage({ params }: Props) {
                   overflow: 'hidden', textOverflow: 'ellipsis',
                 }}>Current</p>
                 <p style={{
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.78rem', color: '#e5e2e1',
                   fontWeight: 600,
                   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
@@ -624,7 +626,7 @@ export default async function EntryPage({ params }: Props) {
                   }}
                 >
                   <span style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
+                    fontFamily: 'var(--font-sans)',
                     fontSize: '.68rem', fontWeight: 700,
                     color: 'rgba(169,138,125,.3)',
                     minWidth: 24, flexShrink: 0,
@@ -633,7 +635,7 @@ export default async function EntryPage({ params }: Props) {
                     <p
                       className="entry-related-title"
                       style={{
-                        fontFamily: "'Inter', system-ui, sans-serif",
+                        fontFamily: 'var(--font-sans)',
                         fontSize: '.76rem', fontWeight: 600,
                         color: '#e5e2e1',
                         textTransform: 'uppercase', letterSpacing: '0.04em',
@@ -643,7 +645,7 @@ export default async function EntryPage({ params }: Props) {
                       }}
                     >{r.title}</p>
                     <p style={{
-                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontFamily: 'var(--font-sans)',
                       fontSize: '.68rem', color: 'rgba(169,138,125,.5)',
                       whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
                       margin: 0,
@@ -661,7 +663,7 @@ export default async function EntryPage({ params }: Props) {
                   display: 'block',
                   background: cat.a,
                   color: '#000',
-                  fontFamily: "'Inter', system-ui, sans-serif",
+                  fontFamily: 'var(--font-sans)',
                   fontSize: '.68rem', fontWeight: 700,
                   textTransform: 'uppercase', letterSpacing: '0.1em',
                   textDecoration: 'none',
