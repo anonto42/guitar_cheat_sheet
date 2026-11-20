@@ -11,7 +11,7 @@ export interface PrecacheManifest {
   assets: string[]
 }
 
-const STATIC_ROUTES = ['/', '/about', '/contact', '/privacy', '/download', '/search', '/guitarfx', '/offline', '/learn', '/practice', '/keys']
+const STATIC_ROUTES = ['/', '/about', '/contact', '/privacy', '/download', '/search', '/guitarfx', '/offline', '/learn', '/practice', '/keys', '/tuner']
 
 /** Builds the list of everything the app should store for offline use, derived from the content service. */
 export async function buildPrecacheManifest(): Promise<PrecacheManifest> {

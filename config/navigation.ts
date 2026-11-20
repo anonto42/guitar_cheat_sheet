@@ -24,6 +24,7 @@ export const LIBRARY_LINKS: LibraryLink[] = (Object.keys(CATEGORY_CONFIG) as Cat
 export const PRIMARY_LINKS: NavLink[] = [
   { label: 'Learn', href: '/learn' },
   { label: 'Practice', href: '/practice' },
+  { label: 'Tuner', href: '/tuner' },
   { label: 'GuitarFX', href: '/guitarfx' },
   { label: 'About', href: '/about' },
 ]
@@ -35,7 +36,8 @@ export const FOOTER_GROUPS: { title: string; links: NavLink[] }[] = [
     links: [
       { label: 'Learning path', href: '/learn' },
       { label: 'All 12 keys', href: '/keys' },
-      { label: 'Practice player', href: '/practice' },
+      { label: 'Practice Studio', href: '/practice' },
+      { label: 'Guitar tuner', href: '/tuner' },
       { label: 'GuitarFX Studio', href: '/guitarfx' },
       { label: 'Search', href: '/search' },
       { label: 'Get the app', href: '/download' },

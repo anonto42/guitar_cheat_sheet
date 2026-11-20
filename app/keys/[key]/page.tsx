@@ -152,12 +152,12 @@ export default async function KeyPage({ params }: Props) {
           <div className="mt-5"><ArrowLink href="/strumming">All strumming patterns</ArrowLink></div>
         </PageSection>
 
-        <PageSection id="practice" eyebrow="6. Practice" title={`Progressions in ${key.name}`} description="One chord per bar. Open the practice player to hear the chords loop with a strumming pattern and a click.">
+        <PageSection id="practice" eyebrow="6. Practice" title={`Progressions in ${key.name}`} description="One chord per bar. Open the Practice Studio to hear the chords loop with a strumming pattern and a click.">
           <SimpleTable
             head={['Progression', 'Chords', '']}
             rows={PRACTICE_PROGRESSIONS.map(prog => [
               <Link key="p" href={entryHref('progressions', prog.entryId)} className="hover:text-ember-l">{prog.name} ({prog.numerals})</Link>,
-              [...new Set(progressionChords(key, prog).map(c => c.name))].join('  '),
+              [...new Set(progressionChords(prog.mode === 'minor' ? key.notes[5] : key.root, prog).map(c => c.name))].join('  '),
               <Link key="a" href={`/practice?key=${key.slug}&progression=${prog.id}`} className="inline-flex items-center gap-1.5 font-semibold text-ember-l hover:text-cream">
                 Play along <ArrowRight size={14} aria-hidden="true" />
               </Link>,
@@ -184,7 +184,7 @@ export default async function KeyPage({ params }: Props) {
         </PageSection>
 
         <section aria-label="Next steps" className="flex flex-col items-stretch gap-3 border-t border-line2 pt-10 sm:flex-row sm:items-center sm:justify-between">
-          <Button href={`/practice?key=${key.slug}`} size="lg">Open the practice player in {key.root}</Button>
+          <Button href={`/practice?key=${key.slug}`} size="lg">Open the Practice Studio in {key.root}</Button>
           <div className="flex gap-3">
             <Button href={`/keys/${previous.slug}`} variant="secondary">{previous.root}</Button>
             <Button href={`/keys/${next.slug}`} variant="secondary">{next.root} next</Button>
