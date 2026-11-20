@@ -80,7 +80,6 @@ export default async function AboutPage() {
                 display: 'flex', alignItems: 'flex-start', gap: 12,
                 padding: '12px 16px',
                 background: '#1c1b1b',
-                borderLeft: `3px solid ${cat.a}`,
               }}>
                 <span style={{
                   fontFamily: 'var(--font-sans)',

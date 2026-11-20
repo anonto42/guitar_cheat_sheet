@@ -143,7 +143,6 @@ export default async function CategoryPage({ params }: Props) {
                           textDecoration: 'none',
                           color: isActive ? p.a : '#a98a7d',
                           background: isActive ? `${p.b}` : 'transparent',
-                          borderLeft: `3px solid ${isActive ? p.a : 'transparent'}`,
                           transition: 'background .15s, color .15s',
                         }}
                       >

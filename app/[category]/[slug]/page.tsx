@@ -135,7 +135,6 @@ export default async function EntryPage({ params }: Props) {
       <style>{`
         .entry-related-item:hover {
           background: #2a2a2a !important;
-          border-left-color: ${cat.a} !important;
         }
         .entry-related-item:hover .entry-related-title {
           color: ${cat.a} !important;
@@ -175,7 +174,6 @@ export default async function EntryPage({ params }: Props) {
                 textTransform: 'uppercase', letterSpacing: '0.12em',
                 color: cat.a,
                 background: cat.b,
-                borderLeft: `2px solid ${cat.a}`,
                 padding: '4px 10px',
               }}>{cat.label}</span>
               <BackLink href={`/${entry.category}`}>Back to {cat.label}</BackLink>
@@ -463,11 +461,6 @@ export default async function EntryPage({ params }: Props) {
                 padding: '20px 24px',
                 position: 'relative', overflow: 'hidden',
               }}>
-                <div style={{
-                  position: 'absolute', top: 0, left: 0,
-                  width: 3, height: '100%',
-                  background: cat.a,
-                }} />
                 <p style={{
                   fontFamily: 'var(--font-sans)',
                   fontSize: '.6rem', fontWeight: 700,
@@ -569,7 +562,6 @@ export default async function EntryPage({ params }: Props) {
               display: 'flex', alignItems: 'center', gap: 12,
               padding: '14px 20px',
               background: `${cat.b}`,
-              borderLeft: `4px solid ${cat.a}`,
               borderBottom: '1px solid #353534',
             }}>
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -589,9 +581,6 @@ export default async function EntryPage({ params }: Props) {
                   margin: 0,
                 }}>{entry.title}</p>
               </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill={cat.a} style={{ flexShrink: 0 }}>
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-              </svg>
             </div>
 
             {/* Related entries list */}
@@ -606,8 +595,7 @@ export default async function EntryPage({ params }: Props) {
                     padding: '12px 20px',
                     textDecoration: 'none',
                     borderBottom: '1px solid rgba(53,53,52,.5)',
-                    borderLeft: '3px solid transparent',
-                    transition: 'background .15s, border-left-color .15s',
+                    transition: 'background .15s',
                     background: 'transparent',
                   }}
                 >

@@ -110,7 +110,6 @@ export default function ContactPage() {
           <div style={{
             background: 'rgba(79,201,106,.08)',
             border: '1px solid rgba(79,201,106,.25)',
-            borderLeft: '3px solid #4fc96a',
             padding: '20px 24px',
           }}>
             <p style={{
