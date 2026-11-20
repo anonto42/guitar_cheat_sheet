@@ -24,7 +24,7 @@ const LEVELS: { key: keyof Mix; label: string }[] = [
 /** Choose what backs you up and how loud each part is. */
 export default function SoundPanel({ instrument, onInstrument, drums, onDrums, bass, onBass, mix, onMix }: SoundPanelProps) {
   return (
-    <section aria-label="Sound" className="space-y-4 border border-line2 bg-surface/70 p-5">
+    <section aria-label="Sound" className="min-w-0 space-y-4 border border-line2 bg-surface/70 p-5">
       <h2 className="font-display text-lg font-bold text-cream">Sound</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         <Select label="Chord instrument" value={instrument} onChange={v => onInstrument(v as InstrumentId)} options={INSTRUMENTS.map(i => ({ value: i.id, label: i.label }))} />

@@ -25,7 +25,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-[100] bg-bg2/90 pt-[var(--safe-top)] backdrop-blur-xl">
-      <div className="mx-auto flex h-nav max-w-7xl items-center gap-2 px-3 sm:px-6 lg:gap-6 lg:px-8">
+      <div className="mx-auto flex h-nav max-w-7xl items-center gap-2 px-3 sm:px-6 lg:gap-3 lg:px-8 xl:gap-6">
         {/* Mobile: menu button */}
         <button
           type="button"
@@ -40,7 +40,7 @@ export default function Navbar() {
         <Logo compact className="min-w-0 flex-1 lg:flex-none" />
 
         {/* Desktop navigation */}
-        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-0.5 lg:flex xl:gap-1">
           <LibraryMenu />
           {PRIMARY_LINKS.map(link => {
             const active = pathname === link.href || pathname.startsWith(`${link.href}/`)
@@ -50,7 +50,8 @@ export default function Navbar() {
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'flex h-10 items-center rounded-md px-3 text-sm font-semibold transition-colors',
+                  'flex h-[var(--control-h)] items-center px-2.5 text-sm font-semibold transition-colors xl:px-3',
+                  link.wideOnly && 'hidden xl:flex',
                   active ? 'text-ember-l' : 'text-outline hover:text-cream',
                 )}
               >
@@ -66,9 +67,9 @@ export default function Navbar() {
         </div>
 
         <HideWhenInstalled>
-          <Button href="/download" size="sm" className="hidden h-[var(--control-h)] shrink-0 border border-ember lg:inline-flex">
+          <Button href="/download" size="sm" aria-label="Get the app" className="hidden h-[var(--control-h)] shrink-0 border border-ember lg:inline-flex">
             <Download size={15} aria-hidden="true" />
-            Get the app
+            <span className="hidden xl:inline">Get the app</span>
           </Button>
         </HideWhenInstalled>
 

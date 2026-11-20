@@ -26,7 +26,7 @@ export default function LibraryMenu() {
         aria-expanded={open}
         onClick={() => setOpen(o => !o)}
         className={cn(
-          'flex h-[var(--control-h)] items-center gap-1.5 px-3 text-sm font-semibold transition-colors',
+          'flex h-[var(--control-h)] items-center gap-1.5 px-2.5 text-sm xl:px-3 font-semibold transition-colors',
           open || inLibrary ? 'text-ember-l' : 'text-outline hover:text-cream',
         )}
       >

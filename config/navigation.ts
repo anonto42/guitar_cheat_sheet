@@ -4,6 +4,8 @@ import type { CategorySlug } from '@/types'
 export interface NavLink {
   label: string
   href: string
+  /** Only shown in the desktop bar from the xl breakpoint (1280px); always in the mobile menu and footer. */
+  wideOnly?: boolean
 }
 
 export interface LibraryLink extends NavLink {
@@ -26,7 +28,7 @@ export const PRIMARY_LINKS: NavLink[] = [
   { label: 'Practice', href: '/practice' },
   { label: 'Tuner', href: '/tuner' },
   { label: 'GuitarFX', href: '/guitarfx' },
-  { label: 'About', href: '/about' },
+  { label: 'About', href: '/about', wideOnly: true },
 ]
 
 export const FOOTER_GROUPS: { title: string; links: NavLink[] }[] = [

@@ -116,7 +116,7 @@ export default function PracticeStudio() {
         showShapes={showShapes} onShowShapes={setShowShapes}
       />
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
         <PatternEditor pattern={pattern} onPattern={setPattern} activeStep={position && !position.countIn ? position.step : null} />
         <SoundPanel
           instrument={instrument} onInstrument={setInstrument}

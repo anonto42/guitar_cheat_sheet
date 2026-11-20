@@ -45,7 +45,7 @@ export default function PatternEditor({ pattern, onPattern, activeStep }: Patter
   }
 
   return (
-    <section aria-label="Rhythm" className="space-y-4 border border-line2 bg-surface/70 p-5">
+    <section aria-label="Rhythm" className="min-w-0 space-y-4 border border-line2 bg-surface/70 p-5">
       <h2 className="font-display text-lg font-bold text-cream">Rhythm</h2>
       <Select
         label="Strumming pattern"

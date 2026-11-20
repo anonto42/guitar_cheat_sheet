@@ -37,7 +37,7 @@ export default function SoloHelper({ tonic, scaleId, scaleLabel, current }: Solo
   const targets = current ? current.notes.filter(n => scale.notes.includes(n)) : []
 
   return (
-    <section aria-label="Solo helper" className="space-y-4 border border-line2 bg-surface/70 p-5">
+    <section aria-label="Solo helper" className="min-w-0 space-y-4 border border-line2 bg-surface/70 p-5">
       <div>
         <h2 className="font-display text-lg font-bold text-cream">Solo over it</h2>
         <p className="mt-1 text-sm text-muted">Keep the loop playing and improvise with one of these scales. While it plays, the notes of the current chord are outlined in gold. Land on them to sound strong.</p>

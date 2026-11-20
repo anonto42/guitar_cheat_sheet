@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils'
 import { pitchClass } from '@/lib/music/notes'
 
@@ -39,16 +42,26 @@ export default function NoteMap({ notes, tonic, frets = 15, range, emphasis, lab
   const fretNumbers = Array.from({ length: frets + 1 }, (_, i) => i)
   const strings = [...OPEN_STRINGS].reverse()
   const inRange = (f: number) => !range || (f >= range[0] && f <= range[1])
+  const figure = useRef<HTMLElement>(null)
+  const start = range?.[0]
+
+  // On narrow screens the map scrolls sideways: bring the chosen position into view.
+  useEffect(() => {
+    const el = figure.current
+    if (!el || start === undefined) return
+    const cell = el.querySelector<HTMLElement>(`[data-fret="${start}"]`)
+    if (cell) el.scrollTo({ left: Math.max(0, cell.offsetLeft - 40), behavior: 'smooth' })
+  }, [start])
 
   return (
-    <figure className={cn('overflow-x-auto border border-line2 bg-bg3/60 p-3', className)}>
+    <figure ref={figure} className={cn('overflow-x-auto border border-line2 bg-bg3/60 p-3', className)}>
       <table className="w-full min-w-[46rem] border-collapse text-xs">
         <caption className="sr-only">{label}</caption>
         <thead>
           <tr>
             <th scope="col" className="w-7" />
             {fretNumbers.map(f => (
-              <th key={f} scope="col" className={cn('pb-1.5 text-center font-semibold', inRange(f) && range ? 'text-ember-l' : 'text-outline')}>
+              <th key={f} scope="col" data-fret={f} className={cn('pb-1.5 text-center font-semibold', inRange(f) && range ? 'text-ember-l' : 'text-outline')}>
                 {f === 0 ? 'Open' : f}
                 <span className={cn('mx-auto mt-1 block h-1.5 w-1.5', MARKER_FRETS.has(f) ? 'bg-outline/50' : 'bg-transparent')} />
               </th>

@@ -137,7 +137,7 @@ export default async function CategoryPage({ params }: Props) {
           </aside>
 
           {/* ── Main content ── */}
-          <div style={{ flex: 1, padding: '36px 32px 80px', background: 'transparent', minWidth: 0 }}>
+          <div style={{ flex: 1, padding: '36px clamp(16px, 4vw, 32px) 80px', background: 'transparent', minWidth: 0 }}>
 
             {/* Page header */}
             <header style={{ marginBottom: 40 }}>
@@ -173,7 +173,7 @@ export default async function CategoryPage({ params }: Props) {
             {/* Entry card grid */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))',
               gap: 20,
               marginBottom: 80,
             }}>
@@ -289,7 +289,7 @@ export default async function CategoryPage({ params }: Props) {
               }}>About Guitar {cat.label}</h2>
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
                 gap: 24,
               }}>
                 {entries.slice(0, 6).map(entry => (

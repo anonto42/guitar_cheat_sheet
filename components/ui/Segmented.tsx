@@ -26,7 +26,7 @@ export default function Segmented<T extends string>({ label, value, options, onC
             onClick={() => onChange(option.value)}
             className={cn(
               'border font-semibold transition-colors',
-              size === 'sm' ? 'h-8 min-w-9 px-2.5 text-xs' : 'h-[var(--control-h)] min-w-10 px-3.5 text-sm',
+              size === 'sm' ? 'h-9 min-w-10 px-2.5 text-xs' : 'h-[var(--control-h)] min-w-10 px-3.5 text-sm',
               selected ? 'border-ember bg-ember text-bg2' : 'border-line2 bg-surface/70 text-outline hover:border-line3 hover:text-cream',
             )}
           >

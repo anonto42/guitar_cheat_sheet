@@ -54,7 +54,8 @@ Dependency direction: `app -> features -> components -> lib/config/types`; `serv
 - Reuse `components/ui` before writing new markup. Add a new primitive when a pattern appears a third time.
 - `'use client'` only for hooks or browser events.
 - Fonts come from `next/font` (CSS vars `--font-sans`, `--font-display`). Do not hardcode font names.
-- Touch targets at least 40px high. Test at 360px and 1280px widths.
+- Touch targets at least 36px high (40px for primary controls).
+- Responsive: no page may scroll sideways at 320, 375, 414, 768, 1024 or 1280px. Wide content (fretboards, tables, tabs) scrolls inside its own `overflow-x-auto` box. Give grid and flex children `min-w-0` so long content cannot stretch them. In the navbar, links marked `wideOnly` hide below 1280px.
 - Legacy pages (`app/[category]/**`, about, contact, privacy) still use inline styles and are scheduled for the category/slug redesign.
 
 ## Entry pages

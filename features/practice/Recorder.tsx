@@ -15,7 +15,7 @@ const extension = (mime: string) => (mime.includes('ogg') ? 'ogg' : mime.include
 /** Your recorded takes for this visit. Nothing is uploaded; download a take to keep it. */
 export default function Recorder({ takes, error, onRemove, onPlayWithBacking }: RecorderProps) {
   return (
-    <section aria-label="Recordings" className="space-y-4 border border-line2 bg-surface/70 p-5">
+    <section aria-label="Recordings" className="min-w-0 space-y-4 border border-line2 bg-surface/70 p-5">
       <div>
         <h2 className="font-display text-lg font-bold text-cream">Your recordings</h2>
         <p className="mt-1 text-sm text-muted">Press Record in the top bar. The backing starts with a count-in and your microphone records you playing along. Use headphones so the backing does not leak into the recording.</p>

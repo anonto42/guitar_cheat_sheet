@@ -129,7 +129,7 @@ export default function Tuner({ tuningId, selectable = true }: TunerProps) {
     <div className="space-y-6 border border-line2 bg-surface/70 p-5 sm:p-6">
       <div className="flex flex-wrap items-end gap-4">
         {selectable && (
-          <Select className="min-w-[18rem]" label="Tuning" value={currentId} onChange={id => { setCurrentId(id); setLocked(null) }} options={TUNINGS.map(t => ({ value: t.id, label: t.name }))} />
+          <Select className="w-full sm:w-auto sm:min-w-[18rem]" label="Tuning" value={currentId} onChange={id => { setCurrentId(id); setLocked(null) }} options={TUNINGS.map(t => ({ value: t.id, label: t.name }))} />
         )}
         {!selectable && (
           <div className="flex flex-col gap-1.5">

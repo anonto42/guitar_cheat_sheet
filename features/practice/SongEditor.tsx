@@ -75,7 +75,7 @@ export default function SongEditor(props: SongEditorProps) {
   const nameOf = (id: string) => song.sections.find(s => s.id === id)?.name ?? ''
 
   return (
-    <section aria-label="Song" className="space-y-6 border border-line2 bg-surface/70 p-5">
+    <section aria-label="Song" className="min-w-0 space-y-6 border border-line2 bg-surface/70 p-5">
       <h2 className="font-display text-lg font-bold text-cream">Song</h2>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -151,7 +151,7 @@ export default function SongEditor(props: SongEditorProps) {
           </Button>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-[0.65rem] font-bold uppercase tracking-widest text-outline">Chord in each bar</p>
           <label className="flex items-center gap-2 text-xs text-muted">
             <input type="checkbox" checked={showShapes} onChange={e => onShowShapes(e.target.checked)} className="h-4 w-4 accent-[#ff6b00]" /> Show chord shapes
