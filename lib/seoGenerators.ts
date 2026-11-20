@@ -1,11 +1,11 @@
 /**
- * SEO GENERATORS — pure functions that auto-generate SEO content from data.
+ * SEO GENERATORS: pure functions that auto-generate SEO content from data.
  *
  * All functions are synchronous and side-effect free. They run at build time
  * from server components (layout.ts, sitemap.ts) with zero client bundle impact.
  */
 
-import type { GuitarEntry, CategoryConfigMap } from '../types'
+import type { GuitarEntry, CategoryConfigMap } from '@/types'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Keywords
@@ -91,62 +91,62 @@ const EVERGREEN_FAQ: FaqQuestion[] = [
   {
     '@type': 'Question',
     name: 'What chords are in the key of C major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in C major are: I — C major, ii — D minor, iii — E minor, IV — F major, V — G major, vi — A minor, vii° — B diminished. The most common chord progressions in C are C–F–G (I–IV–V), C–G–Am–F (I–V–vi–IV), and Am–F–C–G (vi–IV–I–V).' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in C major are: I: C major, ii: D minor, iii: E minor, IV: F major, V: G major, vi: A minor, vii°: B diminished. The most common chord progressions in C are C–F–G (I–IV–V), C–G–Am–F (I–V–vi–IV), and Am–F–C–G (vi–IV–I–V).' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in the key of G major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in G major are: I — G major, ii — A minor, iii — B minor, IV — C major, V — D major, vi — E minor, vii° — F# diminished. Common progressions: G–C–D (I–IV–V), G–D–Em–C (I–V–vi–IV). The relative minor is E minor.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in G major are: I: G major, ii: A minor, iii: B minor, IV: C major, V: D major, vi: E minor, vii°: F# diminished. Common progressions: G–C–D (I–IV–V), G–D–Em–C (I–V–vi–IV). The relative minor is E minor.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in the key of D major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in D major are: I — D major, ii — E minor, iii — F# minor, IV — G major, V — A major, vi — B minor, vii° — C# diminished. Common progressions: D–G–A (I–IV–V), D–A–Bm–G (I–V–vi–IV). The relative minor is B minor.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in D major are: I: D major, ii: E minor, iii: F# minor, IV: G major, V: A major, vi: B minor, vii°: C# diminished. Common progressions: D–G–A (I–IV–V), D–A–Bm–G (I–V–vi–IV). The relative minor is B minor.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in the key of A major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in A major are: I — A major, ii — B minor, iii — C# minor, IV — D major, V — E major, vi — F# minor, vii° — G# diminished. Common progressions: A–D–E (I–IV–V), A–E–F#m–D (I–V–vi–IV). The relative minor is F# minor.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in A major are: I: A major, ii: B minor, iii: C# minor, IV: D major, V: E major, vi: F# minor, vii°: G# diminished. Common progressions: A–D–E (I–IV–V), A–E–F#m–D (I–V–vi–IV). The relative minor is F# minor.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in the key of E major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in E major are: I — E major, ii — F# minor, iii — G# minor, IV — A major, V — B major, vi — C# minor, vii° — D# diminished. The 12-bar blues in E uses E7, A7, and B7. The relative minor is C# minor.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in E major are: I: E major, ii: F# minor, iii: G# minor, IV: A major, V: B major, vi: C# minor, vii°: D# diminished. The 12-bar blues in E uses E7, A7, and B7. The relative minor is C# minor.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in the key of F major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in F major are: I — F major, ii — G minor, iii — A minor, IV — Bb major, V — C major, vi — D minor, vii° — E diminished. F major is notable for requiring a barre chord shape. The relative minor is D minor.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in F major are: I: F major, ii: G minor, iii: A minor, IV: Bb major, V: C major, vi: D minor, vii°: E diminished. F major is notable for requiring a barre chord shape. The relative minor is D minor.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in the key of B major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in B major are: I — B major, ii — C# minor, iii — D# minor, IV — E major, V — F# major, vi — G# minor, vii° — A# diminished. The relative minor is G# minor.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in B major are: I: B major, ii: C# minor, iii: D# minor, IV: E major, V: F# major, vi: G# minor, vii°: A# diminished. The relative minor is G# minor.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in the key of Bb (B flat) major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in Bb major are: I — Bb major, ii — C minor, iii — D minor, IV — Eb major, V — F major, vi — G minor, vii° — A diminished. Common in jazz and horn-based music. The relative minor is G minor.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in Bb major are: I: Bb major, ii: C minor, iii: D minor, IV: Eb major, V: F major, vi: G minor, vii°: A diminished. Common in jazz and horn-based music. The relative minor is G minor.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in the key of Eb (E flat) major?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in Eb major are: I — Eb major, ii — F minor, iii — G minor, IV — Ab major, V — Bb major, vi — C minor, vii° — D diminished. Common in jazz. The relative minor is C minor.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in Eb major are: I: Eb major, ii: F minor, iii: G minor, IV: Ab major, V: Bb major, vi: C minor, vii°: D diminished. Common in jazz. The relative minor is C minor.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in A minor?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in A natural minor are: i — A minor, ii° — B diminished, III — C major, iv — D minor, v — E minor, VI — F major, VII — G major. The harmonic minor version raises the 7th: the v chord becomes E major (dominant), creating stronger resolution to Am.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in A natural minor are: i: A minor, ii°: B diminished, III: C major, iv: D minor, v: E minor, VI: F major, VII: G major. The harmonic minor version raises the 7th: the v chord becomes E major (dominant), creating stronger resolution to Am.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in E minor?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in E natural minor are: i — E minor, ii° — F# diminished, III — G major, iv — A minor, v — B minor, VI — C major, VII — D major. Em–D–C–G and Em–C–G–D are the most common E minor progressions in rock.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in E natural minor are: i: E minor, ii°: F# diminished, III: G major, iv: A minor, v: B minor, VI: C major, VII: D major. Em–D–C–G and Em–C–G–D are the most common E minor progressions in rock.' },
   },
   {
     '@type': 'Question',
     name: 'What chords are in D minor?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The chords in D natural minor are: i — D minor, ii° — E diminished, III — F major, iv — G minor, v — A minor, VI — Bb major, VII — C major. Dm–Bb–F–C and Dm–C–Bb–A (Andalusian) are classic D minor progressions.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The chords in D natural minor are: i: D minor, ii°: E diminished, III: F major, iv: G minor, v: A minor, VI: Bb major, VII: C major. Dm–Bb–F–C and Dm–C–Bb–A (Andalusian) are classic D minor progressions.' },
   },
   {
     '@type': 'Question',
@@ -171,22 +171,22 @@ const EVERGREEN_FAQ: FaqQuestion[] = [
   {
     '@type': 'Question',
     name: 'What scales should a beginner guitarist learn first?',
-    acceptedAnswer: { '@type': 'Answer', text: 'Beginners should start with: (1) Minor Pentatonic — 5 notes, extremely forgiving, used in rock and blues. (2) Blues Scale — add one "blue note" to the pentatonic. (3) Major Scale — foundation of all music theory. Start in the key of A or E where open strings help.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'Beginners should start with: (1) Minor Pentatonic, 5 notes, extremely forgiving, used in rock and blues. (2) Blues Scale, add one "blue note" to the pentatonic. (3) Major Scale, foundation of all music theory. Start in the key of A or E where open strings help.' },
   },
   {
     '@type': 'Question',
     name: 'What are the 7 guitar modes?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The 7 modes are: 1. Ionian (= major scale, bright), 2. Dorian (minor with raised 6th, jazzy — Santana, Miles Davis), 3. Phrygian (dark Spanish sound with ♭2 — flamenco, metal), 4. Lydian (major with ♯4, dreamy — film scores), 5. Mixolydian (major with ♭7, bluesy — Hendrix, classic rock), 6. Aeolian (= natural minor, emotional), 7. Locrian (diminished, darkest — jazz). All shown in every key on Guitar Cheat Sheet.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The 7 modes are: 1. Ionian (= major scale, bright), 2. Dorian (minor with raised 6th, jazzy, Santana, Miles Davis), 3. Phrygian (dark Spanish sound with ♭2, flamenco, metal), 4. Lydian (major with ♯4, dreamy, film scores), 5. Mixolydian (major with ♭7, bluesy, Hendrix, classic rock), 6. Aeolian (= natural minor, emotional), 7. Locrian (diminished, darkest, jazz). All shown in every key on Guitar Cheat Sheet.' },
   },
   {
     '@type': 'Question',
     name: 'What is the CAGED system for guitar?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The CAGED system maps the entire guitar neck using 5 open chord shapes: C, A, G, E, D. Each shape moves up the neck as a barre chord and they interlock continuously. The order always cycles C–A–G–E–D–C. Each shape contains the chord, its scale, and arpeggios — giving you 5 positions anywhere on the neck for any key.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The CAGED system maps the entire guitar neck using 5 open chord shapes: C, A, G, E, D. Each shape moves up the neck as a barre chord and they interlock continuously. The order always cycles C–A–G–E–D–C. Each shape contains the chord, its scale, and arpeggios, giving you 5 positions anywhere on the neck for any key.' },
   },
   {
     '@type': 'Question',
     name: 'What is the difference between major and minor pentatonic scales?',
-    acceptedAnswer: { '@type': 'Answer', text: 'The major pentatonic uses intervals 1, 2, 3, 5, 6 (bright, happy — country, pop). The minor pentatonic uses intervals 1, ♭3, 4, 5, ♭7 (darker, bluesy — rock, blues). They are relative to each other: A minor pentatonic (A C D E G) uses the same notes as C major pentatonic (C D E G A).' },
+    acceptedAnswer: { '@type': 'Answer', text: 'The major pentatonic uses intervals 1, 2, 3, 5, 6 (bright, happy, country, pop). The minor pentatonic uses intervals 1, ♭3, 4, 5, ♭7 (darker, bluesy, rock, blues). They are relative to each other: A minor pentatonic (A C D E G) uses the same notes as C major pentatonic (C D E G A).' },
   },
   {
     '@type': 'Question',
@@ -196,7 +196,7 @@ const EVERGREEN_FAQ: FaqQuestion[] = [
   {
     '@type': 'Question',
     name: 'What guitar chords are in the key of E minor for blues?',
-    acceptedAnswer: { '@type': 'Answer', text: 'For blues in E minor, the primary chords are E7 (I), A7 (IV), and B7 (V) — all dominant 7th chords. The 12-bar blues in E follows: E7 E7 E7 E7 | A7 A7 E7 E7 | B7 A7 E7 B7. The turnaround in bar 12 (B7) drives back to the top.' },
+    acceptedAnswer: { '@type': 'Answer', text: 'For blues in E minor, the primary chords are E7 (I), A7 (IV), and B7 (V), all dominant 7th chords. The 12-bar blues in E follows: E7 E7 E7 E7 | A7 A7 E7 E7 | B7 A7 E7 B7. The turnaround in bar 12 (B7) drives back to the top.' },
   },
   {
     '@type': 'Question',

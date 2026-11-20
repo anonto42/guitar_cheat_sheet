@@ -1,5 +1,5 @@
-import type { GuitarEntry } from '../../types'
-import { ALL_ROOTS } from '../musicHelpers'
+import type { GuitarEntry } from '@/types'
+import { ALL_ROOTS } from '@/data/musicHelpers'
 
 const C = ['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B'] as const
 type Note = typeof C[number]
@@ -14,11 +14,11 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'G', notes: ['G','C','D'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const iv = chr(root,5), v = chr(root,7)
-      return { root, notes:[root, iv, v], chords:[`I — ${root}`, `IV — ${iv}`, `V — ${v}`] }
+      return { root, notes:[root, iv, v], chords:[`I: ${root}`, `IV: ${iv}`, `V: ${v}`] }
     }),
     chords: ['Key of E: E – A – B','Key of A: A – D – E','Key of G: G – C – D','Key of D: D – G – A'],
     details: 'I-IV-V is the most common chord progression in popular music. In blues, all three are dominant 7th chords (I7-IV7-V7).',
-    usedBy: 'Blues, rock, country, folk, pop — everything',
+    usedBy: 'Blues, rock, country, folk, pop, everything',
     tip: 'In blues, make all three chords dominant 7ths. In E: E7 – A7 – B7.',
   },
   {
@@ -29,12 +29,12 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'C', notes: ['C','G','Am','F'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const v = chr(root,7), vi = chr(root,9), iv = chr(root,5)
-      return { root, notes:[root,v,`${vi}m`,iv], chords:[`I — ${root}`,`V — ${v}`,`vi — ${vi}m`,`IV — ${iv}`] }
+      return { root, notes:[root,v,`${vi}m`,iv], chords:[`I: ${root}`,`V: ${v}`,`vi: ${vi}m`,`IV: ${iv}`] }
     }),
     chords: ['Key of C: C – G – Am – F','Key of G: G – D – Em – C'],
-    details: "Sometimes called the Axis Progression. Let Her Go, Don't Look Back in Anger, No Woman No Cry, Africa — all the same four chords.",
+    details: "Sometimes called the Axis Progression. Let Her Go, Don't Look Back in Anger, No Woman No Cry, Africa, all the same four chords.",
     usedBy: 'Pop, rock, pop-punk, indie, modern music',
-    tip: 'This progression loops forever — IV resolves naturally back to I.',
+    tip: 'This progression loops forever, IV resolves naturally back to I.',
   },
   {
     id: 'i-vi-iv-v-50s', category: 'progressions', title: 'I – vi – IV – V (Doo-Wop)',
@@ -44,10 +44,10 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'C', notes: ['C','Am','F','G'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const vi = chr(root,9), iv = chr(root,5), v = chr(root,7)
-      return { root, notes:[root,`${vi}m`,iv,v], chords:[`I — ${root}`,`vi — ${vi}m`,`IV — ${iv}`,`V — ${v}`] }
+      return { root, notes:[root,`${vi}m`,iv,v], chords:[`I: ${root}`,`vi: ${vi}m`,`IV: ${iv}`,`V: ${v}`] }
     }),
     chords: ['Key of C: C – Am – F – G','Key of G: G – Em – C – D'],
-    details: "Stand By Me, Earth Angel, Every Breath You Take, Can't Help Falling in Love — all use this progression.",
+    details: "Stand By Me, Earth Angel, Every Breath You Take, Can't Help Falling in Love, all use this progression.",
     usedBy: 'Pop, doo-wop, oldies, romantic ballads, classic rock',
     tip: 'Notice this is the same four chords as I-V-vi-IV, just starting on a different chord.',
   },
@@ -62,13 +62,13 @@ export const progressions: GuitarEntry[] = [
       const iv = chr(root,5), v = chr(root,7)
       return { root,
         notes:[`${root}7`,`${iv}7`,`${root}7`,`${root}7`,`${iv}7`,`${iv}7`,`${root}7`,`${root}7`,`${v}7`,`${iv}7`,`${root}7`,`${v}7`],
-        chords:[`I7 — ${root}7`,`IV7 — ${iv}7`,`V7 — ${v}7`]
+        chords:[`I7, ${root}7`,`IV7, ${iv}7`,`V7, ${v}7`]
       }
     }),
     chords: ['Key of E: I7=E7, IV7=A7, V7=B7','Quick IV variation: go to IV7 in bar 2'],
     details: 'The 12-bar blues is the most important song form in popular music. Three dominant 7th chords over 12 bars create a cycle of tension and release.',
     usedBy: 'Blues, rock & roll, early rock, jazz blues, R&B',
-    tip: 'Start with the quick IV variation — go to IV7 in bar 2.',
+    tip: 'Start with the quick IV variation, go to IV7 in bar 2.',
   },
   {
     id: 'ii-v-i', category: 'progressions', title: 'ii – V – I (Jazz Turnaround)',
@@ -78,7 +78,7 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'C', notes: ['Dm7','G7','Cmaj7'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const ii = chr(root,2), v = chr(root,7)
-      return { root, notes:[`${ii}m7`,`${v}7`,`${root}maj7`], chords:[`ii — ${ii}m7`,`V — ${v}7`,`I — ${root}maj7`] }
+      return { root, notes:[`${ii}m7`,`${v}7`,`${root}maj7`], chords:[`ii: ${ii}m7`,`V: ${v}7`,`I: ${root}maj7`] }
     }),
     chords: ['Key of C: Dm7 – G7 – Cmaj7','Key of F: Gm7 – C7 – Fmaj7'],
     details: 'The ii-V-I is to jazz what I-IV-V is to blues. Virtually every jazz standard is built on chains of ii-V-I progressions.',
@@ -93,12 +93,12 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'Am', notes: ['Am','G','F','E'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const vii = chr(root,10), vi = chr(root,8), v = chr(root,7)
-      return { root, notes:[`${root}m`,vii,vi,v], chords:[`i — ${root}m`,`VII — ${vii}`,`VI — ${vi}`,`V — ${v}`] }
+      return { root, notes:[`${root}m`,vii,vi,v], chords:[`i: ${root}m`,`VII: ${vii}`,`VI: ${vi}`,`V: ${v}`] }
     }),
     chords: ['Am key: Am – G – F – E','Em key: Em – D – C – B'],
     details: 'The Andalusian cadence has a descending chromatic bass line. Stairway to Heaven intro, Sultans of Swing ending, and Malaguena all use this.',
     usedBy: 'Flamenco, rock, classical, metal, Spanish music',
-    tip: 'The key is the final V major chord — E major in A minor. That major chord against a minor context gives it the Phrygian/Spanish sound.',
+    tip: 'The key is the final V major chord, E major in A minor. That major chord against a minor context gives it the Phrygian/Spanish sound.',
   },
   {
     id: 'cinematic-minor', category: 'progressions', title: 'i – VI – III – VII (Cinematic)',
@@ -108,7 +108,7 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'Em', notes: ['Em','C','G','D'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const vi = chr(root,8), iii = chr(root,3), vii = chr(root,10)
-      return { root, notes:[`${root}m`,vi,iii,vii], chords:[`i — ${root}m`,`VI — ${vi}`,`III — ${iii}`,`VII — ${vii}`] }
+      return { root, notes:[`${root}m`,vi,iii,vii], chords:[`i: ${root}m`,`VI: ${vi}`,`III: ${iii}`,`VII: ${vii}`] }
     }),
     chords: ['Em key: Em – C – G – D','Am key: Am – F – C – G'],
     details: 'This progression (Em-C-G-D) moves from the dark minor tonic through major chords, creating a sweeping, uplifting yet bittersweet feeling.',
@@ -123,7 +123,7 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'Am', notes: ['Bm7♭5','E7','Am'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const ii = chr(root,2), v = chr(root,7)
-      return { root, notes:[`${ii}m7♭5`,`${v}7`,`${root}m`], chords:[`iiø7 — ${ii}m7♭5`,`V7 — ${v}7`,`im — ${root}m`] }
+      return { root, notes:[`${ii}m7♭5`,`${v}7`,`${root}m`], chords:[`iiø7, ${ii}m7♭5`,`V7, ${v}7`,`im, ${root}m`] }
     }),
     chords: ['Key of Am: Bm7♭5 – E7 – Am','Key of Dm: Em7♭5 – A7 – Dm'],
     details: 'The minor ii-V-i uses a half-diminished (m7♭5) chord instead of a pure minor 7th for the ii.',
@@ -138,7 +138,7 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'C major', notes: ['Am – F – C – G'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const vi = chr(root,9), iv = chr(root,5), v = chr(root,7)
-      return { root, notes:[`${vi}m`,iv,root,v], chords:[`vi — ${vi}m`,`IV — ${iv}`,`I — ${root}`,`V — ${v}`] }
+      return { root, notes:[`${vi}m`,iv,root,v], chords:[`vi: ${vi}m`,`IV: ${iv}`,`I: ${root}`,`V: ${v}`] }
     }),
     chords: ['C key: Am – F – C – G','G key: Em – C – G – D'],
     details: 'This is the same chords as I-V-vi-IV, just starting from the vi. Starting on the minor chord creates a more introspective opening.',
@@ -170,7 +170,7 @@ export const progressions: GuitarEntry[] = [
     example: { root: 'Am', notes: ['Am','G','F','E (major!)'] },
     allKeys: [...ALL_ROOTS].map(root => {
       const vii = chr(root,10), vi = chr(root,8), v = chr(root,7)
-      return { root, notes:[`${root}m`,vii,vi,`${v} (major)`], chords:[`i — ${root}m`,`VII — ${vii}`,`VI — ${vi}`,`V maj — ${v}`] }
+      return { root, notes:[`${root}m`,vii,vi,`${v} (major)`], chords:[`i: ${root}m`,`VII: ${vii}`,`VI: ${vi}`,`V maj, ${v}`] }
     }),
     chords: ['Am key: Am – G – F – E','Em key: Em – D – C – B'],
     details: 'The flamenco/rumba progression is simply the Andalusian cadence played as a repeating loop.',

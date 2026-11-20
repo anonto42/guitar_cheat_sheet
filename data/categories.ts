@@ -1,7 +1,7 @@
-import type { CategoryConfigMap, CategorySlug } from '../types'
+import type { CategoryConfigMap, CategorySlug } from '@/types'
 
 /**
- * CATEGORY CONFIG — single source of truth for all categories.
+ * CATEGORY CONFIG: single source of truth for all categories.
  *
  * To add a new category:
  *   1. Add the slug to CategorySlug in app/types/index.ts
@@ -57,7 +57,7 @@ export const CATEGORY_CONFIG: CategoryConfigMap = {
   solos: {
     a: '#ff4d6d', b: 'rgba(255,77,109,.24)', br: 'rgba(255,77,109,.70)',
     label: 'Solos',
-    desc: 'Pre-built solo styles for every scale — techniques, timing & pioneers',
+    desc: 'Pre-built solo styles for every scale, techniques, timing & pioneers',
     sitemapPriority: 0.9,
   },
 } as const
@@ -65,7 +65,7 @@ export const CATEGORY_CONFIG: CategoryConfigMap = {
 /** Ordered array used by filter UI ('all' first) */
 export const CATEGORIES: readonly string[] = ['all', ...Object.keys(CATEGORY_CONFIG)] as const
 
-/** Alias — existing components using PAL[cat] keep working */
+/** Alias: existing components using PAL[cat] keep working */
 export const PAL = CATEGORY_CONFIG
 
 /** Type guard for category slugs */

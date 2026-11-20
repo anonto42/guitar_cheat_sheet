@@ -319,6 +319,8 @@ export default function GuitarFxStudio() {
 
   useEffect(() => {
     audioEngine.registerCallbacks(setEngineStatus, setLatencyValue)
+    // Presets live in localStorage, which only exists in the browser.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setUserPresets(Object.keys(getSavedPresets()))
 
     const refreshDevices = async () => {

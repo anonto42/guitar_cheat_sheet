@@ -1,4 +1,4 @@
-import type { KeyData } from '../types'
+import type { KeyData } from '@/types'
 
 const CHROMATIC = ['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B'] as const
 
@@ -36,25 +36,25 @@ export function allKeysFor(notesFn: NotesFn, chordsFn?: ChordsFn): KeyData[] {
 
 export function majorChordFamily(root: string, notes: string[]): string[] {
   return [
-    `I — ${root} maj`,
-    `ii — ${notes[1]} min`,
-    `iii — ${notes[2]} min`,
-    `IV — ${notes[3]} maj`,
-    `V — ${notes[4]} maj`,
-    `vi — ${notes[5]} min`,
-    `vii° — ${notes[6]} dim`,
+    `I: ${root} maj`,
+    `ii: ${notes[1]} min`,
+    `iii: ${notes[2]} min`,
+    `IV: ${notes[3]} maj`,
+    `V: ${notes[4]} maj`,
+    `vi: ${notes[5]} min`,
+    `vii°: ${notes[6]} dim`,
   ]
 }
 
 export function naturalMinorChordFamily(root: string, notes: string[]): string[] {
   return [
-    `i — ${root} min`,
-    `ii° — ${notes[1]} dim`,
-    `III — ${notes[2]} maj`,
-    `iv — ${notes[3]} min`,
-    `v — ${notes[4]} min`,
-    `VI — ${notes[5]} maj`,
-    `VII — ${notes[6]} maj`,
+    `i: ${root} min`,
+    `ii°: ${notes[1]} dim`,
+    `III: ${notes[2]} maj`,
+    `iv: ${notes[3]} min`,
+    `v: ${notes[4]} min`,
+    `VI: ${notes[5]} maj`,
+    `VII: ${notes[6]} maj`,
   ]
 }
 

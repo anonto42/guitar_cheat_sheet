@@ -1,18 +1,18 @@
 /**
- * FretboardDiagram — SVG fretboard visualiser
+ * FretboardDiagram: SVG fretboard visualiser
  *
  * Renders a horizontal guitar fretboard showing:
- *  • 6 string lines (high-e at top, low-E at bottom — tab convention)
+ *  • 6 string lines (high-e at top, low-E at bottom: tab convention)
  *  • Fret columns with fret-number labels
  *  • Note dots with note names; root = gold accent, key note = pink
  *  • Technique indicators: bend arrows, vibrato ~, tap T
  *  • Connection arcs: hammer-on (h), pull-off (p), slide lines
  *  • Open string hollow circles (when fret === 0 and showNut=true)
  *
- * Pure SVG — no hooks, no browser APIs. Works as a Server Component.
+ * Pure SVG: no hooks, no browser APIs. Works as a Server Component.
  */
 
-import type { FretboardDiagram as FretboardDiagramData } from '../data/fretboards'
+import type { FretboardDiagram as FretboardDiagramData } from '@/data/fretboards'
 
 // ─── Design constants ─────────────────────────────────────────────────────────
 
@@ -57,7 +57,7 @@ const STR_LABELS = ['e', 'B', 'G', 'D', 'A', 'E']
 
 interface Props {
   diagram: FretboardDiagramData
-  /** Category accent colour — overrides default gold for root dots */
+  /** Category accent colour: overrides default gold for root dots */
   accentColor?: string
 }
 

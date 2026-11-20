@@ -1,4 +1,4 @@
-import type { GuitarEntry } from '../types'
+import type { GuitarEntry } from '@/types'
 import { scales }       from './entries/scales'
 import { modes }        from './entries/modes'
 import { chords }       from './entries/chords'

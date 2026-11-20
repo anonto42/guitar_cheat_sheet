@@ -19,9 +19,9 @@ export interface FretDot {
   fret: number
   /** Display note name: 'A', 'C#', 'Eb', etc. */
   note: string
-  /** Root note — rendered in accent gold */
+  /** Root note: rendered in accent gold */
   isRoot?: boolean
-  /** Characteristic / key note — rendered in highlight pink */
+  /** Characteristic / key note: rendered in highlight pink */
   isKey?: boolean
   /**
    * Technique to apply ON this note before moving to the next:
@@ -59,7 +59,7 @@ export interface FretboardDiagram {
   showNut?: boolean
 }
 
-// ─── HELPER — open string dot ────────────────────────────────────────────────
+// ─── HELPER: open string dot ────────────────────────────────────────────────
 
 function open(string: number, note: string, isRoot?: boolean): FretDot {
   return { string, fret: 0, note, isRoot }
@@ -74,7 +74,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'pentatonic-minor-solo': [
     {
       id: 'pmin-box1',
-      title: 'Box 1 — 5th Position  (A minor pentatonic)',
+      title: 'Box 1: 5th Position  (A minor pentatonic)',
       subtitle: 'Gold = root A | Bend ↑ on C (♭3→ implied D) | Vibrato ~ on root notes',
       startFret: 5, fretCount: 4,
       dots: [
@@ -106,7 +106,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'pmin-E-open',
-      title: 'Open Position  (E minor pentatonic) — E G A B D',
+      title: 'Open Position  (E minor pentatonic): E G A B D',
       subtitle: 'E = best guitar root: 5 of 6 open strings are in the scale. Gold = root E. Bend str1 fret3 (G) whole-step for the blues shout.',
       startFret: 0, fretCount: 4, showNut: true,
       dots: [
@@ -137,46 +137,46 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'pmin-E-fullneck',
-      title: 'Full Neck — E minor pentatonic (frets 0–12)',
+      title: 'Full Neck: E minor pentatonic (frets 0–12)',
       subtitle: 'Box 1 = frets 5–8 | Box 2 = frets 8–11 | Fret 12 = octave (same as open). All 5 notes across the entire neck.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E G A B D ─────────────────────────────────────
+        // ── String 6 (low E): E G A B D ─────────────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 3,  note: 'G' },
         { string: 6, fret: 5,  note: 'A' },
         { string: 6, fret: 7,  note: 'B' },
         { string: 6, fret: 10, note: 'D' },
         { string: 6, fret: 12, note: 'E', isRoot: true },
-        // ── String 5 (A) — A B D E G ─────────────────────────────────────────
+        // ── String 5 (A): A B D E G ─────────────────────────────────────────
         open(5, 'A'),
         { string: 5, fret: 2,  note: 'B' },
         { string: 5, fret: 5,  note: 'D' },
         { string: 5, fret: 7,  note: 'E', isRoot: true },
         { string: 5, fret: 10, note: 'G' },
         { string: 5, fret: 12, note: 'A' },
-        // ── String 4 (D) — D E G A B ─────────────────────────────────────────
+        // ── String 4 (D): D E G A B ─────────────────────────────────────────
         open(4, 'D'),
         { string: 4, fret: 2,  note: 'E', isRoot: true },
         { string: 4, fret: 5,  note: 'G' },
         { string: 4, fret: 7,  note: 'A' },
         { string: 4, fret: 9,  note: 'B' },
         { string: 4, fret: 12, note: 'D' },
-        // ── String 3 (G) — G A B D E ─────────────────────────────────────────
+        // ── String 3 (G): G A B D E ─────────────────────────────────────────
         open(3, 'G'),
         { string: 3, fret: 2,  note: 'A' },
         { string: 3, fret: 4,  note: 'B' },
         { string: 3, fret: 7,  note: 'D' },
         { string: 3, fret: 9,  note: 'E', isRoot: true },
         { string: 3, fret: 12, note: 'G' },
-        // ── String 2 (B) — B D E G A ─────────────────────────────────────────
+        // ── String 2 (B): B D E G A ─────────────────────────────────────────
         open(2, 'B'),
         { string: 2, fret: 3,  note: 'D' },
         { string: 2, fret: 5,  note: 'E', isRoot: true },
         { string: 2, fret: 8,  note: 'G' },
         { string: 2, fret: 10, note: 'A' },
         { string: 2, fret: 12, note: 'B' },
-        // ── String 1 (high e) — E G A B D ────────────────────────────────────
+        // ── String 1 (high e): E G A B D ────────────────────────────────────
         open(1, 'E', true),
         { string: 1, fret: 3,  note: 'G' },
         { string: 1, fret: 5,  note: 'A' },
@@ -190,7 +190,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'blues-scale-solo': [
     {
       id: 'blues-box1',
-      title: 'Box 1 — 5th Position  (A blues scale)',
+      title: 'Box 1: 5th Position  (A blues scale)',
       subtitle: 'Pink = ♭5 blue note (Eb) | Slide through it: D → Eb → E',
       startFret: 5, fretCount: 4,
       dots: [
@@ -224,14 +224,14 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'blues-E-open',
-      title: 'Open Position  (E blues scale) — E G A Bb B D',
+      title: 'Open Position  (E blues scale): E G A Bb B D',
       subtitle: 'Pink = Bb (blue note ♭5) on fret 1, str5. Slide A→Bb→B for the cry. Open low E = root. Best position for beginners.',
       startFret: 0, fretCount: 4, showNut: true,
       dots: [
-        // ── String 6 (low E) — root ───────────────────────────────────────
+        // ── String 6 (low E): root ───────────────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 3, note: 'G' },
-        // ── String 5 (A) — the blue note lives here ───────────────────────
+        // ── String 5 (A): the blue note lives here ───────────────────────
         open(5, 'A'),
         { string: 5, fret: 1, note: 'Bb', isKey: true, technique: 'bend-half' },
         { string: 5, fret: 2, note: 'B' },
@@ -259,11 +259,11 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'blues-E-fullneck',
-      title: 'Full Neck — E blues scale (frets 0–12)',
-      subtitle: 'Pink = Bb (♭5 blue note) — appears on every string! frets 1,3,6,8,11. Box 1 = frets 5–8 | Box 2 = frets 8–11.',
+      title: 'Full Neck: E blues scale (frets 0–12)',
+      subtitle: 'Pink = Bb (♭5 blue note): appears on every string! frets 1,3,6,8,11. Box 1 = frets 5–8 | Box 2 = frets 8–11.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E G A Bb B D ──────────────────────────────────
+        // ── String 6 (low E): E G A Bb B D ──────────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 3,  note: 'G' },
         { string: 6, fret: 5,  note: 'A' },
@@ -318,7 +318,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'major-pentatonic-solo': [
     {
       id: 'majp-box1',
-      title: 'Box 1 — 2nd Position  (G major pentatonic)',
+      title: 'Box 1: 2nd Position  (G major pentatonic)',
       subtitle: 'Gold = root G | Double-stop: play two strings simultaneously for country 6ths',
       startFret: 2, fretCount: 4,
       dots: [
@@ -348,7 +348,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'majp-E-open',
-      title: 'Open Position  (E major pentatonic) — E F# G# B C#',
+      title: 'Open Position  (E major pentatonic): E F# G# B C#',
       subtitle: 'Gold = root E | Bright, uplifting sound. Country double-stops: play str2+str4 together (B + E = 5th interval).',
       startFret: 0, fretCount: 5, showNut: true,
       dots: [
@@ -356,12 +356,12 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         open(6, 'E', true),
         { string: 6, fret: 2, note: 'F#' },
         { string: 6, fret: 4, note: 'G#' },
-        // ── String 5 (A) — A not in E major pent; B=fret2, C#=fret4 ───────
+        // ── String 5 (A): A not in E major pent; B=fret2, C#=fret4 ───────
         { string: 5, fret: 2, note: 'B' },
         { string: 5, fret: 4, note: 'C#' },
-        // ── String 4 (D) — D not in E major pent; E root=fret2 ────────────
+        // ── String 4 (D): D not in E major pent; E root=fret2 ────────────
         { string: 4, fret: 2, note: 'E', isRoot: true },
-        // ── String 3 (G) — G not in E major pent; G#=fret1, B=fret4 ───────
+        // ── String 3 (G): G not in E major pent; G#=fret1, B=fret4 ───────
         { string: 3, fret: 1, note: 'G#' },
         { string: 3, fret: 4, note: 'B' },
         // ── String 2 (B) ──────────────────────────────────────────────────
@@ -379,30 +379,30 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'majp-E-fullneck',
-      title: 'Full Neck — E major pentatonic (frets 0–12)',
+      title: 'Full Neck: E major pentatonic (frets 0–12)',
       subtitle: 'Bright, country/pop sound. No open A, D, or G in this scale (A, D, G natural not included). Box 1 = frets 4–7 | Box 2 = frets 9–12.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E F# G# B C# ──────────────────────────────────
+        // ── String 6 (low E): E F# G# B C# ──────────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 2,  note: 'F#' },
         { string: 6, fret: 4,  note: 'G#' },
         { string: 6, fret: 7,  note: 'B' },
         { string: 6, fret: 9,  note: 'C#' },
         { string: 6, fret: 12, note: 'E', isRoot: true },
-        // ── String 5 (A) — open A not in scale ───────────────────────────────
+        // ── String 5 (A): open A not in scale ───────────────────────────────
         { string: 5, fret: 2,  note: 'B' },
         { string: 5, fret: 4,  note: 'C#' },
         { string: 5, fret: 7,  note: 'E', isRoot: true },
         { string: 5, fret: 9,  note: 'F#' },
         { string: 5, fret: 11, note: 'G#' },
-        // ── String 4 (D) — open D not in scale ───────────────────────────────
+        // ── String 4 (D): open D not in scale ───────────────────────────────
         { string: 4, fret: 2,  note: 'E', isRoot: true },
         { string: 4, fret: 4,  note: 'F#' },
         { string: 4, fret: 6,  note: 'G#' },
         { string: 4, fret: 9,  note: 'B' },
         { string: 4, fret: 11, note: 'C#' },
-        // ── String 3 (G) — open G not in scale; G# on fret 1 ─────────────────
+        // ── String 3 (G): open G not in scale; G# on fret 1 ─────────────────
         { string: 3, fret: 1,  note: 'G#' },
         { string: 3, fret: 4,  note: 'B' },
         { string: 3, fret: 6,  note: 'C#' },
@@ -429,7 +429,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'natural-minor-solo': [
     {
       id: 'natmin-box1',
-      title: 'Box 1 — 5th Position  (A natural minor / Aeolian)',
+      title: 'Box 1: 5th Position  (A natural minor / Aeolian)',
       subtitle: 'Gold = root A | ♭6 (F) is the "epic" note unique to this scale vs pentatonic',
       startFret: 5, fretCount: 4,
       dots: [
@@ -464,8 +464,8 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'natmin-E-open',
-      title: 'Open Position  (E natural minor) — E F# G A B C D',
-      subtitle: 'Pink = C (♭6) — the "epic" note that makes this scale bigger than pentatonic. Open str6 = root E.',
+      title: 'Open Position  (E natural minor): E F# G A B C D',
+      subtitle: 'Pink = C (♭6): the "epic" note that makes this scale bigger than pentatonic. Open str6 = root E.',
       startFret: 0, fretCount: 4, showNut: true,
       dots: [
         // ── String 6 (low E) ──────────────────────────────────────────────
@@ -499,11 +499,11 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'natmin-E-fullneck',
-      title: 'Full Neck — E natural minor (frets 0–12)',
-      subtitle: 'Pink = C (♭6) — the note beyond pentatonic that gives depth. Box 1 = frets 5–8 | Box 2 = frets 8–12. 7 notes per octave.',
+      title: 'Full Neck: E natural minor (frets 0–12)',
+      subtitle: 'Pink = C (♭6): the note beyond pentatonic that gives depth. Box 1 = frets 5–8 | Box 2 = frets 8–12. 7 notes per octave.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E F# G A B C D ────────────────────────────────
+        // ── String 6 (low E): E F# G A B C D ────────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 2,  note: 'F#' },
         { string: 6, fret: 3,  note: 'G' },
@@ -564,7 +564,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'dorian-solo': [
     {
       id: 'dorian-E-open',
-      title: 'Open Position  (E Dorian) — E F# G A B C# D',
+      title: 'Open Position  (E Dorian): E F# G A B C# D',
       subtitle: 'Pink = C# (raised 6th vs natural minor). B string open → C# fret2 = the Dorian colour note. Am7→D vamp in E Dorian = Santana signature.',
       startFret: 0, fretCount: 5, showNut: true,
       dots: [
@@ -592,7 +592,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 1, fret: 3, note: 'G', technique: 'vibrato' },
       ],
       connections: [
-        // B string: B → C# hammer (shows the raised 6th — the Dorian signature)
+        // B string: B → C# hammer (shows the raised 6th: the Dorian signature)
         { fromString: 2, fromFret: 0, toString: 2, toFret: 2, type: 'hammer' },
         { fromString: 2, fromFret: 2, toString: 2, toFret: 3, type: 'hammer' },
         { fromString: 5, fromFret: 2, toString: 5, toFret: 4, type: 'hammer' },
@@ -600,15 +600,15 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'dorian-box1',
-      title: 'Box 1 — 5th Position  (A Dorian)',
-      subtitle: 'Pink = F# (raised 6th) — the one note that makes Dorian "brighter" than natural minor',
+      title: 'Box 1: 5th Position  (A Dorian)',
+      subtitle: 'Pink = F# (raised 6th): the one note that makes Dorian "brighter" than natural minor',
       startFret: 5, fretCount: 4,
       dots: [
         // ── String 6 ──────────────────────────────────────────────────────
         { string: 6, fret: 5, note: 'A',  isRoot: true },
         { string: 6, fret: 7, note: 'B' },
         { string: 6, fret: 8, note: 'C' },
-        // ── String 5 (A) — no F in Dorian (F# would be fret 9, outside box) ─
+        // ── String 5 (A): no F in Dorian (F# would be fret 9, outside box) ─
         { string: 5, fret: 5, note: 'D' },
         { string: 5, fret: 7, note: 'E' },
         // ── String 4 ──────────────────────────────────────────────────────
@@ -617,7 +617,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         // ── String 3 ──────────────────────────────────────────────────────
         { string: 3, fret: 5, note: 'C' },
         { string: 3, fret: 7, note: 'D' },
-        // ── String 2 — F# replaces F here (characteristic Dorian note) ─────
+        // ── String 2: F# replaces F here (characteristic Dorian note) ─────
         { string: 2, fret: 5, note: 'E' },
         { string: 2, fret: 7, note: 'F#', isKey: true },
         { string: 2, fret: 8, note: 'G' },
@@ -634,11 +634,11 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'dorian-E-fullneck',
-      title: 'Full Neck — E Dorian (frets 0–12)',
-      subtitle: 'Pink = C# (raised ♭6→♮6 — the Dorian signature). Vs natural minor: every C becomes C#. Santana/Metallica sound.',
+      title: 'Full Neck: E Dorian (frets 0–12)',
+      subtitle: 'Pink = C# (raised ♭6→♮6: the Dorian signature). Vs natural minor: every C becomes C#. Santana/Metallica sound.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E F# G A B C# D ──────────────────────────────
+        // ── String 6 (low E): E F# G A B C# D ──────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 2,  note: 'F#' },
         { string: 6, fret: 3,  note: 'G' },
@@ -699,8 +699,8 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'mixolydian-solo': [
     {
       id: 'mixo-E-open',
-      title: 'Open Position  (E Mixolydian) — E F# G# A B C# D',
-      subtitle: 'Pink = D (♭7) — open D string is the defining Mixolydian note. Root→♭7 move: open E string → open D string = instant classic rock.',
+      title: 'Open Position  (E Mixolydian): E F# G# A B C# D',
+      subtitle: 'Pink = D (♭7): open D string is the defining Mixolydian note. Root→♭7 move: open E string → open D string = instant classic rock.',
       startFret: 0, fretCount: 5, showNut: true,
       dots: [
         // ── String 6 (low E) ──────────────────────────────────────────────
@@ -711,10 +711,10 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         open(5, 'A'),
         { string: 5, fret: 2, note: 'B' },
         { string: 5, fret: 4, note: 'C#' },
-        // ── String 4 (D) — open D string = the ♭7! ───────────────────────
+        // ── String 4 (D): open D string = the ♭7! ───────────────────────
         open(4, 'D', false),
         { string: 4, fret: 2, note: 'E', isRoot: true },
-        // ── String 3 (G) — G not in E Mixolydian; G#=fret1 ───────────────
+        // ── String 3 (G): G not in E Mixolydian; G#=fret1 ───────────────
         { string: 3, fret: 1, note: 'G#' },
         { string: 3, fret: 2, note: 'A' },
         // ── String 2 (B) ──────────────────────────────────────────────────
@@ -727,7 +727,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 1, fret: 4, note: 'G#', technique: 'vibrato' },
       ],
       connections: [
-        // D string: open D (♭7) → E (root) — the key Mixolydian resolution
+        // D string: open D (♭7) → E (root): the key Mixolydian resolution
         { fromString: 4, fromFret: 0, toString: 4, toFret: 2, type: 'slide-up' },
         // B string: B → C# → D (resolves to ♭7)
         { fromString: 2, fromFret: 0, toString: 2, toFret: 2, type: 'hammer' },
@@ -735,8 +735,8 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'mixo-box1',
-      title: 'Box 1 — 3rd Position  (G Mixolydian)',
-      subtitle: 'Pink = F (♭7) — the note that makes Mixolydian "bluesy major". Root→♭7→5 = the classic rock move.',
+      title: 'Box 1: 3rd Position  (G Mixolydian)',
+      subtitle: 'Pink = F (♭7): the note that makes Mixolydian "bluesy major". Root→♭7→5 = the classic rock move.',
       startFret: 3, fretCount: 4,
       dots: [
         // ── String 6 ──────────────────────────────────────────────────────
@@ -761,17 +761,17 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
       connections: [
         // G string: B → C (3rd → 4th stepwise)
         { fromString: 3, fromFret: 4, toString: 3, toFret: 5, type: 'hammer' },
-        // D string: F (♭7) → G (root) — the key Mixolydian resolution move
+        // D string: F (♭7) → G (root): the key Mixolydian resolution move
         { fromString: 4, fromFret: 3, toString: 4, toFret: 5, type: 'slide-up' },
       ],
     },
     {
       id: 'mixo-E-fullneck',
-      title: 'Full Neck — E Mixolydian (frets 0–12)',
-      subtitle: 'Pink = D (♭7) — "bluesy major" note. Open D string = the key note! No open G (G# instead). Box 1 = frets 4–8 | Box 2 = frets 9–12.',
+      title: 'Full Neck: E Mixolydian (frets 0–12)',
+      subtitle: 'Pink = D (♭7): "bluesy major" note. Open D string = the key note! No open G (G# instead). Box 1 = frets 4–8 | Box 2 = frets 9–12.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E F# G# A B C# D ──────────────────────────────
+        // ── String 6 (low E): E F# G# A B C# D ──────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 2,  note: 'F#' },
         { string: 6, fret: 4,  note: 'G#' },
@@ -789,7 +789,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 5, fret: 9,  note: 'F#' },
         { string: 5, fret: 11, note: 'G#' },
         { string: 5, fret: 12, note: 'A' },
-        // ── String 4 (D) — open D = ♭7 key note! ─────────────────────────────
+        // ── String 4 (D): open D = ♭7 key note! ─────────────────────────────
         { string: 4, fret: 0,  note: 'D', isKey: true },
         { string: 4, fret: 2,  note: 'E', isRoot: true },
         { string: 4, fret: 4,  note: 'F#' },
@@ -798,7 +798,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 4, fret: 9,  note: 'B' },
         { string: 4, fret: 11, note: 'C#' },
         { string: 4, fret: 12, note: 'D', isKey: true },
-        // ── String 3 (G) — open G not in scale; G# on fret 1 ─────────────────
+        // ── String 3 (G): open G not in scale; G# on fret 1 ─────────────────
         { string: 3, fret: 1,  note: 'G#' },
         { string: 3, fret: 2,  note: 'A' },
         { string: 3, fret: 4,  note: 'B' },
@@ -831,8 +831,8 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'harmonic-minor-solo': [
     {
       id: 'harmin-E-open',
-      title: 'Open Position  (E harmonic minor) — E F# G A B C D#',
-      subtitle: 'Pink = D# (♯7, fret1 str4) — the leading tone 1 semitone below root E. D#→E hammer = the exotic resolution. str4 fret1 is the key.',
+      title: 'Open Position  (E harmonic minor): E F# G A B C D#',
+      subtitle: 'Pink = D# (♯7, fret1 str4): the leading tone 1 semitone below root E. D#→E hammer = the exotic resolution. str4 fret1 is the key.',
       startFret: 0, fretCount: 5, showNut: true,
       dots: [
         // ── String 6 (low E) ──────────────────────────────────────────────
@@ -843,7 +843,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         open(5, 'A'),
         { string: 5, fret: 2, note: 'B' },
         { string: 5, fret: 3, note: 'C' },
-        // ── String 4 (D) — D# (♯7) is just fret 1! ──────────────────────
+        // ── String 4 (D): D# (♯7) is just fret 1! ──────────────────────
         { string: 4, fret: 1, note: 'D#', isKey: true },
         { string: 4, fret: 2, note: 'E', isRoot: true },
         // ── String 3 (G) ──────────────────────────────────────────────────
@@ -859,7 +859,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 1, fret: 3, note: 'G', technique: 'vibrato' },
       ],
       connections: [
-        // D string: D# → E hammer — the leading tone resolution (the exotic sound)
+        // D string: D# → E hammer: the leading tone resolution (the exotic sound)
         { fromString: 4, fromFret: 1, toString: 4, toFret: 2, type: 'hammer' },
         // B string: B → C hammer
         { fromString: 2, fromFret: 0, toString: 2, toFret: 1, type: 'hammer' },
@@ -867,8 +867,8 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'harmin-box1',
-      title: 'Box 1 — 5th Position  (A harmonic minor)',
-      subtitle: 'Pink = G# (♯7) — the raised 7th that creates the exotic augmented 2nd interval',
+      title: 'Box 1: 5th Position  (A harmonic minor)',
+      subtitle: 'Pink = G# (♯7): the raised 7th that creates the exotic augmented 2nd interval',
       startFret: 5, fretCount: 5,
       dots: [
         // ── String 6 ──────────────────────────────────────────────────────
@@ -879,13 +879,13 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 5, fret: 5, note: 'D' },
         { string: 5, fret: 7, note: 'E' },
         { string: 5, fret: 8, note: 'F' },
-        // ── String 4 — G# replaces G (raised 7th!) ────────────────────────
+        // ── String 4: G# replaces G (raised 7th!) ────────────────────────
         { string: 4, fret: 6, note: 'G#', isKey: true },
         { string: 4, fret: 7, note: 'A',  isRoot: true },
         // ── String 3 ──────────────────────────────────────────────────────
         { string: 3, fret: 5, note: 'C' },
         { string: 3, fret: 7, note: 'D' },
-        // ── String 2 — G# at fret 9 (extended box) ────────────────────────
+        // ── String 2: G# at fret 9 (extended box) ────────────────────────
         { string: 2, fret: 5, note: 'E' },
         { string: 2, fret: 6, note: 'F' },
         { string: 2, fret: 9, note: 'G#', isKey: true },
@@ -895,7 +895,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 1, fret: 8, note: 'C' },
       ],
       connections: [
-        // D string: F → G# — the augmented 2nd leap (the exotic sound)
+        // D string: F → G#: the augmented 2nd leap (the exotic sound)
         { fromString: 5, fromFret: 8, toString: 4, toFret: 6, type: 'slide-up' },
         // D string: G# → A (leading tone resolving to root)
         { fromString: 4, fromFret: 6, toString: 4, toFret: 7, type: 'hammer' },
@@ -903,11 +903,11 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'harmin-E-fullneck',
-      title: 'Full Neck — E harmonic minor (frets 0–12)',
+      title: 'Full Neck: E harmonic minor (frets 0–12)',
       subtitle: 'Pink = D# (♯7 leading tone, 1 semitone below root). Augmented 2nd: C→D# is the exotic "Arabic" interval. No open D string.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E F# G A B C D# ───────────────────────────────
+        // ── String 6 (low E): E F# G A B C D# ───────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 2,  note: 'F#' },
         { string: 6, fret: 3,  note: 'G' },
@@ -925,7 +925,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 5, fret: 9,  note: 'F#' },
         { string: 5, fret: 10, note: 'G' },
         { string: 5, fret: 12, note: 'A' },
-        // ── String 4 (D) — open D not in scale; D# on fret 1 ─────────────────
+        // ── String 4 (D): open D not in scale; D# on fret 1 ─────────────────
         { string: 4, fret: 1,  note: 'D#', isKey: true },
         { string: 4, fret: 2,  note: 'E', isRoot: true },
         { string: 4, fret: 4,  note: 'F#' },
@@ -967,8 +967,8 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'diminished-solo': [
     {
       id: 'dim-box',
-      title: 'Symmetrical Position — 7th fret  (C diminished W–H)',
-      subtitle: 'The same pattern moves up 3 frets (to 10fr) and sounds identical — use this to transpose licks instantly',
+      title: 'Symmetrical Position: 7th fret  (C diminished W–H)',
+      subtitle: 'The same pattern moves up 3 frets (to 10fr) and sounds identical: use this to transpose licks instantly',
       startFret: 7, fretCount: 5,
       dots: [
         // ── String 6 ──────────────────────────────────────────────────────
@@ -999,11 +999,11 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'dim-E-fullneck',
-      title: 'Full Neck — E diminished W–H (frets 0–12)',
-      subtitle: 'Same pattern every 3 frets (symmetric). Pink = Bb (♭5) & C# (♯6). 8 notes per octave — dense but symmetrical.',
+      title: 'Full Neck: E diminished W–H (frets 0–12)',
+      subtitle: 'Same pattern every 3 frets (symmetric). Pink = Bb (♭5) & C# (♯6). 8 notes per octave: dense but symmetrical.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E F# G A Bb B C# D ────────────────────────────
+        // ── String 6 (low E): E F# G A Bb B C# D ────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 2,  note: 'F#' },
         { string: 6, fret: 3,  note: 'G' },
@@ -1070,7 +1070,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'whole-tone-solo': [
     {
       id: 'wt-box',
-      title: 'All-String Pattern — 6th fret  (C whole tone)',
+      title: 'All-String Pattern: 6th fret  (C whole tone)',
       subtitle: 'Every note is exactly 2 frets apart. The pattern on strings 6+1 repeats on strings 2+5. Dreamy, floating sound.',
       startFret: 6, fretCount: 5,
       dots: [
@@ -1097,11 +1097,11 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'wt-E-fullneck',
-      title: 'Full Neck — E whole-tone (frets 0–12)',
-      subtitle: 'Every interval = 2 frets. Fully symmetric — no open A, G, or B strings in this scale. Dreamy, floating, film-score sound.',
+      title: 'Full Neck: E whole-tone (frets 0–12)',
+      subtitle: 'Every interval = 2 frets. Fully symmetric: no open A, G, or B strings in this scale. Dreamy, floating, film-score sound.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E F# G# Bb C D ────────────────────────────────
+        // ── String 6 (low E): E F# G# Bb C D ────────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 2,  note: 'F#' },
         { string: 6, fret: 4,  note: 'G#', isKey: true },
@@ -1109,7 +1109,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 6, fret: 8,  note: 'C' },
         { string: 6, fret: 10, note: 'D' },
         { string: 6, fret: 12, note: 'E', isRoot: true },
-        // ── String 5 (A) — open A not in scale ───────────────────────────────
+        // ── String 5 (A): open A not in scale ───────────────────────────────
         { string: 5, fret: 1,  note: 'Bb', isKey: true },
         { string: 5, fret: 3,  note: 'C' },
         { string: 5, fret: 5,  note: 'D' },
@@ -1124,14 +1124,14 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 4, fret: 8,  note: 'Bb', isKey: true },
         { string: 4, fret: 10, note: 'C' },
         { string: 4, fret: 12, note: 'D' },
-        // ── String 3 (G) — open G not in scale; G# on fret 1 ─────────────────
+        // ── String 3 (G): open G not in scale; G# on fret 1 ─────────────────
         { string: 3, fret: 1,  note: 'G#', isKey: true },
         { string: 3, fret: 3,  note: 'Bb', isKey: true },
         { string: 3, fret: 5,  note: 'C' },
         { string: 3, fret: 7,  note: 'D' },
         { string: 3, fret: 9,  note: 'E', isRoot: true },
         { string: 3, fret: 11, note: 'F#' },
-        // ── String 2 (B) — open B not in scale; C on fret 1 ──────────────────
+        // ── String 2 (B): open B not in scale; C on fret 1 ──────────────────
         { string: 2, fret: 1,  note: 'C' },
         { string: 2, fret: 3,  note: 'D' },
         { string: 2, fret: 5,  note: 'E', isRoot: true },
@@ -1189,7 +1189,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'maj-E-open',
-      title: 'Open Position  (E major) — E F# G# A B C# D#',
+      title: 'Open Position  (E major): E F# G# A B C# D#',
       subtitle: 'Gold = root E. Open low E + high e = root on both ends. D# (fret1 str4) is the bright 7th. Target E, G#, B (chord tones) on beat 1.',
       startFret: 0, fretCount: 5, showNut: true,
       dots: [
@@ -1201,10 +1201,10 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         open(5, 'A'),
         { string: 5, fret: 2, note: 'B' },
         { string: 5, fret: 4, note: 'C#' },
-        // ── String 4 (D) — D# = ♯7 leading tone ──────────────────────────
+        // ── String 4 (D): D# = ♯7 leading tone ──────────────────────────
         { string: 4, fret: 1, note: 'D#', isKey: true },
         { string: 4, fret: 2, note: 'E',  isRoot: true },
-        // ── String 3 (G) — G# = fret 1 ───────────────────────────────────
+        // ── String 3 (G): G# = fret 1 ───────────────────────────────────
         { string: 3, fret: 1, note: 'G#' },
         { string: 3, fret: 2, note: 'A' },
         // ── String 2 (B) ──────────────────────────────────────────────────
@@ -1225,11 +1225,11 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     },
     {
       id: 'maj-E-fullneck',
-      title: 'Full Neck — E major scale (frets 0–12)',
+      title: 'Full Neck: E major scale (frets 0–12)',
       subtitle: 'Pink = D# (♯7 leading tone, 1 semitone below root). 3 sharps: F# G# D#. No open G or D string. Box 1 = frets 4–7 | Box 2 = frets 9–12.',
       startFret: 1, fretCount: 12, showNut: true,
       dots: [
-        // ── String 6 (low E) — E F# G# A B C# D# ─────────────────────────────
+        // ── String 6 (low E): E F# G# A B C# D# ─────────────────────────────
         open(6, 'E', true),
         { string: 6, fret: 2,  note: 'F#' },
         { string: 6, fret: 4,  note: 'G#' },
@@ -1247,7 +1247,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 5, fret: 9,  note: 'F#' },
         { string: 5, fret: 11, note: 'G#' },
         { string: 5, fret: 12, note: 'A' },
-        // ── String 4 (D) — open D not in scale; D# on fret 1 ─────────────────
+        // ── String 4 (D): open D not in scale; D# on fret 1 ─────────────────
         { string: 4, fret: 1,  note: 'D#', isKey: true },
         { string: 4, fret: 2,  note: 'E', isRoot: true },
         { string: 4, fret: 4,  note: 'F#' },
@@ -1255,7 +1255,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
         { string: 4, fret: 7,  note: 'A' },
         { string: 4, fret: 9,  note: 'B' },
         { string: 4, fret: 11, note: 'C#' },
-        // ── String 3 (G) — open G not in scale; G# on fret 1 ─────────────────
+        // ── String 3 (G): open G not in scale; G# on fret 1 ─────────────────
         { string: 3, fret: 1,  note: 'G#' },
         { string: 3, fret: 2,  note: 'A' },
         { string: 3, fret: 4,  note: 'B' },
@@ -1290,7 +1290,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'bending': [
     {
       id: 'bend-demo',
-      title: 'String Bending — Whole & Half Step',
+      title: 'String Bending: Whole & Half Step',
       subtitle: '"1" = whole step bend (2 frets up in pitch). "½" = half step (1 fret up). Stack fingers behind the bending finger for strength.',
       startFret: 7, fretCount: 4,
       dots: [
@@ -1307,7 +1307,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'vibrato': [
     {
       id: 'vibrato-demo',
-      title: 'Vibrato — Width × Speed = Character',
+      title: 'Vibrato: Width × Speed = Character',
       subtitle: '"~" marks = add vibrato here. Hold the note then oscillate with wrist rotation. B.B. King: wide + slow. Zakk Wylde: tight + fast.',
       startFret: 7, fretCount: 4,
       dots: [
@@ -1321,7 +1321,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'hammer-on': [
     {
       id: 'hammeron-demo',
-      title: 'Hammer-On — Ascending Legato',
+      title: 'Hammer-On: Ascending Legato',
       subtitle: 'Pick the first note only. Snap the next finger down firmly without picking. Arc shows hammer-on direction.',
       startFret: 5, fretCount: 4,
       dots: [
@@ -1344,7 +1344,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'pull-off': [
     {
       id: 'pulloff-demo',
-      title: 'Pull-Off — Descending Legato',
+      title: 'Pull-Off: Descending Legato',
       subtitle: 'Pre-fret BOTH notes. Pick the higher note then flick the top finger sideways off the string. Arc shows pull-off direction.',
       startFret: 5, fretCount: 4,
       dots: [
@@ -1367,7 +1367,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'tapping': [
     {
       id: 'tap-demo',
-      title: 'Two-Hand Tapping — Van Halen Pattern',
+      title: 'Two-Hand Tapping: Van Halen Pattern',
       subtitle: '"T" = tap with picking-hand finger | Then pull off to h5, hammer to h7. Cycle: T12 – p7 – h5 fast.',
       startFret: 5, fretCount: 8,
       dots: [
@@ -1388,7 +1388,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
     {
       id: 'sweep-demo',
       title: '5-String Am Arpeggio Sweep  (12th position)',
-      subtitle: 'One fluid downstroke across all 5 strings. Each finger presses and releases immediately — no blurring. Yngwie/Malmsteen style.',
+      subtitle: 'One fluid downstroke across all 5 strings. Each finger presses and releases immediately: no blurring. Yngwie/Malmsteen style.',
       startFret: 12, fretCount: 4,
       dots: [
         // Am arpeggio sweep: A C E (across 5 strings)
@@ -1425,7 +1425,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'pinch-harmonics': [
     {
       id: 'pinch-demo',
-      title: 'Pinch Harmonic — Thumb Contact Points',
+      title: 'Pinch Harmonic: Thumb Contact Points',
       subtitle: 'Pick note normally, then let the thumb side graze the string immediately after. Move picking position along the string to find the "sweet spot" that produces a harmonic overtone.',
       startFret: 7, fretCount: 4,
       dots: [
@@ -1439,7 +1439,7 @@ export const FRETBOARDS: Record<string, FretboardDiagram[]> = {
   'whammy-bar': [
     {
       id: 'whammy-demo',
-      title: 'Whammy Bar — Dive Bomb & Vibrato',
+      title: 'Whammy Bar: Dive Bomb & Vibrato',
       subtitle: 'Push arm = pitch drops. A "dive bomb" pushes all the way down so the note fades to silence. Oscillate lightly for whammy vibrato.',
       startFret: 7, fretCount: 4,
       dots: [

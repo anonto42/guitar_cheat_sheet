@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuitarFxStudio from './GuitarFxStudio'
+import GuitarFxStudio from '@/features/guitarfx/GuitarFxStudio'
 
 export const metadata: Metadata = {
   title: 'GuitarFX Studio',

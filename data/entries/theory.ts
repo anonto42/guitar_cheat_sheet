@@ -1,5 +1,5 @@
-import type { GuitarEntry } from '../../types'
-import { ALL_ROOTS } from '../musicHelpers'
+import type { GuitarEntry } from '@/types'
+import { ALL_ROOTS } from '@/data/musicHelpers'
 
 const C = ['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B'] as const
 type Note = typeof C[number]
@@ -16,7 +16,7 @@ export const theory: GuitarEntry[] = [
     allKeys: [],
     chords: ['Adjacent keys share 6 of 7 notes','Opposite keys share 0 notes','Inner ring = relative minor keys'],
     details: 'The Circle of Fifths arranges all 12 major keys in a circle, each a perfect 5th apart. Moving clockwise adds one sharp to the key signature.',
-    usedBy: 'All music theory — the fundamental map',
+    usedBy: 'All music theory, the fundamental map',
     tip: 'Mnemonic for sharps clockwise: C G D A E B F♯ = Can Go Dancing After Each Beer Fast',
   },
   {
@@ -29,7 +29,7 @@ export const theory: GuitarEntry[] = [
     allKeys: [],
     chords: ['Triads = Root + 3rd + 5th','7th chords = Root + 3rd + 5th + 7th'],
     details: 'Every interval has a unique sound quality. The tritone (6 semitones) is maximally dissonant. Understanding intervals lets you construct any chord or scale.',
-    usedBy: 'All music theory — essential foundation',
+    usedBy: 'All music theory, essential foundation',
     tip: 'Learn intervals by song: M3 = When the Saints, P5 = Star Wars, tritone = The Simpsons theme.',
   },
   {
@@ -42,7 +42,7 @@ export const theory: GuitarEntry[] = [
     allKeys: [],
     chords: ['All 5 shapes interlock and repeat continuously up the neck'],
     details: 'The CAGED system is derived from the 5 open chord shapes (C, A, G, E, D). Each shape can be moved to any position using a barre chord.',
-    usedBy: 'All guitar players — one of the most important concepts',
+    usedBy: 'All guitar players, one of the most important concepts',
     tip: 'Start by locating the root note in each shape. Chord shapes become scale shapes when you add the remaining scale notes.',
   },
   {
@@ -57,7 +57,7 @@ export const theory: GuitarEntry[] = [
       return { root, notes:[`${root} major → ${rel} minor`], chords:[`${root} maj shares all notes with ${rel} min`] }
     }),
     chords: ['Relative pairs share all 7 diatonic notes and chords'],
-    details: 'Every major key has a relative minor using the exact same 7 notes and chords — just with a different tonal centre.',
+    details: 'Every major key has a relative minor using the exact same 7 notes and chords, just with a different tonal centre.',
     usedBy: 'All music theory, songwriting, improvisation',
     tip: 'Quick formula: for any major key, count up 6 notes to find the relative minor.',
   },
@@ -71,7 +71,7 @@ export const theory: GuitarEntry[] = [
     allKeys: [],
     chords: ['Any open chord shape + capo = that shape key raised by capo fret number'],
     details: 'Transposing moves an entire piece to a different pitch while keeping all intervals identical. On guitar, a capo is the easiest method.',
-    usedBy: 'All musicians — essential for playing with singers and bands',
+    usedBy: 'All musicians, essential for playing with singers and bands',
     tip: 'If a song uses chords like F♯, C♯, G♯ and feels awkward, try a capo at fret 2 and play the simpler E, B, F♯ shapes.',
   },
   {
@@ -100,7 +100,7 @@ export const theory: GuitarEntry[] = [
     }),
     chords: ['Slash chords: C/E means C major with E in bass'],
     details: 'Chord inversions place a chord tone other than the root in the bass. Creates smoother voice leading and richer harmony.',
-    usedBy: 'All genres — especially sophisticated pop, classical, jazz',
+    usedBy: 'All genres, especially sophisticated pop, classical, jazz',
     tip: 'The descending bassline trick: C to C/E to F to C/G creates a beautiful walkdown.',
   },
   {
@@ -116,7 +116,7 @@ export const theory: GuitarEntry[] = [
     }),
     chords: ['Diatonic chords in any major key: Maj Min Min Maj Maj Min Dim'],
     details: 'Every chord is built by stacking intervals of a 3rd (skip every other note of a scale). Major scales always produce the same quality sequence: Maj-Min-Min-Maj-Maj-Min-Dim.',
-    usedBy: 'All music theory — songwriting, arranging, improvising',
+    usedBy: 'All music theory, songwriting, arranging, improvising',
     tip: 'Memorize the pattern: 1=Maj, 2=min, 3=min, 4=Maj, 5=Maj, 6=min, 7=dim.',
   },
   {
@@ -134,7 +134,7 @@ export const theory: GuitarEntry[] = [
   {
     id: 'modes-explained', category: 'theory', title: 'Understanding Modes (The Right Way)',
     tags: ['modes explained','modal','parallel modes','parent key','Ionian Dorian Phrygian'],
-    summary: 'Modes are not just starting points of a major scale — they are independent scales with their own root and flavour.',
+    summary: 'Modes are not just starting points of a major scale, they are independent scales with their own root and flavour.',
     formula: 'Parallel approach: same root, different scale | Relative approach: same notes, different root',
     degrees: 'C Ionian = C D E F G A B | C Dorian = C D E♭ F G A B♭ (same root, different notes)',
     example: { root: 'D', notes: ['D Ionian: D E F♯ G A B C♯','D Dorian: D E F G A B C','D Phrygian: D E♭ F G A B♭ C','D Lydian: D E F♯ G♯ A B C♯'] },
@@ -152,7 +152,7 @@ export const theory: GuitarEntry[] = [
     example: { root: 'A minor', notes: ['Box 1: frets 5-8 (most common)','Box 2: frets 7-10','Box 3: frets 9-12','Box 4: frets 12-15'] },
     allKeys: [], chords: [],
     details: 'Most guitarists learn Box 1 of the minor pentatonic and stay there forever. But 5 interlocking positions cover every note on the neck.',
-    usedBy: 'Rock, blues, country, R&B — all genres that use pentatonic scales',
+    usedBy: 'Rock, blues, country, R&B, all genres that use pentatonic scales',
     tip: 'Connect positions with slides: at the top of Box 1, slide up to the first note of Box 2 on the same string.',
   },
   {
@@ -169,7 +169,7 @@ export const theory: GuitarEntry[] = [
     }),
     chords: ['I = Tonic (rest)','IV = Subdominant (movement)','V = Dominant (tension)'],
     details: 'Diatonic harmony means all chords come from the same key. Each chord has a function: Tonic (I, iii, vi) feel stable. Subdominant (IV, ii) move away from home. Dominant (V, vii°) create tension.',
-    usedBy: 'All music — the fundamental framework of Western harmony',
+    usedBy: 'All music, the fundamental framework of Western harmony',
     tip: 'The most powerful motion in harmony is V→I (dominant to tonic).',
   },
   {
