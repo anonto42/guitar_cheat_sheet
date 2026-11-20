@@ -22,6 +22,14 @@ To move to a backend:
 
 For the native app, which has no server, keep the static repository or add a runtime fetch with the offline cache in front.
 
+## Learning flow
+The site teaches in this order: scale, key, modes, triads, chord types, strumming, practise and solo.
+- `data/learn.ts` defines the seven steps and which entries belong to each (`category/id`). `content.getLearningPath()` resolves them. `/learn` renders them and stores progress in `localStorage` only.
+- `lib/music/` is pure theory code: `notes.ts` spells notes by letter (F♯ in G major), `chordTypes.ts` lists every chord type as intervals, `keys.ts` derives modes, triads and solo scales for the 12 major keys, `progressions.ts` writes progressions in a key. Nothing there is typed per key, so a new key or chord type is one data change.
+- `/keys/[key]` composes those functions. `components/music/NoteMap` draws any set of notes on the fretboard from the tuning, so no diagram is hand-made.
+- `data/strumPatterns.ts` is the single source for strumming. It generates the Strumming reference entries and drives the player.
+- `/practice` (`features/practice`) uses `lib/music/audio.ts`, a small Web Audio scheduler that synthesises chords, strums and a click. No audio files are downloaded, so it works offline.
+
 ## Search
 `/search-index.json` is generated from the service and contains only id, category, title, summary and tags. The navbar loads it on first focus. `lib/search.ts` ranks results (exact title, prefix, substring, tag, summary). The service worker stores the index, so search works offline.
 

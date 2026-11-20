@@ -25,13 +25,14 @@ components/
   brand/        Logo, LogoMark
   seo/          JsonLd
 features/       one folder per product feature, owns its components and hooks
-  home/ search/ install/ offline/ fretboard/ guitarfx/
+  home/ learn/ practice/ search/ install/ offline/ fretboard/ guitarfx/
 services/
   content/      ContentRepository interface + staticRepository (the ONLY data entry point)
   offline/      precache manifest builder
 data/           static content and category config (replaced by a backend later)
 config/         site.ts, app.ts (store links), navigation.ts
 lib/            pure helpers: utils, search, platform, seoGenerators, useDismiss
+  music/        theory code: notes, chordTypes, keys, progressions, voicing, audio (no per-key data entry)
 types/          shared types
 public/         sw.js, icons, static files
 scripts/        generate-icons, build-mobile, check-content
@@ -42,6 +43,7 @@ Dependency direction: `app -> features -> components -> lib/config/types`; `serv
 - Pages and features read content through `content` from `@/services/content` (async). Never import `DATA` directly outside `services/` and `data/`.
 - To move to a database or API, write a new `ContentRepository` implementation and change one line in `services/content/index.ts`.
 - Add an entry: edit `data/entries/<category>.ts`. Search, sitemap, SEO, offline cache and landing page pick it up automatically.
+- Learning path: edit `data/learn.ts`. Strumming patterns: edit `data/strumPatterns.ts` only (entries and the player follow).
 - Add a category: add the slug to `types/index.ts`, config to `data/categories.ts`, a file in `data/entries/`, spread it in `data/index.ts`.
 
 ## UI rules
