@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { FormEvent, useState } from 'react'
+import Select from '@/components/ui/Select'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -158,18 +159,17 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <label style={labelStyle}>Subject</label>
-              <select
+              <Select
+                label="Subject"
                 name="subject"
-                style={{ ...inputStyle, cursor: 'pointer' }}
-                onFocus={e => { e.currentTarget.style.borderColor = 'rgba(255,107,0,.4)' }}
-                onBlur={e => { e.currentTarget.style.borderColor = '#353534' }}
-              >
-                <option value="suggestion">Content suggestion</option>
-                <option value="error">Report an error</option>
-                <option value="feedback">General feedback</option>
-                <option value="other">Other</option>
-              </select>
+                defaultValue="suggestion"
+                options={[
+                  { value: 'suggestion', label: 'Content suggestion' },
+                  { value: 'error', label: 'Report an error' },
+                  { value: 'feedback', label: 'General feedback' },
+                  { value: 'other', label: 'Other' },
+                ]}
+              />
             </div>
 
             <div>

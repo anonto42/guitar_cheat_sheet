@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react'
 import { Play, Power, Save, Square } from 'lucide-react'
+import Select from '@/components/ui/Select'
 import { audioEngine } from './audioEngine'
 import { BUILT_IN_PRESETS, DEFAULT_PRESET, DEFAULT_PRESET_NAME } from './presets'
 import type { DeviceOption, EngineStatus, Preset } from './types'
@@ -131,74 +132,44 @@ function RoutingPanel({
 }: RoutingPanelProps) {
   return (
     <section className="gfx-routing-panel gfx-panel" aria-label="Audio routing">
-      <div className="gfx-control-group">
-        <label htmlFor="inputSelect" className="gfx-control-label">Guitar Input</label>
-        <select
-          id="inputSelect"
-          className="gfx-select"
-          value={selectedInput}
-          onChange={(event) => onInputChange(event.target.value)}
-        >
-          {inputs.length === 0 ? (
-            <option value="">Start Audio to list inputs</option>
-          ) : (
-            inputs.map((device) => (
-              <option key={device.deviceId} value={device.deviceId}>
-                {device.label}
-              </option>
-            ))
-          )}
-        </select>
-      </div>
+      <Select
+        className="gfx-control-group"
+        label="Guitar input"
+        value={selectedInput}
+        onChange={onInputChange}
+        options={inputs.length === 0
+          ? [{ value: '', label: 'Start Audio to list inputs' }]
+          : [
+              // Browsers hide device names until microphone access is allowed.
+              ...(inputs.some(d => d.deviceId === selectedInput) ? [] : [{ value: selectedInput, label: 'Default input' }]),
+              ...inputs.map((device, i) => ({ value: device.deviceId, label: device.label || `Input ${i + 1}` })),
+            ]}
+      />
 
-      <div className="gfx-control-group">
-        <label htmlFor="outputSelect" className="gfx-control-label">Output Device</label>
-        <select
-          id="outputSelect"
-          className="gfx-select"
-          value={selectedOutput}
-          onChange={(event) => onOutputChange(event.target.value)}
-        >
-          <option value={COMPATIBLE_DEFAULT_OUTPUT}>Default output (compatible)</option>
-          <option value="">System default (low latency)</option>
-          {outputs.length === 0 ? (
-            <option value="" disabled>Start Audio to list outputs</option>
-          ) : (
-            outputs.filter((device) => device.deviceId !== 'default').map((device) => (
-              <option key={device.deviceId} value={device.deviceId}>
-                {device.label}
-              </option>
-            ))
-          )}
-        </select>
-      </div>
+      <Select
+        className="gfx-control-group"
+        label="Output device"
+        value={selectedOutput}
+        onChange={onOutputChange}
+        options={[
+          { value: COMPATIBLE_DEFAULT_OUTPUT, label: 'Default output (compatible)' },
+          { value: '', label: 'System default (low latency)' },
+          ...(outputs.length === 0
+            ? [{ value: '__none__', label: 'Start Audio to list outputs', disabled: true }]
+            : outputs.filter(device => device.deviceId !== 'default').map((device, i) => ({ value: device.deviceId, label: device.label || `Output ${i + 1}` }))),
+        ]}
+      />
 
-      <div className="gfx-control-group">
-        <label htmlFor="presetSelect" className="gfx-control-label">Active Preset</label>
-        <select
-          id="presetSelect"
-          className="gfx-select"
-          value={selectedPreset}
-          onChange={(event) => onPresetChange(event.target.value)}
-        >
-          <optgroup label="Factory Tones">
-            {factoryPresets.map((name) => (
-              <option key={`builtin:${name}`} value={`builtin:${name}`}>
-                {name}
-              </option>
-            ))}
-          </optgroup>
-          {userPresets.length > 0 && (
-            <optgroup label="User Tones">
-              {userPresets.map((name) => (
-                <option key={`saved:${name}`} value={`saved:${name}`}>
-                  {name}
-                </option>
-              ))}
-            </optgroup>
-          )}
-        </select>
-      </div>
+      <Select
+        className="gfx-control-group"
+        label="Active preset"
+        value={selectedPreset}
+        onChange={onPresetChange}
+        options={[
+          ...factoryPresets.map(name => ({ value: `builtin:${name}`, label: name, group: 'Factory tones' })),
+          ...userPresets.map(name => ({ value: `saved:${name}`, label: name, group: 'User tones' })),
+        ]}
+      />
 
       <button id="savePresetButton" className="gfx-btn gfx-btn-secondary" type="button" onClick={onSavePreset}>
         <Save size={16} />
