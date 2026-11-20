@@ -6,6 +6,7 @@ import { CornerDownLeft, Search, X } from 'lucide-react'
 import { CATEGORY_CONFIG } from '@/data/categories'
 import { cn } from '@/lib/utils'
 import { searchItems } from '@/lib/search'
+import SoundLoader from '@/components/ui/SoundLoader'
 import { useSearchIndex } from './useSearchIndex'
 
 interface SearchBoxProps {
@@ -115,7 +116,7 @@ export default function SearchBox({
           role="listbox"
           className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] overflow-y-auto rounded-lg border border-line2 bg-bg3 p-1.5 shadow-2xl shadow-black/60 animate-fade-in sm:min-w-[22rem]"
         >
-          {status === 'loading' && <p className="px-3 py-4 text-sm text-outline">Loading index…</p>}
+          {status === 'loading' && <div className="flex justify-center py-5"><SoundLoader size="sm" label="Loading index" /></div>}
           {status === 'error' && <p className="px-3 py-4 text-sm text-outline">Search is unavailable right now. Check your connection and try again.</p>}
           {status === 'ready' && results.length === 0 && (
             <p className="px-3 py-4 text-sm text-outline">No matches for &ldquo;{query.trim()}&rdquo;.</p>

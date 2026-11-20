@@ -1,7 +1,8 @@
 'use client'
 
-import { CheckCircle2, CloudDownload, Loader2 } from 'lucide-react'
+import { CheckCircle2, CloudDownload } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import ProgressBar from '@/components/ui/ProgressBar'
 import { useOfflineCache } from './useOfflineCache'
 
 /** Lets the user store every page on this device with one tap and shows progress. */
@@ -24,19 +25,18 @@ export default function OfflineDownloadCard() {
           )}
 
           {status === 'caching' && (
-            <div className="mt-4" role="status" aria-live="polite">
-              <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full rounded-full bg-ember transition-[width] duration-200" style={{ width: `${percent}%` }} />
-              </div>
-              <p className="mt-2 flex items-center gap-2 text-xs text-outline">
-                <Loader2 size={12} className="animate-spin" aria-hidden="true" /> Saving {percent}%
+            <div className="mt-4" aria-live="polite">
+              <ProgressBar value={progress} label="Saving the library for offline use" />
+              <p className="mt-2 flex items-center justify-between text-xs text-outline">
+                <span>Saving the library to this device</span>
+                <span className="font-bold tabular-nums text-ember-l">{percent}%</span>
               </p>
             </div>
           )}
 
           {status === 'ready' && (
             <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-theory">
-              <CheckCircle2 size={16} aria-hidden="true" /> Saved. The whole library works offline.
+              <CheckCircle2 size={16} className="animate-fade-in" aria-hidden="true" /> Saved. The whole library works offline.
             </p>
           )}
 
