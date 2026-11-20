@@ -28,11 +28,10 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      # The runner image already ships the Android SDK. Only add what the build needs; the default
-      # package list of this action includes the removed "tools" package and fails.
-      - uses: android-actions/setup-android@v3
-        with:
-          packages: 'platform-tools platforms;android-36 build-tools;36.0.0'
+      # The ubuntu runner already has the Android SDK (ANDROID_HOME) with licenses accepted, and
+      # Gradle downloads any missing platform itself, so no SDK setup action is needed.
+      - name: Check Android SDK
+        run: echo "ANDROID_HOME=$ANDROID_HOME" && ls "$ANDROID_HOME"
 
       - run: npm ci
 
