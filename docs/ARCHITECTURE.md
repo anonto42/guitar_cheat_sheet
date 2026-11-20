@@ -32,7 +32,7 @@ For the native app, which has no server, keep the static repository or add a run
 - other same-origin files: stale while revalidate
 - `CACHE_ALL` message: fetches every route listed in `/precache.json` plus the assets each page references
 
-`/precache.json` is built from the content service, so new entries become offline-ready automatically. The client stores the manifest version in `localStorage` to know whether its copy is current. Automatic download is skipped on cellular, slow or data-saver connections; the `/download` page offers a manual button.
+`/precache.json` is built from the content service, so new entries become offline-ready automatically. The client stores the manifest version in `localStorage` to know whether its copy is current. `features/offline/ServiceWorkerRegister` runs the sync automatically when the browser is idle: if the server's version differs from the stored one it sends `CACHE_ALL`, and it retries on the next load or the `online` event. The only exception is the browser's data saver mode. There is no manual download control.
 
 ## Styling
 Tailwind with tokens in `tailwind.config.ts` and CSS variables in `app/globals.css`. Category accent colours come from `data/categories.ts` and are applied through a `--accent` custom property. Fonts are loaded by `next/font` and exposed as `--font-sans` and `--font-display`.

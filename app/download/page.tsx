@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const FAQ = [
   { q: 'Is it free?', a: 'Yes. Guitar Cheat Sheet is free and open source, with no ads and no account.' },
-  { q: 'Does it work without internet?', a: 'Yes. Once installed, or after you tap Save for offline, every page and the search work with no signal.' },
+  { q: 'Does it work without internet?', a: 'Yes. The whole library is saved on your device automatically the first time you visit, so every page and the search keep working with no signal.' },
   { q: 'How do updates work?', a: 'The app checks for new content whenever you are online and refreshes the saved copy in the background.' },
 ]
 

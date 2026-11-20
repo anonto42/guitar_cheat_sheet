@@ -4,7 +4,6 @@ import { Apple, CheckCircle2, Download, Globe } from 'lucide-react'
 import { APP } from '@/config/app'
 import Button from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
-import OfflineDownloadCard from '@/features/offline/OfflineDownloadCard'
 import { usePwaInstall } from './usePwaInstall'
 import InstallAction from './InstallAction'
 
@@ -41,7 +40,6 @@ export default function DownloadOptions() {
           <CheckCircle2 size={20} aria-hidden="true" />
           You are already using the app.
         </p>
-        <OfflineDownloadCard />
       </div>
     )
   }
@@ -87,7 +85,6 @@ export default function DownloadOptions() {
         </Option>
       </div>
 
-      <OfflineDownloadCard />
     </div>
   )
 }
