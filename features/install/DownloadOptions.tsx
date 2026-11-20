@@ -5,6 +5,8 @@ import { APP } from '@/config/app'
 import Button, { buttonVariants } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import { usePwaInstall } from './usePwaInstall'
+import { useLatestApk, type ApkStatus } from './useLatestApk'
+import { SITE } from '@/config/site'
 import InstallAction from './InstallAction'
 
 interface OptionProps {
@@ -31,6 +33,7 @@ function Option({ icon, title, description, highlighted, children }: OptionProps
 /** Download page body: store links when configured, browser install everywhere else. */
 export default function DownloadOptions() {
   const { platform, installed, canPrompt, promptInstall } = usePwaInstall()
+  const apk = useLatestApk(SITE.repoUrl, 'guitar-cheat-sheet.apk')
   const { android, ios } = APP
 
   if (installed) {
@@ -65,20 +68,7 @@ export default function DownloadOptions() {
           {android.playStoreUrl ? (
             <Button href={android.playStoreUrl} className="w-full">Get it on Google Play</Button>
           ) : android.apkUrl ? (
-            <div className="space-y-3">
-              {/* A plain link: the file comes from GitHub Releases, not a page inside this site. */}
-              <a href={android.apkUrl} download className={cn(buttonVariants({ size: 'md' }), 'w-full')}>
-                <Download size={16} aria-hidden="true" /> Download APK
-              </a>
-              <ol className="list-decimal space-y-1 pl-4 text-xs leading-relaxed text-outline">
-                <li>Open the downloaded file.</li>
-                <li>If Android asks, allow installing apps from your browser.</li>
-                <li>Tap Install. Works on Android 7 and newer.</li>
-              </ol>
-              <a href={android.releasesUrl} className="inline-block text-xs font-semibold text-ember-l hover:text-cream" target="_blank" rel="noopener noreferrer">
-                All versions and release notes
-              </a>
-            </div>
+            <AndroidDownload apkUrl={android.apkUrl} releasesUrl={android.releasesUrl} status={apk} />
           ) : (
             <Button disabled className="w-full">Coming soon</Button>
           )}
@@ -98,6 +88,36 @@ export default function DownloadOptions() {
         </Option>
       </div>
 
+    </div>
+  )
+}
+
+function AndroidDownload({ apkUrl, releasesUrl, status }: { apkUrl: string; releasesUrl: string; status: ApkStatus }) {
+  if (status.state === 'checking') return <Button disabled className="w-full">Checking for the latest version…</Button>
+  if (status.state === 'none') {
+    return (
+      <div className="space-y-2">
+        <Button disabled className="w-full">Coming soon</Button>
+        <p className="text-xs text-outline">The first Android release is being prepared. Install from the browser for now.</p>
+      </div>
+    )
+  }
+  const url = status.state === 'ready' ? status.url : apkUrl
+  return (
+    <div className="space-y-3">
+      {/* A plain link: the file is served by GitHub Releases, not by this site. */}
+      <a href={url} download className={cn(buttonVariants({ size: 'md' }), 'w-full')}>
+        <Download size={16} aria-hidden="true" /> Download APK
+        {status.state === 'ready' && <span className="font-normal opacity-80">({status.version}, {status.sizeMb.toFixed(1)} MB)</span>}
+      </a>
+      <ol className="list-decimal space-y-1 pl-4 text-xs leading-relaxed text-outline">
+        <li>Open the downloaded file.</li>
+        <li>If Android asks, allow installing apps from your browser.</li>
+        <li>Tap Install. Works on Android 7 and newer.</li>
+      </ol>
+      <a href={releasesUrl} className="inline-block text-xs font-semibold text-ember-l hover:text-cream" target="_blank" rel="noopener noreferrer">
+        All versions and release notes
+      </a>
     </div>
   )
 }
