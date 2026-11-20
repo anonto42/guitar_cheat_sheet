@@ -42,8 +42,8 @@ export default function HeroSection({ topicCount, categoryCount }: HeroSectionPr
         </Reveal>
 
         <Reveal delay={1.15} className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <Button href="#library" size="lg">
-            Browse the library <ArrowRight size={16} aria-hidden="true" />
+          <Button href="/learn" size="lg">
+            Start learning <ArrowRight size={16} aria-hidden="true" />
           </Button>
           <Button href="/download" variant="secondary" size="lg">
             <Download size={16} aria-hidden="true" /> Get the app

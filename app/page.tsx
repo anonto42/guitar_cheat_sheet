@@ -6,6 +6,7 @@ import JsonLd from '@/components/seo/JsonLd'
 import Container from '@/components/ui/Container'
 import HeroSection from '@/features/home/HeroSection'
 import CategorySection from '@/features/home/CategorySection'
+import LearnPathTeaser from '@/features/home/LearnPathTeaser'
 import AppPromo from '@/features/home/AppPromo'
 import HideWhenInstalled from '@/components/layout/HideWhenInstalled'
 
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 const PREVIEW_COUNT = 3
 
 export default async function HomePage() {
-  const [categories, entries] = await Promise.all([content.listCategories(), content.listEntries()])
+  const [categories, entries, steps] = await Promise.all([content.listCategories(), content.listEntries(), content.getLearningPath()])
 
   return (
     <main>
@@ -36,6 +37,8 @@ export default async function HomePage() {
         ],
       }} />
       <HeroSection topicCount={entries.length} categoryCount={categories.length} />
+
+      <LearnPathTeaser steps={steps} />
 
       <div id="library" className="scroll-mt-20">
         <Container className="space-y-16 py-16 sm:py-20">
