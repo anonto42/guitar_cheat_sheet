@@ -23,17 +23,17 @@ android {
         release {
             def keystore = System.getenv("ANDROID_KEYSTORE_PATH")
             if (keystore && file(keystore).exists()) {
-                storeFile file(keystore)
-                storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
-                keyAlias System.getenv("ANDROID_KEY_ALIAS")
-                keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+                storeFile = file(keystore)
+                storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("ANDROID_KEY_ALIAS")
+                keyPassword = System.getenv("ANDROID_KEY_PASSWORD")
             }
         }
     }
     buildTypes {
         release {
             def keystore = System.getenv("ANDROID_KEYSTORE_PATH")
-            signingConfig (keystore && file(keystore).exists()) ? signingConfigs.release : signingConfigs.debug
+            signingConfig = (keystore && file(keystore).exists()) ? signingConfigs.release : signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
