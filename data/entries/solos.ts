@@ -231,6 +231,18 @@ export const solos: GuitarEntry[] = [
   // ─── SOLO THEORY GUIDES ──────────────────────────────────────────────────────
 
   {
+    id: 'rhythm-for-solos', category: 'solos', title: 'Rhythm for Solos: Quarter Notes to Triplets',
+    tags: ['rhythm','triplets','eighth notes','sixteenth notes','quarter notes','swing','timing','counting','lead guitar','tab symbols','beginner'],
+    summary: 'Count the beat, then split it into 2, 3 or 4 equal notes. That is all rhythm is.',
+    formula: 'Quarter = 1 note per beat | Eighth = 2 | Triplet = 3 | Sixteenth = 4',
+    degrees: 'Count: 1 | 1 & | 1 trip let | 1 e & a',
+    example: { root: 'D major pentatonic', notes: ['Beat 1: D E F♯ (A string 5 7 9)','Beat 2: F♯ A F♯ (D string 4 7 4)','Beat 3: F♯ E D (A string 9 7 5)','Beat 4: D, let it ring'] },
+    allKeys: [], chords: [],
+    details: 'Good solos are about rhythm as much as notes. Every rhythm starts from the beat, the steady pulse you tap with your foot. Quarter notes play once per beat. Eighth notes play twice per beat. Triplets play three equal notes per beat, which gives a rolling, bluesy feel. Sixteenth notes play four per beat for fast runs.\n\nMixing these rhythms in one solo makes it sound alive. A slow phrase of quarter notes followed by a quick triplet run is far more exciting than the same speed all the time.',
+    usedBy: 'Blues, rock, Bangla band music, pop, metal, every style of lead guitar',
+    tip: 'Say the count out loud while you play: "1 trip let 2 trip let". If you can say it, you can play it.',
+  },
+  {
     id: 'solo-construction', category: 'solos', title: 'How to Build a Guitar Solo',
     tags: ['solo construction','phrasing','call response','climax','arc','peak note','theory','improvisation'],
     summary: 'The 4 principles every great solo follows: anchor, arc, space, and resolve.',

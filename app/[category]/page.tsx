@@ -23,10 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isCategorySlug(category)) return {}
   const cat = CATEGORY_CONFIG[category]
   const title = cat.keyed === false
-    ? `Guitar ${cat.label} Patterns: ${cat.desc}`
+    ? `Guitar ${cat.label}: ${cat.desc}`
     : `Guitar ${cat.label}: Every ${cat.label.replace(/s$/, "")} in All 12 Keys`
   const description = cat.keyed === false
-    ? `Guitar ${cat.label.toLowerCase()} reference. ${cat.desc}. Each pattern shows the strokes, the count and how to play it. Free for all levels.`
+    ? `Guitar ${cat.label.toLowerCase()} reference. ${cat.desc}. Clear steps, diagrams and examples for every level.`
     : `Complete guitar ${cat.label.toLowerCase()} reference. ${cat.desc}. Every item shown in all 12 keys with formulas, notes, and chord families. Free for all levels.`
   return {
     title,
@@ -165,7 +165,7 @@ export default async function CategoryPage({ params }: Props) {
                 maxWidth: 640, lineHeight: 1.6,
               }}>
                 {cat.keyed === false
-                  ? `${cat.desc}. Each pattern shows the strokes, the count and how to play it.`
+                  ? `${cat.desc}. Clear steps, diagrams and examples for every level.`
                   : `${cat.desc}. Every item shown in all 12 keys, complete notes, formulas, and chord families.`}
               </p>
             </header>

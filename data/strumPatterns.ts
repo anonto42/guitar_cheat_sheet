@@ -2,7 +2,7 @@ import type { StrumPattern } from '@/types'
 
 /**
  * Single source for every strumming pattern. The reference entries in
- * data/entries/strumming.ts and the practice player both read from here.
+ * data/entries/strumming.ts and the Practice Studio both read from here.
  * Symbols: D down, U up, x muted chop, M palm-muted down, - rest (hand keeps moving).
  */
 const EIGHTHS = ['1', '&', '2', '&', '3', '&', '4', '&']
@@ -59,7 +59,7 @@ export const STRUM_PATTERNS: StrumPattern[] = [
     counts: ['1', '2', '3', '4', '5', '6'],
     steps: ['D', '-', '-', 'D', 'U', '-'],
     summary: 'Two big pulses per bar with a rolling lilt. Slow, emotional and flowing.',
-    details: 'Feel two beats per bar, each divided into three. The strong downs land on 1 and 4 and a small up fills the gap after the second pulse. In 6/8 the BPM in the practice player counts these two big beats.',
+    details: 'Feel two beats per bar, each divided into three. The strong downs land on 1 and 4 and a small up fills the gap after the second pulse. In 6/8 the BPM in the Practice Studio counts these two big beats.',
     usedBy: 'Slow ballads, worship songs, Irish and folk waltzes',
     tip: 'Count "ONE two three FOUR five six" and keep the six counts even.',
     tags: ['6/8','ballad','compound time','slow','worship'],

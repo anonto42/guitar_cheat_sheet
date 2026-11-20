@@ -8,8 +8,9 @@ import { techniques }   from './entries/techniques'
 import { theory }       from './entries/theory'
 import { tunings }      from './entries/tunings'
 import { solos }        from './entries/solos'
+import { SIMPLE_WORDS } from './simpleWords'
 
-export const DATA: GuitarEntry[] = [
+const ALL: GuitarEntry[] = [
   ...scales,
   ...modes,
   ...chords,
@@ -20,6 +21,12 @@ export const DATA: GuitarEntry[] = [
   ...tunings,
   ...solos,
 ]
+
+/** Every entry, with its plain-English explanation attached when one exists. */
+export const DATA: GuitarEntry[] = ALL.map(entry => {
+  const simple = SIMPLE_WORDS[`${entry.category}/${entry.id}`]
+  return simple ? { ...entry, simple } : entry
+})
 
 export const QUICK_SEARCHES: string[] = [
   'Minor Pentatonic', 'Blues Scale', 'Bending', 'Dorian',

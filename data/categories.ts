@@ -51,6 +51,7 @@ export const CATEGORY_CONFIG: CategoryConfigMap = {
     label: 'Techniques',
     desc: 'Bending, vibrato, tapping, legato and more',
     sitemapPriority: 0.8,
+    keyed: false,
   },
   theory: {
     a: '#4dd98a', b: 'rgba(77,217,138,.24)', br: 'rgba(77,217,138,.70)',
@@ -63,6 +64,7 @@ export const CATEGORY_CONFIG: CategoryConfigMap = {
     label: 'Tunings',
     desc: 'Standard, drop, open and alternate tunings',
     sitemapPriority: 0.7,
+    keyed: false,
   },
   solos: {
     a: '#ff4d6d', b: 'rgba(255,77,109,.24)', br: 'rgba(255,77,109,.70)',

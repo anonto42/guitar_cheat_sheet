@@ -66,6 +66,8 @@ export interface GuitarEntry {
   details: string
   usedBy: string
   tip: string
+  /** Short explanation in plain English (short sentences, common words). Shown first on the page. */
+  simple?: string
 }
 
 // ─── SEO ──────────────────────────────────────────────────────────────────────
