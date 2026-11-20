@@ -11,7 +11,7 @@ export const SITE = {
     'Free guitar reference for every player. Look up scales, modes, chords, progressions, techniques, music theory and tunings in all 12 keys.',
   themeColor: '#0d0b08',
   accentColor: '#ff6b00',
-  repoUrl: 'https://github.com/ananto/guitar-cheat-sheet',
+  repoUrl: 'https://github.com/anonto42/guitar_cheat_sheet',
   locale: 'en_US',
 } as const
 

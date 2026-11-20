@@ -30,3 +30,20 @@ await sharp({ create: { width: 512, height: 512, channels: 4, background: BACKGR
   .png()
   .toFile(join(root, 'public/icon-maskable-512.png'))
 console.log('ok  icon-maskable-512.png (512x512)')
+
+// Native app sources for `npx @capacitor/assets generate` (Android launcher icons and splash screens).
+import { mkdirSync } from 'node:fs'
+const assets = join(root, 'assets')
+mkdirSync(assets, { recursive: true })
+const art = await sharp(svg, { density: 1200 }).resize(1024, 1024).png().toBuffer()
+await sharp(art).toFile(join(assets, 'icon-only.png'))
+const mark = await sharp(svg, { density: 1200 }).resize(660, 660).png().toBuffer()
+await sharp({ create: { width: 1024, height: 1024, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+  .composite([{ input: mark, gravity: 'center' }]).png().toFile(join(assets, 'icon-foreground.png'))
+await sharp({ create: { width: 1024, height: 1024, channels: 4, background: BACKGROUND } }).png().toFile(join(assets, 'icon-background.png'))
+const splashMark = await sharp(svg, { density: 1200 }).resize(720, 720).png().toBuffer()
+for (const name of ['splash.png', 'splash-dark.png']) {
+  await sharp({ create: { width: 2732, height: 2732, channels: 4, background: BACKGROUND } })
+    .composite([{ input: splashMark, gravity: 'center' }]).png().toFile(join(assets, name))
+}
+console.log('ok  assets/ (icon-only, icon-foreground, icon-background, splash, splash-dark)')

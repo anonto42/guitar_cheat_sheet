@@ -2,7 +2,7 @@
 
 import { Apple, CheckCircle2, Download, Globe } from 'lucide-react'
 import { APP } from '@/config/app'
-import Button from '@/components/ui/Button'
+import Button, { buttonVariants } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import { usePwaInstall } from './usePwaInstall'
 import InstallAction from './InstallAction'
@@ -65,7 +65,20 @@ export default function DownloadOptions() {
           {android.playStoreUrl ? (
             <Button href={android.playStoreUrl} className="w-full">Get it on Google Play</Button>
           ) : android.apkUrl ? (
-            <Button href={android.apkUrl} className="w-full">Download APK</Button>
+            <div className="space-y-3">
+              {/* A plain link: the file comes from GitHub Releases, not a page inside this site. */}
+              <a href={android.apkUrl} download className={cn(buttonVariants({ size: 'md' }), 'w-full')}>
+                <Download size={16} aria-hidden="true" /> Download APK
+              </a>
+              <ol className="list-decimal space-y-1 pl-4 text-xs leading-relaxed text-outline">
+                <li>Open the downloaded file.</li>
+                <li>If Android asks, allow installing apps from your browser.</li>
+                <li>Tap Install. Works on Android 7 and newer.</li>
+              </ol>
+              <a href={android.releasesUrl} className="inline-block text-xs font-semibold text-ember-l hover:text-cream" target="_blank" rel="noopener noreferrer">
+                All versions and release notes
+              </a>
+            </div>
           ) : (
             <Button disabled className="w-full">Coming soon</Button>
           )}

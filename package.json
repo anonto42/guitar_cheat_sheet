@@ -15,7 +15,8 @@
     "cap:add:android": "cap add android",
     "cap:add:ios": "cap add ios",
     "cap:open:android": "cap open android",
-    "cap:open:ios": "cap open ios"
+    "cap:open:ios": "cap open ios",
+    "cap:build:android": "npm run cap:sync && cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@capacitor/app": "^8.1.2",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@capacitor/android": "^8.6.2",
+    "@capacitor/assets": "^4.0.0",
     "@capacitor/cli": "^8.6.2",
     "@capacitor/ios": "^8.6.2",
     "@types/node": "^25.5.0",
@@ -62,6 +64,6 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/ananto/guitar-cheat-sheet.git"
+    "url": "https://github.com/anonto42/guitar_cheat_sheet.git"
   }
 }

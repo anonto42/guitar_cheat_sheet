@@ -1,6 +1,7 @@
+import { SITE } from './site'
+
 /**
  * Native app distribution settings.
- * Set a store/download URL to enable the matching button on /download.
  * `null` renders a "coming soon" state instead of a broken link.
  */
 export const APP = {
@@ -8,7 +9,9 @@ export const APP = {
   name: 'Guitar Cheat Sheet',
   android: {
     playStoreUrl: null as string | null,
-    apkUrl: null as string | null,
+    /** Built by .github/workflows/android.yml and attached to every tagged GitHub Release. */
+    apkUrl: `${SITE.repoUrl}/releases/latest/download/guitar-cheat-sheet.apk` as string | null,
+    releasesUrl: `${SITE.repoUrl}/releases`,
   },
   ios: {
     appStoreUrl: null as string | null,
