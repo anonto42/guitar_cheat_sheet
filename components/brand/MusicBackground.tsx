@@ -50,7 +50,7 @@ function NoteGlyph({ shape }: { shape: NoteShape }) {
 }
 
 /**
- * Site-wide background: deep dark base, a soft ember glow, faint staff lines and music
+ * Site-wide background: deep dark base, a soft ember glow and music
  * notes that slide slowly across the screen. Pure CSS motion, no JavaScript, and it stands
  * still for people who prefer reduced motion. Mount once in the root layout.
  */
@@ -58,13 +58,6 @@ export default function MusicBackground({ className }: { className?: string }) {
   return (
     <div aria-hidden="true" className={cn('pointer-events-none fixed inset-0 -z-10 overflow-hidden', className)}>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_55%_at_50%_-10%,rgba(255,107,0,.12),transparent_70%),radial-gradient(ellipse_60%_40%_at_100%_100%,rgba(185,135,245,.06),transparent_70%)]" />
-
-      {/* Staff lines */}
-      {[34, 70].map(top => (
-        <div key={top} className="absolute inset-x-0 flex flex-col gap-3 opacity-[.07]" style={{ top: `${top}%` }}>
-          {[0, 1, 2, 3, 4].map(n => <span key={n} className="h-px bg-ember-l" />)}
-        </div>
-      ))}
 
       {NOTES.map((n, i) => (
         <span

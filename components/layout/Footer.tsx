@@ -7,7 +7,7 @@ import Container from '@/components/ui/Container'
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-line2 bg-bg2/80 pb-[var(--safe-bottom)] backdrop-blur">
+    <footer className="mt-24 bg-bg2/80 pb-[var(--safe-bottom)] backdrop-blur">
       <Container className="py-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_2fr]">
           <div>
@@ -42,7 +42,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6 text-xs text-outline/80 sm:flex-row sm:justify-between">
+        <div className="mt-10 flex flex-col gap-2 pt-6 text-xs text-outline/80 sm:flex-row sm:justify-between">
           <p>&copy; {new Date().getFullYear()} {SITE.name}. Free and open source.</p>
           <p>Works offline once installed.</p>
         </div>

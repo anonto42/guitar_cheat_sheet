@@ -10,8 +10,6 @@ interface HeroSectionProps {
   categoryCount: number
 }
 
-const STRING_OFFSETS = [18, 32, 46, 60, 74, 88]
-
 export default function HeroSection({ topicCount, categoryCount }: HeroSectionProps) {
   const stats: Stat[] = [
     { value: topicCount, label: 'Topics' },
@@ -21,17 +19,10 @@ export default function HeroSection({ topicCount, categoryCount }: HeroSectionPr
   ]
 
   return (
-    <section className="relative isolate overflow-hidden border-b border-line2 bg-gradient-to-b from-black/40 to-transparent">
-      {/* Decorative strings */}
+    <section className="relative isolate overflow-hidden bg-gradient-to-b from-black/40 to-transparent">
+      {/* Soft ember glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(255,107,0,.14),transparent_70%)]" />
-        {STRING_OFFSETS.map((top, i) => (
-          <div
-            key={top}
-            className="absolute inset-x-0 bg-gradient-to-r from-transparent via-outline/20 to-transparent"
-            style={{ top: `${top}%`, height: i < 3 ? 1.5 : 1 }}
-          />
-        ))}
       </div>
 
       <Container size="lg" className="py-16 text-center sm:py-24">
