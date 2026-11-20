@@ -28,6 +28,7 @@ Before opening a pull request run `npm run check` and `npm run build`. CI runs t
 - Prefer the primitives in `components/ui`. Style with Tailwind and the tokens in `tailwind.config.ts`.
 - `'use client'` only when a component needs hooks or browser events.
 - Features live in `features/<name>`; keep them free of imports from other features.
+- Icons are drawn bare: no background, circle or box behind them. Corners are square everywhere.
 - Accessible by default: labels, focus states, 40px touch targets, keyboard support.
 
 ## Writing style

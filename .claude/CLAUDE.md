@@ -45,6 +45,7 @@ Dependency direction: `app -> features -> components -> lib/config/types`; `serv
 - Add a category: add the slug to `types/index.ts`, config to `data/categories.ts`, a file in `data/entries/`, spread it in `data/index.ts`.
 
 ## UI rules
+- Icons never get a background, circle or box behind them. Use the bare icon with a text colour (`text-ember`, `text-outline`). Corners are always square.
 - Tailwind classes first. Colours come from `tailwind.config.ts` (`bg-surface`, `text-ember`, `border-line2`). Per-category accent via CSS var: `style={{'--accent': cat.a}}` and `text-[color:var(--accent)]`.
 - Reuse `components/ui` before writing new markup. Add a new primitive when a pattern appears a third time.
 - `'use client'` only for hooks or browser events.
