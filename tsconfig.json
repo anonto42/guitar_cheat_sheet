@@ -29,6 +29,7 @@
     }
   },
   "include": [
+    "capacitor.config.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

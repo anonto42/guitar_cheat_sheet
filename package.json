@@ -5,9 +5,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "generate-icons": "node scripts/generate-icons.mjs"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "lint:content": "node scripts/check-content.mjs",
+    "check": "npm run typecheck && npm run lint && npm run lint:content",
+    "generate-icons": "node scripts/generate-icons.mjs",
+    "build:mobile": "node scripts/build-mobile.mjs",
+    "cap:sync": "node scripts/build-mobile.mjs --sync",
+    "cap:add:android": "cap add android",
+    "cap:add:ios": "cap add ios",
+    "cap:open:android": "cap open android",
+    "cap:open:ios": "cap open ios"
   },
   "dependencies": {
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.2",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -27,10 +41,25 @@
     "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/cli": "^8.6.2",
+    "@capacitor/ios": "^8.6.2",
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.6",
     "sharp": "^0.33.5",
     "typescript": "^6.0.2"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "description": "Free, offline-first guitar reference: scales, modes, chords, progressions, techniques, theory and tunings in all 12 keys.",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ananto/guitar-cheat-sheet.git"
   }
 }
