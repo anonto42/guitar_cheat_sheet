@@ -19,12 +19,7 @@ export default function HeroSection({ topicCount, categoryCount }: HeroSectionPr
   ]
 
   return (
-    <section className="relative isolate overflow-hidden bg-gradient-to-b from-black/40 to-transparent">
-      {/* Soft ember glow */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_-10%,rgba(255,107,0,.14),transparent_70%)]" />
-      </div>
-
+    <section>
       <Container size="lg" className="py-16 text-center sm:py-24">
         <Reveal>
           <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-ember">Free guitar reference</p>
