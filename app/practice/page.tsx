@@ -7,8 +7,8 @@ import SoundLoader from '@/components/ui/SoundLoader'
 import PracticeStudio from '@/features/practice/PracticeStudio'
 
 export const metadata: Metadata = {
-  title: 'Guitar Practice Player: Chord Progressions, Strumming and Solo Scales',
-  description: 'Loop a chord progression in any of the 12 keys with a strumming pattern and a click, then solo over it with the matching scale shown on the fretboard.',
+  title: 'Guitar Practice Studio: Backing Tracks, Strumming, Recording and Solo Scales',
+  description: 'Build a backing track in any key with your own chords and bars, choose guitar, piano, bass and drums, set the tempo, record yourself and see which notes to solo with.',
   alternates: { canonical: `${SITE.url}/practice` },
 }
 
@@ -19,8 +19,8 @@ export default function PracticePage() {
         <SectionHeading
           as="h1"
           eyebrow="Step 7 of the learning path"
-          title="Practice player"
-          description="Choose a key, a progression and a strumming pattern, press play, and strum along. When you are ready, solo over the same loop with the scale below."
+          title="Practice Studio"
+          description="Build a backing track: pick a key, choose or change the chords in each bar, set the rhythm and the sound. Press Play and strum or solo along. Press Record to capture yourself."
         />
         <Suspense fallback={<div className="flex justify-center py-20"><SoundLoader label="Loading player" /></div>}>
           <PracticeStudio />
