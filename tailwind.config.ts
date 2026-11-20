@@ -7,6 +7,10 @@ const config: Config = {
     './features/**/*.{ts,tsx}',
   ],
   theme: {
+    // Sharp corners everywhere: the design has no rounded buttons, cards or boxes.
+    borderRadius: {
+      none: '0', sm: '0', DEFAULT: '0', md: '0', lg: '0', xl: '0', '2xl': '0', '3xl': '0', full: '0',
+    },
     extend: {
       colors: {
         /* Surfaces */
@@ -47,11 +51,6 @@ const config: Config = {
         display: ['var(--font-display)'],
         serif:   ['var(--font-display)'],
         sans:    ['var(--font-sans)'],
-      },
-      borderRadius: {
-        DEFAULT: '0.25rem',
-        lg: '0.5rem',
-        xl: '0.75rem',
       },
       height: { nav: 'var(--nav-h)' },
       keyframes: {

@@ -50,6 +50,9 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; }
+
+  /* Sharp corners everywhere, including legacy inline styles. GuitarFX keeps its round knobs and meters. */
+  *:not(.guitarfx-page, .guitarfx-page *), *::before, *::after { border-radius: 0 !important; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
   body {
@@ -72,7 +75,7 @@
 
   /* Keyboard focus only: mouse and touch users see no ring */
   :focus { outline: none; }
-  :focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; border-radius: 2px; }
+  :focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
 
   ::-webkit-scrollbar       { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
