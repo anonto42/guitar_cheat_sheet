@@ -5,7 +5,9 @@ A free, open source guitar reference. Look up any scale, mode, chord, progressio
 ## Features
 - A guided learning path (`/learn`): scale, key, modes, triads, chord types, strumming, then practise and solo
 - One page per key (`/keys/c`, `/keys/f-sharp`…): the scale on the fretboard, its seven modes, triads, every chord type, progressions and solo scales
-- Practice player (`/practice`): loop a progression in any key with a strumming pattern and a click, then solo over it
+- Interactive library pages: pick any key on a scale, chord, progression or theory page and see fretboard positions, generated chord shapes and examples
+- Practice Studio (`/practice`): build a backing track with any number of bars, choose guitar, piano or pad, bass and drums, set the tempo, record yourself and see target notes for soloing
+- Guitar tuner (`/tuner`) for standard, drop and open tunings, using the microphone
 - 100+ reference topics across 9 categories (scales, modes, chords, strumming, progressions, techniques, theory, tunings, solos)
 - Search from the navbar with keyboard support (`/` to focus)
 - Offline first: service worker stores every page, the search index and fonts
@@ -52,6 +54,9 @@ Edit a file in `data/entries/`. The entry shows up in search, the landing page, 
 
 ## Contributing
 Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md) first. Report security problems as described in [SECURITY.md](SECURITY.md).
+
+## Third-party
+- [pitchy](https://github.com/ianprime0509/pitchy) (MIT) for pitch detection in the tuner.
 
 ## License
 [MIT](LICENSE)

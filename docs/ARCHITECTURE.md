@@ -30,6 +30,16 @@ The site teaches in this order: scale, key, modes, triads, chord types, strummin
 - `data/strumPatterns.ts` is the single source for strumming. It generates the Strumming reference entries and drives the player.
 - `/practice` (`features/practice`) uses `lib/music/audio.ts`, a small Web Audio scheduler that synthesises chords, strums and a click. No audio files are downloaded, so it works offline.
 
+## Entry pages
+`lib/music/entryMusic.ts` maps each entry to an interactive view, rendered by `features/entry/EntryVisual`:
+- scales, modes and solo scales use `SCALE_CATALOG` (`lib/music/scales.ts`) for correctly spelled notes in any key, positions and the chords of the scale
+- chords use `CHORD_TYPE_FOR_ENTRY` and `findFingerings` (`lib/music/fingerings.ts`), a small search over the neck that returns playable shapes for any chord, inversion or slash chord
+- progressions use `PRACTICE_PROGRESSIONS` (major and minor), strumming uses `data/strumPatterns.ts`, tunings use `lib/music/tunings.ts`
+The chosen key lives in `?key=` (`lib/useUrlParam.ts`), read on the client so every page stays statically generated and works offline.
+
+## Practice Studio and tuner
+`lib/music/audio.ts` synthesises chords (acoustic, electric, piano, pad), bass, drums and a click, scheduled slightly ahead of the audio clock. `features/practice` builds the UI around it; `useRecorder` records the microphone with MediaRecorder and keeps takes in memory only. The tuner (`features/tuner`) uses pitchy's McLeod Pitch Method on microphone input; audio never leaves the device.
+
 ## Search
 `/search-index.json` is generated from the service and contains only id, category, title, summary and tags. The navbar loads it on first focus. `lib/search.ts` ranks results (exact title, prefix, substring, tag, summary). The service worker stores the index, so search works offline.
 

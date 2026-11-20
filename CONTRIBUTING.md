@@ -34,6 +34,7 @@ Before opening a pull request run `npm run check` and `npm run build`. CI runs t
 ## Writing style
 Text in the UI, data and docs must read like a person wrote it.
 - No em dashes (U+2014) and no `--` used as a dash. Use a comma, colon, full stop or parentheses.
+- Use plain English: short sentences, common words. Many readers are still learning English.
 - No emoji, no marketing filler.
 - En dashes are fine inside notation such as `W – W – H`.
 

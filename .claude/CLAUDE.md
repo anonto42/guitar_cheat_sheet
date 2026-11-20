@@ -8,6 +8,7 @@ Copy must read as written by a person. Never produce:
 - em dashes (U+2014) or `--` used as a dash. Rewrite the sentence with a comma, colon, full stop or parentheses.
 - Filler openers and stock phrases ("Let's dive in", "unlock", "elevate", "seamless", "game-changer").
 - Emoji in UI copy, data or docs.
+- Plain English for learners: short sentences, common words, one idea per sentence. Many readers are still learning English. Add an "In simple words" line in `data/simpleWords.ts` for new entries.
 En dashes are allowed only inside musical notation (`W – W – H`, `1 – ♭3 – 5`, `Am–F–C`).
 `npm run lint:content` enforces this and runs in CI. Run it before finishing any change.
 
@@ -49,11 +50,17 @@ Dependency direction: `app -> features -> components -> lib/config/types`; `serv
 ## UI rules
 - Icons never get a background, circle or box behind them. Use the bare icon with a text colour (`text-ember`, `text-outline`). Corners are always square.
 - Tailwind classes first. Colours come from `tailwind.config.ts` (`bg-surface`, `text-ember`, `border-line2`). Per-category accent via CSS var: `style={{'--accent': cat.a}}` and `text-[color:var(--accent)]`.
+- Never use a native `<select>`: use `components/ui/Select` (shadcn/ui pattern on Radix). New shadcn components can be added with `npx shadcn@latest add <name>` (`components.json` is set up); restyle them with the site tokens and square corners.
 - Reuse `components/ui` before writing new markup. Add a new primitive when a pattern appears a third time.
 - `'use client'` only for hooks or browser events.
 - Fonts come from `next/font` (CSS vars `--font-sans`, `--font-display`). Do not hardcode font names.
 - Touch targets at least 40px high. Test at 360px and 1280px widths.
 - Legacy pages (`app/[category]/**`, about, contact, privacy) still use inline styles and are scheduled for the category/slug redesign.
+
+## Entry pages
+- `app/[category]/[slug]/page.tsx` is a thin server page. `lib/music/entryMusic.ts` decides which interactive view an entry gets (scale, chord, slash, strum, progression, theory, tuning, rhythm) and `features/entry/EntryVisual` renders it.
+- Keyed views read and write `?key=` with `useUrlParam`, so pages stay static and Learn can deep-link (`/scales/major-scale?key=g`).
+- Never hand-draw chord or scale diagrams: use `findFingerings` (chord shapes) and `NoteMap` (scale positions).
 
 ## Offline and mobile
 - `public/sw.js` is the service worker; registered only in production by `features/offline/ServiceWorkerRegister`.
