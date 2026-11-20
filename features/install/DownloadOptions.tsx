@@ -1,11 +1,12 @@
 'use client'
 
-import { Apple, CheckCircle2, Download, Globe, Share, SquarePlus } from 'lucide-react'
+import { Apple, CheckCircle2, Download, Globe } from 'lucide-react'
 import { APP } from '@/config/app'
 import Button from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import OfflineDownloadCard from '@/features/offline/OfflineDownloadCard'
 import { usePwaInstall } from './usePwaInstall'
+import InstallAction from './InstallAction'
 
 interface OptionProps {
   icon: React.ReactNode
@@ -19,7 +20,7 @@ function Option({ icon, title, description, highlighted, children }: OptionProps
   return (
     <div className={cn('flex flex-col rounded-xl border bg-surface p-5', highlighted ? 'border-ember/50' : 'border-line2')}>
       <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-ember-dim text-ember">{icon}</span>
+        <span className="flex h-6 w-6 items-center justify-center text-ember">{icon}</span>
         <h3 className="font-display text-lg font-semibold text-cream">{title}</h3>
       </div>
       <p className="mt-3 flex-1 text-sm leading-relaxed text-outline">{description}</p>
@@ -54,18 +55,7 @@ export default function DownloadOptions() {
           description="Adds Guitar Cheat Sheet to your home screen or desktop. No store, no account, and updates arrive automatically."
           highlighted={platform === 'desktop'}
         >
-          {canPrompt ? (
-            <Button className="w-full" onClick={promptInstall}>
-              <Download size={16} aria-hidden="true" /> Install app
-            </Button>
-          ) : platform === 'ios' ? (
-            <ol className="space-y-2 text-sm text-cream">
-              <li className="flex items-center gap-2"><Share size={16} className="text-ember" aria-hidden="true" /> Tap Share in Safari</li>
-              <li className="flex items-center gap-2"><SquarePlus size={16} className="text-ember" aria-hidden="true" /> Choose Add to Home Screen</li>
-            </ol>
-          ) : (
-            <p className="text-sm text-outline">Open this page in Chrome, Edge or Safari and use the install icon in the address bar or the browser menu.</p>
-          )}
+          <InstallAction platform={platform} canPrompt={canPrompt} onInstall={promptInstall} />
         </Option>
 
         <Option

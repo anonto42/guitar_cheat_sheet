@@ -12,6 +12,7 @@ import MusicBackground from '@/components/brand/MusicBackground'
 import ServiceWorkerRegister from '@/features/offline/ServiceWorkerRegister'
 import OfflineBanner from '@/features/offline/OfflineBanner'
 import ScrollToTopOnReload from '@/features/navigation/ScrollToTopOnReload'
+import { installPromptScript } from '@/features/install/installPromptScript'
 import RouteProgress from '@/features/navigation/RouteProgress'
 import NativeBootstrap from '@/features/install/NativeBootstrap'
 
@@ -98,6 +99,9 @@ const siteJsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${notoSerif.variable}`} data-scroll-behavior="smooth">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: installPromptScript }} />
+      </head>
       <body suppressHydrationWarning>
         <JsonLd data={siteJsonLd} />
         <ScrollToTopOnReload />
