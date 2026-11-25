@@ -24,7 +24,7 @@ const inputStyle = {
 const labelStyle = {
   display: 'block',
   fontFamily: 'var(--font-sans)',
-  fontSize: '.6rem', fontWeight: 700,
+  fontSize: '.65rem', fontWeight: 700,
   color: 'rgba(169,138,125,.5)',
   textTransform: 'uppercase' as const, letterSpacing: '.12em',
   marginBottom: 8,
@@ -71,22 +71,12 @@ export default function ContactPage() {
   return (
     <main style={{ minHeight: '100vh', background: 'transparent', paddingBottom: 100 }}>
 
-      {/* Breadcrumb */}
-      <nav style={{
-        background: 'rgba(14,14,14,.72)', borderBottom: '1px solid #353534',
-        padding: '14px 24px', display: 'flex', gap: 8, alignItems: 'center',
-        fontFamily: 'var(--font-sans)', fontSize: '.68rem',
-      }}>
-        <Link href="/" style={{ color: '#ff6b00', textDecoration: 'none', fontWeight: 600 }}>Guitar Cheat Sheet</Link>
-        <span style={{ color: 'rgba(169,138,125,.3)' }}>›</span>
-        <span style={{ color: '#a98a7d' }}>Contact</span>
-      </nav>
 
       <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 24px 80px' }}>
 
         <p style={{
           fontFamily: 'var(--font-sans)',
-          fontSize: '.6rem', fontWeight: 700,
+          fontSize: '.65rem', fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.14em',
           color: 'rgba(169,138,125,.45)', marginBottom: 12,
         }}>Reach Out</p>
@@ -220,7 +210,7 @@ export default function ContactPage() {
             fontSize: '.72rem', fontWeight: 600,
             color: 'rgba(169,138,125,.5)',
             textDecoration: 'none',
-            display: 'inline-flex', alignItems: 'center', gap: 6,
+            display: 'inline-flex', alignItems: 'center', gap: 6, minHeight: 36,
           }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
