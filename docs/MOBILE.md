@@ -29,11 +29,13 @@ Set these repository secrets so every release is signed with the same key (neede
 | `ANDROID_KEY_ALIAS` | key alias |
 | `ANDROID_KEY_PASSWORD` | key password |
 
-Create a key once with:
+The easy way: run this once. It creates the key with openssl (no Java needed), saves it to `~/.config/guitar-cheat-sheet-signing/` and sets all four secrets with the GitHub CLI:
 ```bash
-keytool -genkeypair -v -keystore release.keystore -alias guitarcheatsheet -keyalg RSA -keysize 2048 -validity 10000
+bash scripts/create-signing-key.sh
 ```
-Keep the keystore file and passwords safe and never commit them. Without the secrets the workflow still builds an installable APK signed with a temporary debug key and prints a warning.
+Or create a key by hand with `keytool -genkeypair -v -keystore release.keystore -alias guitarcheatsheet -keyalg RSA -keysize 2048 -validity 10000` and set the secrets yourself.
+
+Back up the key folder and never commit it. If the key is lost, no update can be installed over the existing app; people would have to uninstall first. Without the secrets the workflow still builds an installable APK signed with a temporary debug key and prints a warning.
 
 ### Building locally
 Needs Node 22 (Capacitor 8), JDK 21 and the Android SDK (Android Studio installs both).
