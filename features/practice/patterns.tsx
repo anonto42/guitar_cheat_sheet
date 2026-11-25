@@ -32,6 +32,24 @@ export const PATTERN_OPTIONS = [
   ...Object.entries(CUSTOM_TEMPLATES).map(([id, t]) => ({ value: id, label: `Make my own: ${t.label}`, group: 'Your own' })),
 ]
 
+/** Time signatures the studio can play. A swung 4/4 counts as 4/4. */
+export const TIME_SIGNATURES = [
+  { value: '4/4', label: '4/4' },
+  { value: '3/4', label: '3/4' },
+  { value: '6/8', label: '6/8' },
+]
+
+export const timeOf = (pattern: StrumPattern) => pattern.time.replace(' swung', '')
+
+/** Pattern dropdown options that fit one time signature. */
+export const patternOptionsFor = (time: string) =>
+  PATTERN_OPTIONS.filter(o => timeOf(patternFor(o.value)) === time)
+
+/** First pattern in a time signature: a ready-made one if there is one, else your own. */
+export function firstPatternFor(time: string): StrumPattern {
+  return STRUM_PATTERNS.find(x => timeOf(x) === time) ?? patternFor(patternOptionsFor(time)[0]?.value ?? 'custom-8')
+}
+
 /** Turn a dropdown value into a pattern. */
 export function patternFor(id: string): StrumPattern {
   if (id.startsWith('custom')) return customPattern(id)

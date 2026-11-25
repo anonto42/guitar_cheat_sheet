@@ -60,7 +60,7 @@ export function songTemplate(id: string): Song {
     return { templateId: id, sections: [verse, chorus], order: [verse.id, chorus.id, verse.id, chorus.id] }
   }
   const preset = PRACTICE_PROGRESSIONS.find(p => p.id === id) ?? PRACTICE_PROGRESSIONS[0]
-  const loop: SongSection = { id: newId(), kind: 'Verse', name: preset.name, bars: preset.steps, presetId: preset.id }
+  const loop: SongSection = { id: newId(), kind: 'Verse', name: 'Verse', bars: preset.steps, presetId: preset.id }
   return { templateId: preset.id, sections: [loop], order: [loop.id] }
 }
 
