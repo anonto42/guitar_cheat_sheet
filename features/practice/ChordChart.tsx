@@ -106,7 +106,7 @@ export default function ChordChart({ harmony, part, onPart, selectedBar, onSelec
                       isSelected && 'ring-2 ring-inset ring-cream',
                     )}
                   >
-                    <span className="text-[0.6rem] font-bold text-outline">{i + 1}</span>
+                    <span className="text-[0.65rem] font-bold text-outline">{i + 1}</span>
                     <span className="truncate font-display text-xl font-bold sm:text-2xl" style={{ color }}>{chord.name}</span>
                     <span className="text-[0.65rem] font-semibold text-outline">{numeral(step)}</span>
                   </button>
@@ -146,7 +146,7 @@ export default function ChordChart({ harmony, part, onPart, selectedBar, onSelec
                 )
               })}
             </div>
-            <button type="button" onClick={() => setMore(m => !m)} className="text-xs font-semibold text-ember-l hover:text-cream" aria-expanded={more}>
+            <button type="button" onClick={() => setMore(m => !m)} className="flex min-h-9 items-center text-xs font-semibold text-ember-l hover:text-cream" aria-expanded={more}>
               {more ? 'Fewer chords' : 'More chords: 7ths and borrowed chords'}
             </button>
             {more && (
@@ -157,7 +157,7 @@ export default function ChordChart({ harmony, part, onPart, selectedBar, onSelec
                   return (
                     <button key={o.value} type="button" onClick={() => place(o)} className="flex h-10 min-w-16 flex-col items-center justify-center border border-line2 px-2 hover:border-line3">
                       <span className="text-sm font-bold" style={{ color }}>{chord.name}</span>
-                      <span className="text-[0.55rem] text-outline">{numeralFor(o.degree, o.type)}</span>
+                      <span className="text-[0.65rem] text-outline">{numeralFor(o.degree, o.type)}</span>
                     </button>
                   )
                 })}

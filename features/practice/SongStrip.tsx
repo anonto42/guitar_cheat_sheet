@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { ArrowLeft, ArrowRight, Copy, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Select from '@/components/ui/Select'
@@ -17,6 +18,8 @@ interface SongStripProps {
   onSelect: (index: number) => void
   /** Progress through the whole song, 0 to 1, or null when not playing it. */
   progress: number | null
+  /** Block playing right now, or null. */
+  playingIndex: number | null
   summary: string
 }
 
@@ -24,7 +27,17 @@ interface SongStripProps {
  * The arrangement as a strip of coloured blocks, like the tracks area of GarageBand:
  * each block is a part, its width is its length, and a line moves across while it plays.
  */
-export default function SongStrip({ song, onEdit, onTemplate, selected, onSelect, progress, summary }: SongStripProps) {
+export default function SongStrip({ song, onEdit, onTemplate, selected, onSelect, progress, playingIndex, summary }: SongStripProps) {
+  const scroller = useRef<HTMLDivElement>(null)
+
+  // Keep the playing block in view when the strip scrolls sideways on a phone.
+  useEffect(() => {
+    const box = scroller.current
+    const block = playingIndex === null ? null : box?.querySelector<HTMLElement>(`[data-part="${playingIndex}"]`)
+    if (!box || !block || box.scrollWidth <= box.clientWidth) return
+    box.scrollTo({ left: block.offsetLeft, behavior: 'smooth' })
+  }, [playingIndex])
+
   const parts = song.order.map(id => song.sections.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => Boolean(s))
   const current = parts[selected] ?? parts[0]
 
@@ -75,37 +88,45 @@ export default function SongStrip({ song, onEdit, onTemplate, selected, onSelect
         />
       </div>
 
-      {/* The strip */}
-      <div className="relative">
-        <ol className="flex flex-wrap gap-1 sm:flex-nowrap" aria-label="Parts in playing order">
-          {parts.map((part, i) => {
-            const color = SECTION_COLORS[part.kind]
-            const active = i === selected
-            return (
-              <li key={`${part.id}-${i}`} className="min-w-[5.5rem] sm:min-w-0" style={{ flexGrow: part.bars.length, flexBasis: 0 }}>
-                <button
-                  type="button"
-                  onClick={() => onSelect(i)}
-                  aria-pressed={active}
-                  className={cn('flex h-16 w-full flex-col justify-between border-2 px-2 py-1.5 text-left transition-colors', active ? 'border-cream' : 'border-transparent hover:border-line3')}
-                  style={{ background: `${color}33` }}
+      {/* The strip. On phones it scrolls sideways like a timeline; each bar gets the same width. */}
+      <div ref={scroller} className="no-scrollbar -mx-4 overflow-x-auto px-4 sm:mx-0 sm:overflow-visible sm:px-0">
+        <div className="relative w-max min-w-full sm:w-full">
+          <ol className="flex gap-1" aria-label="Parts in playing order">
+            {parts.map((part, i) => {
+              const color = SECTION_COLORS[part.kind]
+              const active = i === selected
+              return (
+                <li
+                  key={`${part.id}-${i}`}
+                  data-part={i}
+                  className="min-w-[5.5rem] shrink-0 grow-0 basis-[calc(var(--bars)*1.5rem)] sm:min-w-0 sm:shrink sm:grow-[var(--bars)] sm:basis-0"
+                  style={{ '--bars': part.bars.length } as React.CSSProperties}
                 >
-                  <span className="truncate text-xs font-bold" style={{ color }}>{part.name}</span>
-                  <span className="text-[0.65rem] font-semibold text-outline">{part.bars.length} bar{part.bars.length > 1 ? 's' : ''}</span>
-                </button>
-              </li>
-            )
-          })}
-        </ol>
-        {progress !== null && (
-          <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 hidden w-0.5 bg-cream shadow-[0_0_8px_rgba(255,255,255,.8)] sm:block" style={{ left: `${progress * 100}%` }} />
-        )}
+                  <button
+                    type="button"
+                    onClick={() => onSelect(i)}
+                    aria-pressed={active}
+                    aria-current={playingIndex === i ? 'step' : undefined}
+                    className={cn('flex h-16 w-full flex-col justify-between border-2 px-2 py-1.5 text-left transition-colors', active ? 'border-cream' : 'border-transparent hover:border-line3')}
+                    style={{ background: `${color}${playingIndex === i ? '55' : '33'}` }}
+                  >
+                    <span className="truncate text-xs font-bold" style={{ color }}>{part.name}</span>
+                    <span className="text-xs font-semibold text-outline">{part.bars.length} bar{part.bars.length > 1 ? 's' : ''}</span>
+                  </button>
+                </li>
+              )
+            })}
+          </ol>
+          {progress !== null && (
+            <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 w-0.5 bg-cream shadow-[0_0_8px_rgba(255,255,255,.8)]" style={{ left: `${progress * 100}%` }} />
+          )}
+        </div>
       </div>
 
       {/* Actions for the selected block */}
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-2 sm:flex sm:flex-wrap sm:items-center">
         <Select
-          className="w-36"
+          className="min-w-0 sm:w-36"
           label="This part is a"
           hideLabel
           size="sm"
@@ -115,10 +136,12 @@ export default function SongStrip({ song, onEdit, onTemplate, selected, onSelect
         />
         <Button size="sm" variant="secondary" onClick={() => move(-1)} disabled={selected === 0} aria-label="Move earlier"><ArrowLeft size={14} /></Button>
         <Button size="sm" variant="secondary" onClick={() => move(1)} disabled={selected === song.order.length - 1} aria-label="Move later"><ArrowRight size={14} /></Button>
-        <Button size="sm" variant="secondary" onClick={repeat}><Copy size={14} aria-hidden="true" /> Play again</Button>
-        <Button size="sm" variant="secondary" onClick={remove} disabled={song.order.length < 2}><X size={14} aria-hidden="true" /> Remove</Button>
+        <div className="col-span-3 grid grid-cols-2 gap-2 sm:contents">
+          <Button size="sm" variant="secondary" onClick={repeat}><Copy size={14} aria-hidden="true" /> Play again</Button>
+          <Button size="sm" variant="secondary" onClick={remove} disabled={song.order.length < 2}><X size={14} aria-hidden="true" /> Remove</Button>
+        </div>
         <Select
-          className="ml-auto w-40"
+          className="col-span-3 sm:ml-auto sm:w-40"
           label="Add a part"
           hideLabel
           size="sm"

@@ -75,7 +75,7 @@ export function CustomStepsEditor({ pattern, onPattern }: CustomStepsEditorProps
             className={cn('flex h-12 w-10 flex-col items-center justify-center border text-sm font-bold', i % pattern.stepsPerBeat === 0 ? 'border-line3' : 'border-line2', s === '-' ? 'text-outline' : 'text-cream')}
           >
             {LABEL[s]}
-            <span className="text-[0.55rem] text-outline">{pattern.counts[i]}</span>
+            <span className="text-[0.65rem] text-outline">{pattern.counts[i]}</span>
           </button>
         ))}
       </div>

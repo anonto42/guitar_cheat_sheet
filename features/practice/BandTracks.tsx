@@ -65,7 +65,7 @@ function Track({ name, color, on, onToggle, level, onLevel, children }: TrackPro
           type="range" min={0} max={100} value={Math.round(level * 100)}
           onChange={e => onLevel(Number(e.target.value) / 100)}
           aria-label={`${name} volume`}
-          className="min-w-0 flex-1 accent-[#ff6b00]"
+          className="h-9 min-w-0 flex-1 accent-[#ff6b00]"
           disabled={!on}
         />
       </label>

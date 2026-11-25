@@ -55,9 +55,8 @@ export default function PracticeStudio() {
   const def = SCALE_CATALOG[scaleId]
   const choice = scaleChoice(scaleId)
   const harmony = useMemo(() => harmonyNotes(tonic, def), [tonic, def])
-  const partId = song.order[selected] ?? song.order[0]
-  const part = song.sections.find(s => s.id === partId) ?? song.sections[0]
-  const flat = useMemo(() => flattenSong(song, loopPart ? part.id : null), [song, loopPart, part.id])
+  const selectedId = song.order[selected] ?? song.order[0]
+  const flat = useMemo(() => flattenSong(song, loopPart ? selectedId : null), [song, loopPart, selectedId])
   const chords = useMemo(() => chordsFromNotes(harmony, flat.map(b => b.step)), [harmony, flat])
   const playedBy: InstrumentId = chordsOn ? instrument : 'none'
   const drums: DrumStyle = drumsOn ? drumStyle : 'off'
@@ -73,6 +72,12 @@ export default function PracticeStudio() {
   const playingBar = live ? flat[live.bar] ?? null : null
   const current = live ? chords[live.bar] ?? null : null
   const progress = live && !loopPart && flat.length ? (live.bar + live.step / pattern.steps.length) / flat.length : null
+  const playingIndex = playingBar ? (loopPart ? selected : playingBar.orderIndex) : null
+
+  // Follow the music: while the whole song plays, the chord chart shows the part that is playing,
+  // unless you have picked a bar to edit.
+  const shown = playingIndex !== null && !loopPart && selectedBar === null ? playingIndex : selected
+  const part = song.sections.find(s => s.id === song.order[shown]) ?? song.sections[0]
 
   const changeScale = (id: string) => {
     setScaleId(id)
@@ -95,7 +100,17 @@ export default function PracticeStudio() {
   const editPart = (patch: Partial<SongSection>) =>
     editSong({ ...song, sections: song.sections.map(s => (s.id === part.id ? { ...s, presetId: undefined, ...patch } : s)) })
 
-  const togglePlay = () => (player.playing ? player.stop() : player.start({ countIn }))
+  const togglePlay = () => {
+    if (!player.playing) return player.start({ countIn })
+    setSelected(shown)
+    player.stop()
+  }
+
+  /** Picking a bar stops the chart following the music, so stay on the part shown now. */
+  const selectBar = (bar: number | null) => {
+    setSelected(shown)
+    setSelectedBar(bar)
+  }
 
   const toggleRecord = async () => {
     if (recorder.recording) {
@@ -138,17 +153,17 @@ export default function PracticeStudio() {
 
       <SongStrip
         song={song} onEdit={editSong} onTemplate={useTemplate}
-        selected={selected} onSelect={selectPart}
-        progress={progress}
+        selected={shown} onSelect={selectPart}
+        progress={progress} playingIndex={playingIndex}
         summary={describePlayback({ tonic, scaleId, templateId: song.templateId, bars: flat.length, bpm, pattern, instrument: playedBy, drums, bass })}
       />
 
       <ChordChart
         harmony={harmony}
         part={part} onPart={editPart}
-        selectedBar={selectedBar} onSelectBar={setSelectedBar}
+        selectedBar={selectedBar} onSelectBar={selectBar}
         playingBar={playingBar && playingBar.sectionId === part.id ? playingBar.barInSection : null}
-        loopPart={loopPart} onLoopPart={setLoopPart}
+        loopPart={loopPart} onLoopPart={on => { setSelected(shown); setLoopPart(on) }}
       />
 
       <BandTracks

@@ -50,7 +50,7 @@ export default function SoloHelper({ tonic, scaleId, scaleLabel, current }: Solo
         {current ? <>Now playing <b>{current.name}</b>. Target notes: <b className="text-amber">{targets.length ? targets.join(' ') : current.notes.join(' ')}</b></> : 'Press Play to see target notes for each chord.'}
       </p>
       <NoteMap notes={scale.notes} tonic={scale.tonic} emphasis={current?.notes} label={`${scale.label} on the fretboard`} />
-      <Link href={scale.guide} className="inline-block text-sm font-semibold text-ember-l hover:text-cream">How to solo with this scale</Link>
+      <Link href={scale.guide} className="inline-flex min-h-9 items-center text-sm font-semibold text-ember-l hover:text-cream">How to solo with this scale</Link>
     </Panel>
   )
 }
