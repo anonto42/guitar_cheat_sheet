@@ -9,9 +9,10 @@ import { SCALE_CATALOG, harmonyNotes, normaliseRoot, rootFromSlug, scaleChoice }
 import { voiceChord } from '@/lib/music/voicing'
 import type { StrumPattern } from '@/types'
 import TransportBar from './TransportBar'
-import SongEditor from './SongEditor'
-import PatternEditor from './PatternEditor'
-import SoundPanel from './SoundPanel'
+import SongTimeline from './SongTimeline'
+import StudioSidebar from './StudioSidebar'
+import StrumCard from './StrumCard'
+import { describePlayback } from './describe'
 import SoloHelper from './SoloHelper'
 import Recorder from './Recorder'
 import { flattenSong, songTemplate, type Song } from './song'
@@ -45,7 +46,6 @@ export default function PracticeStudio() {
   const [drums, setDrums] = useState<DrumStyle>('off')
   const [bass, setBass] = useState(false)
   const [mix, setMix] = useState<Mix>(DEFAULT_MIX)
-  const [showShapes, setShowShapes] = useState(true)
 
   const def = SCALE_CATALOG[scaleId]
   const choice = scaleChoice(scaleId)
@@ -106,19 +106,22 @@ export default function PracticeStudio() {
       />
       {player.error && <p role="alert" className="text-sm text-tunings">{player.error}</p>}
 
-      <SongEditor
-        tonic={tonic} scaleId={scaleId} quality={def.quality} harmony={harmony}
-        onKey={setTonic} onScale={changeScale}
-        song={song} onSong={setSong}
-        editingId={editingId} onEditing={setEditingId}
-        scope={scope} onScope={setScope}
-        playing={playingBar}
-        showShapes={showShapes} onShowShapes={setShowShapes}
-      />
-
-      <div className="grid gap-6 lg:grid-cols-2 [&>*]:min-w-0">
-        <PatternEditor pattern={pattern} onPattern={setPattern} activeStep={position && !position.countIn ? position.step : null} />
-        <SoundPanel
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="min-w-0 space-y-6">
+          <SongTimeline
+            harmony={harmony}
+            song={song} onSong={setSong}
+            editingId={editingId} onEditing={setEditingId}
+            loopPart={scope === 'section'} onLoopPart={on => setScope(on ? 'section' : 'song')}
+            playing={playingBar}
+            summary={describePlayback({ tonic, scaleId, templateId: song.templateId, bars: flat.length, bpm, pattern, instrument, drums, bass })}
+          />
+          <StrumCard pattern={pattern} onPattern={setPattern} instrument={instrument} activeStep={position && !position.countIn ? position.step : null} />
+        </div>
+        <StudioSidebar
+          tonic={tonic} onKey={setTonic}
+          scaleId={scaleId} quality={def.quality} onScale={changeScale}
+          pattern={pattern} onPattern={setPattern}
           instrument={instrument} onInstrument={setInstrument}
           drums={drums} onDrums={setDrums}
           bass={bass} onBass={setBass}

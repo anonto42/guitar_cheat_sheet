@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef } from 'react'
 import { Circle, Minus, Pause, Play, Plus, Square } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
@@ -21,21 +20,12 @@ interface TransportBarProps {
 
 const clampBpm = (n: number) => Math.min(220, Math.max(30, Math.round(n)))
 
-/** Sticky controls at the top of the studio: play, record, tempo and click. */
+/**
+ * Sticky controls at the top of the studio: play, record, tempo, metronome and count-in.
+ * Metronome: a tick on every beat. Count-in: one bar of ticks before the music starts.
+ */
 export default function TransportBar(props: TransportBarProps) {
   const { playing, recording, bpm, onBpm, countIn, onCountIn, metronome, onMetronome, onPlay, onRecord, status } = props
-  const taps = useRef<number[]>([])
-
-  const tap = () => {
-    const now = performance.now()
-    const recent = [...taps.current.filter(t => now - t < 3000), now].slice(-5)
-    taps.current = recent
-    if (recent.length >= 2) {
-      const gaps = recent.slice(1).map((t, i) => t - recent[i])
-      onBpm(clampBpm(60000 / (gaps.reduce((a, b) => a + b, 0) / gaps.length)))
-    }
-  }
-
   return (
     <div className="sticky top-[calc(var(--nav-h)+var(--safe-top))] z-40 -mx-4 border-y border-line2 bg-bg2/95 px-4 py-2 backdrop-blur-xl sm:mx-0 sm:border-x sm:py-3">
       <div className="flex flex-wrap items-center gap-2 sm:gap-3">
@@ -60,12 +50,11 @@ export default function TransportBar(props: TransportBarProps) {
           <span className="ml-1 hidden text-xs font-bold text-outline sm:inline">BPM</span>
         </div>
         <input type="range" min={30} max={220} value={bpm} onChange={e => onBpm(Number(e.target.value))} aria-label="Tempo slider" className="hidden w-32 accent-[#ff6b00] sm:block sm:w-44" />
-        <button type="button" onClick={tap} className="h-[var(--control-h)] border border-line3 px-3 text-xs font-bold text-outline hover:text-cream">Tap<span className="hidden sm:inline"> tempo</span></button>
 
-        <label className="flex items-center gap-2 text-sm text-muted">
-          <input type="checkbox" checked={metronome} onChange={e => onMetronome(e.target.checked)} className="h-4 w-4 accent-[#ff6b00]" /> Click
+        <label className="flex items-center gap-2 text-sm text-muted" title="A tick on every beat, so you can keep time">
+          <input type="checkbox" checked={metronome} onChange={e => onMetronome(e.target.checked)} className="h-4 w-4 accent-[#ff6b00]" /> Metronome
         </label>
-        <label className="flex items-center gap-2 text-sm text-muted">
+        <label className="flex items-center gap-2 text-sm text-muted" title="One bar of ticks before the music starts, so you are ready on beat 1">
           <input type="checkbox" checked={countIn} onChange={e => onCountIn(e.target.checked)} className="h-4 w-4 accent-[#ff6b00]" /> Count-in
         </label>
         <p className="ml-auto hidden text-sm font-semibold text-cream md:block" aria-live="polite">{status}</p>

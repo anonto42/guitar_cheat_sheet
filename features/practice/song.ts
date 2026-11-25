@@ -9,12 +9,16 @@ export interface SongSection {
   /** Shown name, for example "Verse 2". */
   name: string
   bars: ProgressionStep[]
+  /** Progression the chords came from, until the player edits them. */
+  presetId?: string
 }
 
 export interface Song {
   sections: SongSection[]
   /** Section ids in playing order. A section can appear more than once. */
   order: string[]
+  /** Template the song came from, until the player edits it. */
+  templateId?: string
 }
 
 export interface FlatBar {
@@ -45,6 +49,7 @@ export function songTemplate(id: string): Song {
     const bridge = make('Bridge', [2, 4, 6, 5])
     const outro = make('Outro', [4, 1, 4, 1])
     return {
+      templateId: id,
       sections: [intro, verse, pre, chorus, bridge, outro],
       order: [intro.id, verse.id, pre.id, chorus.id, verse.id, pre.id, chorus.id, bridge.id, chorus.id, outro.id],
     }
@@ -52,11 +57,11 @@ export function songTemplate(id: string): Song {
   if (id === 'verse-chorus') {
     const verse = make('Verse', [1, 4, 1, 5])
     const chorus = make('Chorus', [4, 5, 6, 1])
-    return { sections: [verse, chorus], order: [verse.id, chorus.id, verse.id, chorus.id] }
+    return { templateId: id, sections: [verse, chorus], order: [verse.id, chorus.id, verse.id, chorus.id] }
   }
   const preset = PRACTICE_PROGRESSIONS.find(p => p.id === id) ?? PRACTICE_PROGRESSIONS[0]
-  const loop: SongSection = { id: newId(), kind: 'Verse', name: preset.name, bars: preset.steps }
-  return { sections: [loop], order: [loop.id] }
+  const loop: SongSection = { id: newId(), kind: 'Verse', name: preset.name, bars: preset.steps, presetId: preset.id }
+  return { templateId: preset.id, sections: [loop], order: [loop.id] }
 }
 
 export const SONG_TEMPLATES = [

@@ -7,6 +7,7 @@ export interface ChordOption extends ProgressionStep {
   /** Value used in a select: "degree:type". */
   value: string
   label: string
+  group: string
 }
 
 const TRIAD_TYPE = { major: 'major', minor: 'minor', diminished: 'diminished', augmented: 'augmented' } as const
@@ -36,19 +37,22 @@ export function parseStep(value: string): ProgressionStep {
  */
 export function chordOptions(notes: string[]): ChordOption[] {
   const triads = triadsOf(notes)
-  const options: ChordOption[] = []
+  const own: ChordOption[] = []
+  const borrowed: ChordOption[] = []
   triads.forEach((triad, i) => {
     const degree = i + 1
-    const own = TRIAD_TYPE[triad.quality]
-    // First: the chord that belongs to the scale. It follows the scale if the scale changes.
-    options.push({ degree, type: DIATONIC, value: `${degree}:${DIATONIC}`, label: `${triad.numeral}  ${triad.name}  (in the scale)` })
+    // The chord that belongs to the scale. It follows the scale if the scale changes.
+    own.push({ degree, type: DIATONIC, value: `${degree}:${DIATONIC}`, label: `${triad.name}   ${triad.numeral}`, group: 'In the scale' })
     const seventh = seventhType(notes[i], notes[(i + 2) % 7], notes[(i + 4) % 7], notes[(i + 6) % 7])
+    if (seventh) {
+      const chord = buildChord(notes[i], getChordType(seventh))
+      own.push({ degree, type: seventh, value: `${degree}:${seventh}`, label: `${chord.name}   ${numeralFor(degree, seventh)}`, group: 'In the scale' })
+    }
     // Borrowed chords are common: the major V in a minor key, a minor iv in a major key.
-    const types = new Set([...(seventh ? [seventh] : []), 'major', 'minor', 'dominant7'].filter(t => t !== own))
-    for (const type of types) {
+    for (const type of ['major', 'minor', 'dominant7'].filter(t => t !== TRIAD_TYPE[triad.quality] && t !== seventh)) {
       const chord = buildChord(notes[i], getChordType(type))
-      options.push({ degree, type, value: `${degree}:${type}`, label: `${numeralFor(degree, type)}  ${chord.name}` })
+      borrowed.push({ degree, type, value: `${degree}:${type}`, label: `${chord.name}   ${numeralFor(degree, type)}`, group: 'Borrowed from other keys' })
     }
   })
-  return options
+  return [...own, ...borrowed]
 }
