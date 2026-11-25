@@ -8,6 +8,7 @@ import Segmented from '@/components/ui/Segmented'
 import { SCALE_CATALOG, rootSlug, scaleNotes } from '@/lib/music/scales'
 import { spell } from '@/lib/music/notes'
 import type { BuiltChord } from '@/lib/music/chordTypes'
+import Panel from '@/components/ui/Panel'
 
 interface SoloHelperProps {
   tonic: string
@@ -37,7 +38,7 @@ export default function SoloHelper({ tonic, scaleId, scaleLabel, current }: Solo
   const targets = current ? current.notes.filter(n => scale.notes.includes(n)) : []
 
   return (
-    <section aria-label="Solo helper" className="min-w-0 space-y-4 border border-line2 bg-surface/70 p-5">
+    <Panel aria-label="Solo helper" className="space-y-5">
       <div>
         <h2 className="font-display text-lg font-bold text-cream">Solo over it</h2>
         <p className="mt-1 text-sm text-muted">Keep the loop playing and improvise with one of these scales. While it plays, the notes of the current chord are outlined in gold. Land on them to sound strong.</p>
@@ -50,6 +51,6 @@ export default function SoloHelper({ tonic, scaleId, scaleLabel, current }: Solo
       </p>
       <NoteMap notes={scale.notes} tonic={scale.tonic} emphasis={current?.notes} label={`${scale.label} on the fretboard`} />
       <Link href={scale.guide} className="inline-block text-sm font-semibold text-ember-l hover:text-cream">How to solo with this scale</Link>
-    </section>
+    </Panel>
   )
 }
