@@ -4,6 +4,13 @@ import Link from 'next/link'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Download, X } from 'lucide-react'
 import { LIBRARY_LINKS, PRIMARY_LINKS } from '@/config/navigation'
+
+const MORE_LINKS = [
+  ...PRIMARY_LINKS,
+  { label: 'All 12 keys', href: '/keys' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Privacy', href: '/privacy' },
+]
 import Logo from '@/components/brand/Logo'
 import HideWhenInstalled from './HideWhenInstalled'
 
@@ -50,7 +57,7 @@ export default function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
 
             <p className="px-3 pb-2 pt-6 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-outline/70">More</p>
             <ul>
-              {PRIMARY_LINKS.map(link => (
+              {MORE_LINKS.map(link => (
                 <li key={link.href}>
                   <Link href={link.href} onClick={close} className="flex min-h-12 items-center rounded-lg px-3 text-[0.95rem] font-semibold text-cream transition-colors hover:bg-white/5">
                     {link.label}

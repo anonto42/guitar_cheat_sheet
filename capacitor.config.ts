@@ -8,6 +8,7 @@ const config: CapacitorConfig = {
   webDir: 'out',
   backgroundColor: '#0d0b08',
   server: { androidScheme: 'https' },
+  appendUserAgent: APP.userAgentTag,
   plugins: {
     SplashScreen: {
       launchShowDuration: 800,

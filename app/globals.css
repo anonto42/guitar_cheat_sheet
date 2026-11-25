@@ -49,6 +49,8 @@
     --control-h: 2.5rem;
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
+    /* Height of the app's bottom tab bar (components/layout/AppTabBar). */
+    --tab-h: 3.75rem;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -66,6 +68,23 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* App mode (native shell or installed PWA): behave like an app, not a web page. */
+  html[data-app] { overscroll-behavior-y: none; }
+  html[data-app] a,
+  html[data-app] button,
+  html[data-app] img,
+  html[data-app] svg,
+  html[data-app] [role='button'],
+  html[data-app] [role='combobox'] {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  @media (max-width: 1023.98px) {
+    /* Room for the bottom tab bar. */
+    html[data-app] body { padding-bottom: calc(var(--tab-h) + var(--safe-bottom)); }
   }
 
   h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }

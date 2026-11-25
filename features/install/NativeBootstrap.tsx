@@ -10,6 +10,7 @@ import { isNativeApp } from '@/lib/platform'
 export default function NativeBootstrap() {
   useEffect(() => {
     if (!isNativeApp()) return
+    if (!document.documentElement.dataset.app) document.documentElement.dataset.app = 'native'
     let removeBackListener: (() => void) | undefined
 
     ;(async () => {

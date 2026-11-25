@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Download, Menu, Search, X } from 'lucide-react'
@@ -12,6 +12,7 @@ import SearchBox from '@/features/search/SearchBox'
 import HideWhenInstalled from './HideWhenInstalled'
 import LibraryMenu from './LibraryMenu'
 import MobileMenu from './MobileMenu'
+import { OPEN_MENU_EVENT } from './AppTabBar'
 
 /**
  * Site navbar.
@@ -23,6 +24,13 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
 
+  // The app's bottom tab bar opens the same menu.
+  useEffect(() => {
+    const open = () => setMenuOpen(true)
+    window.addEventListener(OPEN_MENU_EVENT, open)
+    return () => window.removeEventListener(OPEN_MENU_EVENT, open)
+  }, [])
+
   return (
     <header className="sticky top-0 z-[100] bg-bg2/90 pt-[var(--safe-top)] backdrop-blur-xl">
       <div className="mx-auto flex h-nav max-w-7xl items-center gap-2 px-3 sm:px-6 lg:gap-3 lg:px-8 xl:gap-6">
@@ -32,7 +40,7 @@ export default function Navbar() {
           aria-label="Open menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(true)}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-outline hover:bg-white/5 hover:text-cream lg:hidden"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-outline hover:bg-white/5 hover:text-cream app:hidden lg:hidden"
         >
           <Menu size={20} />
         </button>

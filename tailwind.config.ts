@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
 const config: Config = {
   content: [
@@ -71,7 +72,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // `app:` styles apply when the site runs as an app (native shell or installed PWA). See features/install/appModeScript.
+    plugin(({ addVariant }) => addVariant('app', 'html[data-app] &')),
+  ],
 }
 
 export default config

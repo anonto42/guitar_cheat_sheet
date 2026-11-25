@@ -16,6 +16,8 @@ import { installPromptScript } from '@/features/install/installPromptScript'
 import HistoryTracker from '@/features/navigation/HistoryTracker'
 import RouteProgress from '@/features/navigation/RouteProgress'
 import NativeBootstrap from '@/features/install/NativeBootstrap'
+import { appModeScript } from '@/features/install/appModeScript'
+import AppTabBar from '@/components/layout/AppTabBar'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const notoSerif = Noto_Serif({ subsets: ['latin'], variable: '--font-noto-serif', display: 'swap' })
@@ -99,8 +101,9 @@ const siteJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoSerif.variable}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${inter.variable} ${notoSerif.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: appModeScript }} />
         <script dangerouslySetInnerHTML={{ __html: installPromptScript }} />
       </head>
       <body suppressHydrationWarning>
@@ -113,6 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <OfflineBanner />
         {children}
         <Footer />
+        <AppTabBar />
         <ServiceWorkerRegister />
         <NativeBootstrap />
       </body>

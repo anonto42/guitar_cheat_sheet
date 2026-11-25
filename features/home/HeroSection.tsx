@@ -45,7 +45,7 @@ export default function HeroSection({ topicCount, categoryCount }: HeroSectionPr
           <Button href="/learn" size="lg">
             Start learning <ArrowRight size={16} aria-hidden="true" />
           </Button>
-          <Button href="/download" variant="secondary" size="lg">
+          <Button href="/download" variant="secondary" size="lg" className="app:hidden">
             <Download size={16} aria-hidden="true" /> Get the app
           </Button>
         </Reveal>

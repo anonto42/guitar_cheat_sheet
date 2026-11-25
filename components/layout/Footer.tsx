@@ -7,7 +7,7 @@ import Container from '@/components/ui/Container'
 
 export default function Footer() {
   return (
-    <footer className="mt-24 bg-bg2/80 pb-[var(--safe-bottom)] backdrop-blur">
+    <footer className="mt-24 bg-bg2/80 app:max-lg:hidden pb-[var(--safe-bottom)] backdrop-blur">
       <Container className="py-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_2fr]">
           <div>
