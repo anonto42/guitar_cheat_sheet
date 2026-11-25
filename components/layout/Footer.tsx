@@ -17,7 +17,7 @@ export default function Footer() {
               href={SITE.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-outline transition-colors hover:text-ember-l"
+              className="mt-4 inline-flex min-h-9 items-center gap-2 text-sm font-semibold text-outline transition-colors hover:text-ember-l"
             >
               <Code2 size={16} aria-hidden="true" />
               View the source on GitHub
@@ -27,11 +27,11 @@ export default function Footer() {
           <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             {FOOTER_GROUPS.map(group => (
               <div key={group.title}>
-                <h2 className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-cream">{group.title}</h2>
-                <ul className="mt-4 space-y-2.5">
+                <h2 className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-cream">{group.title}</h2>
+                <ul className="mt-3">
                   {group.links.map(link => (
                     <li key={link.href}>
-                      <Link href={link.href} className="text-sm text-outline transition-colors hover:text-ember-l">
+                      <Link href={link.href} className="inline-flex min-h-9 items-center text-sm text-outline transition-colors hover:text-ember-l">
                         {link.label}
                       </Link>
                     </li>

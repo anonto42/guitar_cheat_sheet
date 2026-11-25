@@ -144,7 +144,7 @@ export default async function CategoryPage({ params }: Props) {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 10 }}>
               <p style={{
                 fontFamily: 'var(--font-sans)',
-                fontSize: '.62rem', fontWeight: 700,
+                fontSize: '.65rem', fontWeight: 700,
                 color: cat.a,
                 textTransform: 'uppercase', letterSpacing: '0.14em',
                 margin: 0,
@@ -201,7 +201,7 @@ export default async function CategoryPage({ params }: Props) {
                     <span style={{
                       display: 'inline-block',
                       fontFamily: 'var(--font-sans)',
-                      fontSize: '.58rem', fontWeight: 700,
+                      fontSize: '.65rem', fontWeight: 700,
                       textTransform: 'uppercase', letterSpacing: '0.12em',
                       color: cat.a,
                       marginBottom: 10,

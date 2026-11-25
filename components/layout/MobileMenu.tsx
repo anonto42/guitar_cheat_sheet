@@ -33,7 +33,7 @@ export default function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
           </div>
 
           <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-2 py-4">
-            <p className="px-3 pb-2 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-outline/70">Library</p>
+            <p className="px-3 pb-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-outline/70">Library</p>
             <ul>
               {LIBRARY_LINKS.map(link => (
                 <li key={link.slug}>
@@ -48,7 +48,7 @@ export default function MobileMenu({ open, onOpenChange }: MobileMenuProps) {
               ))}
             </ul>
 
-            <p className="px-3 pb-2 pt-6 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-outline/70">More</p>
+            <p className="px-3 pb-2 pt-6 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-outline/70">More</p>
             <ul>
               {PRIMARY_LINKS.map(link => (
                 <li key={link.href}>

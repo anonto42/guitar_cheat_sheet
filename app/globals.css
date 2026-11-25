@@ -564,10 +564,23 @@
   white-space: nowrap;
 }
 
+/* The input is 36px tall so it is easy to grab on a phone; the visible track stays 6px. */
 .gfx-slider {
   appearance: none;
   -webkit-appearance: none;
   width: 100%;
+  height: 36px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.gfx-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.gfx-slider::-moz-range-track {
   height: 6px;
   background: rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
@@ -578,6 +591,7 @@
   appearance: none;
   width: 14px;
   height: 18px;
+  margin-top: -6px;
   background: var(--ember-l);
   border: 1px solid var(--ember);
   border-radius: 0;

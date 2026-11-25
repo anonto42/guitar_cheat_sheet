@@ -13,7 +13,7 @@ export default function ArrowLink({ href, children, className }: ArrowLinkProps)
   return (
     <Link
       href={href}
-      className={cn('group inline-flex items-center gap-1.5 text-sm font-semibold text-outline transition-colors hover:text-cream', className)}
+      className={cn('group inline-flex min-h-9 items-center gap-1.5 text-sm font-semibold text-outline transition-colors hover:text-cream', className)}
     >
       {children}
       <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" aria-hidden="true" />

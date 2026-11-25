@@ -38,7 +38,7 @@ export default function BackLink({ href, children, className }: BackLinkProps) {
   const previous = raw ? (JSON.parse(raw) as { path: string; title: string }) : null
 
   const classes = cn(
-    'group inline-flex h-[var(--control-h)] max-w-[16rem] shrink-0 items-center gap-2 border border-line2 bg-surface/70 px-4 text-xs font-semibold text-outline backdrop-blur transition-colors hover:border-line3 hover:text-cream',
+    'group inline-flex h-[var(--control-h)] min-w-0 max-w-[60%] items-center sm:max-w-[16rem] gap-2 border border-line2 bg-surface/70 px-4 text-xs font-semibold text-outline backdrop-blur transition-colors hover:border-line3 hover:text-cream',
     className,
   )
   const icon = <ArrowLeft size={14} className="shrink-0 transition-transform group-hover:-translate-x-0.5" aria-hidden="true" />

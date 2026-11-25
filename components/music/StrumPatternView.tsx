@@ -23,7 +23,7 @@ export default function StrumPatternView({ pattern, activeStep, size = 'lg', cla
       <ol className="flex min-w-max gap-2" aria-label={`${pattern.name} pattern`}>
         {Array.from({ length: beats }, (_, beat) => (
           <li key={beat} className="border border-line2 bg-bg3/60 p-1.5">
-            <p className="px-1 pb-1 text-[0.6rem] font-bold uppercase tracking-widest text-outline">Beat {beat + 1}</p>
+            <p className="px-1 pb-1 text-[0.65rem] font-bold uppercase tracking-widest text-outline">Beat {beat + 1}</p>
             <ol className="flex gap-1">
               {pattern.steps.slice(beat * pattern.stepsPerBeat, (beat + 1) * pattern.stepsPerBeat).map((symbol, i) => {
                 const index = beat * pattern.stepsPerBeat + i

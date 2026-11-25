@@ -157,7 +157,7 @@ export default function Tuner({ tuningId, selectable = true }: TunerProps) {
         <div className="relative mx-auto mt-5 h-10 max-w-xl border border-line2 bg-bg3/80">
           <div className="absolute inset-y-0 left-1/2 w-[10%] -translate-x-1/2 bg-theory/20" />
           {[-50, -25, 0, 25, 50].map(c => (
-            <span key={c} className="absolute -bottom-5 -translate-x-1/2 text-[0.6rem] text-outline" style={{ left: `${50 + c}%` }}>{c > 0 ? `+${c}` : c}</span>
+            <span key={c} className="absolute -bottom-5 -translate-x-1/2 text-[0.65rem] text-outline" style={{ left: `${50 + c}%` }}>{c > 0 ? `+${c}` : c}</span>
           ))}
           <div
             className={cn('absolute inset-y-0 w-1 -translate-x-1/2 transition-[left] duration-100', inTune ? 'bg-theory' : farOff ? 'bg-tunings' : 'bg-ember')}
@@ -174,18 +174,18 @@ export default function Tuner({ tuningId, selectable = true }: TunerProps) {
             const active = reading?.stringIndex === i
             return (
               <li key={i} className={cn('border p-2 text-center', active ? (inTune ? 'border-theory bg-theory/10' : 'border-ember bg-ember-dim') : 'border-line2 bg-bg3/60')}>
-                <p className="text-[0.6rem] font-bold uppercase tracking-widest text-outline">String {6 - i}</p>
+                <p className="text-[0.65rem] font-bold uppercase tracking-widest text-outline">String {6 - i}</p>
                 <p className="font-display text-2xl font-bold text-cream">{s.note}</p>
                 <p className="text-[0.65rem] text-outline">{s.label}</p>
-                <div className="mt-2 flex justify-center gap-1">
-                  <button type="button" onClick={() => playReference(s)} aria-label={`Play reference ${s.label}`} className="flex h-8 w-8 items-center justify-center border border-line2 text-outline hover:text-cream">
+                <div className="mt-2 grid grid-cols-2 gap-1">
+                  <button type="button" onClick={() => playReference(s)} aria-label={`Play reference ${s.label}`} className="flex h-9 min-w-9 items-center justify-center border border-line2 text-outline hover:text-cream">
                     <Volume2 size={14} aria-hidden="true" />
                   </button>
                   <button
                     type="button"
                     onClick={() => setLocked(locked === i ? null : i)}
                     aria-pressed={locked === i}
-                    className={cn('h-8 border px-2 text-[0.65rem] font-bold', locked === i ? 'border-ember text-ember-l' : 'border-line2 text-outline hover:text-cream')}
+                    className={cn('h-9 min-w-9 border px-1 text-[0.65rem] font-bold', locked === i ? 'border-ember text-ember-l' : 'border-line2 text-outline hover:text-cream')}
                   >
                     {locked === i ? 'Locked' : 'Lock'}
                   </button>

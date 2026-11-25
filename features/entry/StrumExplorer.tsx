@@ -37,7 +37,7 @@ export default function StrumExplorer({ patternId }: { patternId: string }) {
         </Button>
         <label className="flex items-center gap-3 text-sm text-muted">
           Tempo <span className="w-14 font-bold text-ember-l">{bpm} BPM</span>
-          <input type="range" min={40} max={140} value={bpm} onChange={e => setBpm(Number(e.target.value))} className="w-40 accent-[#ff6b00]" />
+          <input type="range" min={40} max={140} value={bpm} onChange={e => setBpm(Number(e.target.value))} className="h-9 w-40 accent-[#ff6b00]" />
         </label>
         {player.error && <p role="alert" className="text-sm text-tunings">{player.error}</p>}
       </div>

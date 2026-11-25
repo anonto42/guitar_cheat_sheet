@@ -104,7 +104,7 @@ export default async function KeyPage({ params }: Props) {
           <SimpleTable
             head={['Mode', 'Starts on', 'Notes', 'Feel']}
             rows={modes.map(mode => [
-              <Link key="m" href={entryHref('modes', mode.entryId)} className="hover:text-ember-l">{mode.degree}. {mode.name}</Link>,
+              <Link key="m" href={entryHref('modes', mode.entryId)} className="inline-flex min-h-9 items-center hover:text-ember-l">{mode.degree}. {mode.name}</Link>,
               mode.root,
               mode.notes.join(' '),
               mode.feel,
@@ -117,7 +117,7 @@ export default async function KeyPage({ params }: Props) {
             head={['Numeral', 'Chord', 'Notes', 'Quality']}
             rows={triads.map(triad => [
               triad.numeral,
-              <Link key="c" href={entryHref('chords', triad.entryId)} className="font-bold text-cream hover:text-ember-l">{triad.name}</Link>,
+              <Link key="c" href={entryHref('chords', triad.entryId)} className="inline-flex min-h-9 min-w-9 items-center font-bold text-cream hover:text-ember-l">{triad.name}</Link>,
               triad.notes.join(' '),
               triad.quality,
             ])}
@@ -156,9 +156,9 @@ export default async function KeyPage({ params }: Props) {
           <SimpleTable
             head={['Progression', 'Chords', '']}
             rows={PRACTICE_PROGRESSIONS.map(prog => [
-              <Link key="p" href={entryHref('progressions', prog.entryId)} className="hover:text-ember-l">{prog.name} ({prog.numerals})</Link>,
+              <Link key="p" href={entryHref('progressions', prog.entryId)} className="inline-flex min-h-9 items-center hover:text-ember-l">{prog.name} ({prog.numerals})</Link>,
               [...new Set(progressionChords(prog.mode === 'minor' ? key.notes[5] : key.root, prog).map(c => c.name))].join('  '),
-              <Link key="a" href={`/practice?key=${key.slug}&progression=${prog.id}`} className="inline-flex items-center gap-1.5 font-semibold text-ember-l hover:text-cream">
+              <Link key="a" href={`/practice?key=${key.slug}&progression=${prog.id}`} className="inline-flex min-h-9 items-center gap-1.5 font-semibold text-ember-l hover:text-cream">
                 Play along <ArrowRight size={14} aria-hidden="true" />
               </Link>,
             ])}

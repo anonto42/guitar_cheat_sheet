@@ -69,7 +69,7 @@ export const SelectLabel = forwardRef<
   React.ElementRef<typeof SelectPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
 >(({ className, ...props }, ref) => (
-  <SelectPrimitive.Label ref={ref} className={cn('px-2.5 pb-1 pt-2 text-[0.6rem] font-bold uppercase tracking-widest text-outline', className)} {...props} />
+  <SelectPrimitive.Label ref={ref} className={cn('px-2.5 pb-1 pt-2 text-[0.65rem] font-bold uppercase tracking-widest text-outline', className)} {...props} />
 ))
 SelectLabel.displayName = 'SelectLabel'
 

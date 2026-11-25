@@ -62,7 +62,7 @@ export default function ChordExplorer({ typeId, defaultRoot, arpeggio }: ChordEx
                 return (
                   <tr key={r} className={cn('border-b border-line last:border-b-0', active && 'bg-ember-dim')}>
                     <th scope="row" className="px-4 py-2.5">
-                      <button type="button" onClick={() => setRoot(r)} className={cn('min-w-12 border px-2 py-1 text-sm font-bold', active ? 'border-ember bg-ember text-bg2' : 'border-line2 text-cream hover:border-ember/60')}>
+                      <button type="button" onClick={() => setRoot(r)} className={cn('h-9 min-w-12 border px-2 text-sm font-bold', active ? 'border-ember bg-ember text-bg2' : 'border-line2 text-cream hover:border-ember/60')}>
                         {c.name}
                       </button>
                     </th>

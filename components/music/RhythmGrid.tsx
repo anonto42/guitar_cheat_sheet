@@ -71,7 +71,7 @@ export default function RhythmGrid({ rows = RHYTHM_ROWS }: { rows?: RhythmRow[] 
     <div className="space-y-4">
       <label className="flex items-center gap-3 text-sm text-muted">
         Tempo <span className="w-16 font-bold text-ember-l">{bpm} BPM</span>
-        <input type="range" min={40} max={120} value={bpm} onChange={e => setBpm(Number(e.target.value))} className="w-40 accent-[#ff6b00]" />
+        <input type="range" min={40} max={120} value={bpm} onChange={e => setBpm(Number(e.target.value))} className="h-9 w-40 accent-[#ff6b00]" />
       </label>
       {rows.map(row => (
         <div key={row.id} className="border border-line2 bg-surface/70 p-3">
@@ -80,7 +80,7 @@ export default function RhythmGrid({ rows = RHYTHM_ROWS }: { rows?: RhythmRow[] 
             <button
               type="button"
               onClick={() => (playing === row.id ? stop() : play(row))}
-              className="flex h-8 items-center gap-1.5 border border-line2 px-3 text-xs font-semibold text-outline hover:text-cream"
+              className="flex h-9 items-center gap-1.5 border border-line2 px-3 text-xs font-semibold text-outline hover:text-cream"
             >
               {playing === row.id ? <Square size={12} aria-hidden="true" /> : <Play size={12} aria-hidden="true" />}
               {playing === row.id ? 'Stop' : 'Hear it'}

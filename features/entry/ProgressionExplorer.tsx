@@ -60,7 +60,7 @@ export default function ProgressionExplorer({ progressionId, defaultRoot }: { pr
             {player.playing ? <Square size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
             {player.playing ? 'Stop' : 'Play it'}
           </Button>
-          <Link href={`/practice?key=${rootSlug(root)}&mode=${progression.mode}&progression=${progression.id}`} className="text-sm font-semibold text-ember-l hover:text-cream">
+          <Link href={`/practice?key=${rootSlug(root)}&mode=${progression.mode}&progression=${progression.id}`} className="inline-flex min-h-9 items-center text-sm font-semibold text-ember-l hover:text-cream">
             Practise and solo over it in the Practice Studio
           </Link>
           {player.error && <p role="alert" className="text-sm text-tunings">{player.error}</p>}

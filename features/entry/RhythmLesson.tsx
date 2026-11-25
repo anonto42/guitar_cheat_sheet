@@ -84,7 +84,7 @@ export default function RhythmLesson() {
           head={['Symbol', 'Technique', 'Example', 'What to do']}
           rows={NOTATION.map(([symbol, name, example, what, href]) => [
             symbol,
-            <Link key="l" href={href} className="hover:text-ember-l">{name}</Link>,
+            <Link key="l" href={href} className="inline-flex min-h-9 min-w-9 items-center hover:text-ember-l">{name}</Link>,
             <code key="c" className="font-mono text-cream">{example}</code>,
             what,
           ])}

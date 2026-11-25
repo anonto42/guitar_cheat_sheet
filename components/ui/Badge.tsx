@@ -10,7 +10,7 @@ export default function Badge({ accent = '#ff6b00', className, style, ...props }
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded border px-2 py-0.5 text-[0.62rem] font-bold uppercase tracking-widest',
+        'inline-flex items-center rounded border px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-widest',
         className,
       )}
       style={{ color: accent, background: `${accent}1f`, borderColor: `${accent}59`, ...style }}

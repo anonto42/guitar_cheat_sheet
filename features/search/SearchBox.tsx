@@ -96,7 +96,7 @@ export default function SearchBox({
           onChange={e => { setQuery(e.target.value); setActive(0) }}
           onFocus={() => setFocused(true)}
           onKeyDown={onKeyDown}
-          className="min-w-0 flex-1 appearance-none bg-transparent outline-none focus-visible:outline-none text-sm text-cream placeholder:text-outline/60 [&::-webkit-search-cancel-button]:hidden"
+          className="h-full min-w-0 flex-1 appearance-none bg-transparent outline-none focus-visible:outline-none text-sm text-cream placeholder:text-outline/60 [&::-webkit-search-cancel-button]:hidden"
         />
         {query ? (
           <button
