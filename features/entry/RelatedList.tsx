@@ -11,11 +11,11 @@ interface RelatedListProps {
 /** Sidebar list of every entry in the category, with the current one marked. */
 export default function RelatedList({ current, entries, cat }: RelatedListProps) {
   return (
-    <nav aria-label={`More ${cat.label}`} className="border border-line2 bg-surface/80 lg:sticky lg:top-24">
+    <nav aria-label={`More ${cat.label}`} className="flex flex-col self-start border border-line2 bg-surface/80 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)]">
       <p className="border-b border-line2 px-4 py-3 text-[0.65rem] font-bold uppercase tracking-widest" style={{ color: cat.a }}>
         More {cat.label}
       </p>
-      <ol className="max-h-[70vh] overflow-y-auto">
+      <ol className="min-h-0 overflow-y-auto [&>li:last-child>a]:border-b-0">
         {entries.map(entry => {
           const active = entry.id === current.id
           return (
